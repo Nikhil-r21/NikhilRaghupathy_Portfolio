@@ -67,7 +67,7 @@ export function Hero() {
           >
             <div className="absolute inset-0 animate-blob bg-gradient-to-r from-primary to-secondary opacity-20 rounded-full" />
             <img
-              src="https://images.unsplash.com/photo-1603575448878-868a20723f5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+              src="https://media.licdn.com/dms/image/v2/D5603AQHbq6G5DzE1iA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1724775021779?e=1743033600&v=beta&t=0OYa-GSesQnckfXc-3EICrb9yGKg8ImemQ_r1ZHxSeE"
               alt="Profile"
               className="rounded-full w-64 h-64 md:w-80 md:h-80 object-cover mx-auto relative z-10"
             />
