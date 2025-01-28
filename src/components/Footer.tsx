@@ -37,12 +37,12 @@ export function Footer() {
     },
     {
       icon: <Instagram size={20} />,
-      href: "mailto:rnikhilvignesh21@gmail.com",
+      href: "https://www.instagram.com/niktheenigma/",
       label: "Instagram"
     },
     {
       icon: <FontAwesomeIcon icon={faXTwitter} size="lg" />,
-      href: "mailto:rnikhilvignesh21@gmail.com",
+      href: "https://x.com/NikhilR31569448",
       label: "Twitter"
     }
   ];
