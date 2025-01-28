@@ -3,10 +3,13 @@ import {
   Linkedin, 
   Github, 
   Mail, 
+  Instagram,
   Newspaper,
   ChevronRight,
   MapPin
 } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -31,6 +34,16 @@ export function Footer() {
       icon: <Newspaper size={20} />,
       href: "https://cloudtrailblazer.blogspot.com/",
       label: "Blog"
+    },
+    {
+      icon: <Instagram size={20} />,
+      href: "mailto:rnikhilvignesh21@gmail.com",
+      label: "Instagram"
+    },
+    {
+      icon: <FontAwesomeIcon icon={faXTwitter} size="lg" />,
+      href: "mailto:rnikhilvignesh21@gmail.com",
+      label: "Twitter"
     }
   ];
 
@@ -88,7 +101,7 @@ export function Footer() {
           {/* Social Links */}
           <div>
             <h4 className="text-xl font-semibold mb-4">Stay In Touch</h4>
-            <div className="flex gap-4">
+            <div className="flex space-x-2">
               {socialLinks.map((link) => (
                 <motion.a
                   key={link.label}
@@ -97,7 +110,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 rounded-full bg-dark flex items-center justify-center text-light-darker hover:text-primary hover:bg-dark-lighter transition-colors"
+                  className="min-w-[40px] min-h-[40px] rounded-full bg-dark flex items-center justify-center text-light-darker hover:text-primary hover:bg-dark-lighter transition-colors"
                 >
                   {link.icon}
                 </motion.a>

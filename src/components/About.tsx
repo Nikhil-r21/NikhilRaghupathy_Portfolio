@@ -66,7 +66,7 @@ export function About() {
 
             <div className="flex flex-wrap gap-4">
               <motion.a
-                href="/assets/pdf/Nikhil_Resume.pdf"
+                href="/Nikhil_Resume.pdf"
                 download
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
