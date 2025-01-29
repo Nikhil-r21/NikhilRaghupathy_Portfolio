@@ -75,7 +75,7 @@ export function About() {
                 Download CV
               </motion.a>
               <motion.a
-                href="http://localhost:5173"
+                href="https://devops-odyssey-studio.vercel.app/"
                 target="_blank"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
