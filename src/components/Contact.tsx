@@ -47,7 +47,7 @@ export function Contact() {
   
       setTimeout(() => {
         setSubmitStatus({ type: null, message: '' });
-      }, 5000);
+      }, 2000);
   
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {

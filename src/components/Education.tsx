@@ -30,7 +30,7 @@ export function Education() {
   return (
     <section id="education" className="py-20 bg-dark-lighter">
       <div className="container mx-auto px-6">
-        <h2 className="section-title text-white">Education & Certification</h2>
+        <h2 className="text-4xl font-bold text-center mb-12">Education & Certification</h2>
         
         <div className="grid md:grid-cols-2 gap-12">
           {/* Education Timeline */}
