@@ -6,11 +6,9 @@ export function Hero() {
   const typingTexts = [
     'AWS Certified Cloud Practitioner',
     3000,
-    'Jr. DevOps Engineer',
+    'Jr. Cloud & DevOps Engineer',
     3000,
     'Cloud Administrator',
-    3000,
-    'Server & Network Setup Specialist',
     3000,
   ];
 

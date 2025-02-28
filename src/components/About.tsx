@@ -12,7 +12,7 @@ export function About() {
     {
       icon: <Award className="w-8 h-8 text-primary" />,
       title: "Experience",
-      value: "1+ Years"
+      value: "2 Years"
     },
     {
       icon: <Briefcase className="w-8 h-8 text-primary" />,
@@ -66,16 +66,16 @@ export function About() {
 
             <div className="flex flex-wrap gap-4">
               <motion.a
-                href="/Nikhil_Resume.pdf"
+                href="./NikhilRaghupathy_Resume.pdf"
                 download
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
               >
-                Download CV
+                Download Resume
               </motion.a>
               <motion.a
-                href="https://devops-odyssey-studio.vercel.app/"
+                href="https://devopsodyssey.in/"
                 target="_blank"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

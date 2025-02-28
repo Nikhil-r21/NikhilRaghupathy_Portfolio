@@ -10,13 +10,23 @@ export function Experience() {
   const experience = [
     {
       title: "Jr. Cloud & DevOps Engineer",
-      company: "e-Cosmos (India) Pvt. Ltd.",
+      company: "e-Cosmos (India) Pvt. Ltd., Bengaluru",
       period: "Sept 2023 - Present",
       responsibilities: [
         "Led cloud infrastructure development using AWS services.",
         "Implemented CI/CD pipelines reducing deployment time by 60%.",
         "Managed containerized applications using Docker.",
         "Optimized cloud costs and improved system efficiency."
+      ]
+    },
+    {
+      title: "AWS Re/Start Program Intern",
+      company: "Magic bus India Foundation, Chennai",
+      period: "Jan 2023 - May 2023",
+      responsibilities: [
+        "Completed AWS Re/Start program with hands-on experience in AWS cloud fundamentals.",
+        "Developed foundational knowledge in AWS services and best practices for cloud security and scalability.",
+        "Successfully completed the AWS Certified Cloud Practitioner certification, valid until May 2026."
       ]
     }
   ];
@@ -62,7 +72,7 @@ export function Experience() {
             >
               <div className="absolute w-4 h-4 bg-primary rounded-full -left-[9px] top-0" />
               
-              <div className="bg-dark-lighter p-6 rounded-lg shadow-lg">
+              <div className="bg-dark-lighter p-6 rounded-lg shadow-lg">    
                 <span className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm mb-4">
                   {job.period}
                 </span>
