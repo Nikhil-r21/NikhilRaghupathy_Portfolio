@@ -75,7 +75,7 @@ export function About() {
                 Download Resume
               </motion.a>
               <motion.a
-{/*                 href="https://devopsodyssey.in/" */}
+                href=""
                 target="_blank"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
