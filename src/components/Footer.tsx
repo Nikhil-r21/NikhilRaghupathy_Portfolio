@@ -39,11 +39,6 @@ export function Footer() {
       icon: <Instagram size={20} />,
       href: "https://www.instagram.com/niktheenigma/",
       label: "Instagram"
-    },
-    {
-      icon: <FontAwesomeIcon icon={faXTwitter} size="lg" />,
-      href: "https://x.com/NikhilR31569448",
-      label: "Twitter"
     }
   ];
 
