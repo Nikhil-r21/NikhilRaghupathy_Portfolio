@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 export function Hero() {
-  const typingTexts = [
-    'AWS Certified Cloud Practitioner',
-    3000,
-    'Jr. Cloud & DevOps Engineer',
-    3000,
-    'Cloud Administrator',
-    3000,
-  ];
+  // const typingTexts = [
+  //   'AWS Certified Cloud Practitioner',
+  //   3000,
+  //   'Jr. Cloud & DevOps Engineer',
+  //   3000,
+  //   'Cloud Administrator',
+  //   3000,
+  // ];
 
   return (
     <section id="hero" className="min-h-screen flex items-center pt-20">
@@ -26,19 +26,28 @@ export function Hero() {
               Nikhil Raghupathy
             </h1>
             <div className="text-xl md:text-2xl mb-6 text-primary">
-              <TypeAnimation
+              {/* <TypeAnimation
                 sequence={typingTexts}
                 wrapper="span"
                 speed={50}
                 repeat={Infinity}
-              />
+              /> */}
+              <h3>Jr. Cloud & DevOps Engineer | AWS Certified Cloud Practitioner</h3>
             </div>
             <p className="text-light-darker mb-8 text-lg">
               Specializing in cloud architecture, automation, and DevOps practices
               to build scalable and reliable infrastructure solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <motion.a
+            <motion.a
+                href="#projects"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-primary text-white px-8 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+              >
+                View Projects
+              </motion.a>
+              {/* <motion.a
                 href="#contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -53,7 +62,7 @@ export function Hero() {
                 className="border-2 border-primary text-primary px-8 py-3 rounded-lg font-medium hover:bg-primary/10 transition-colors"
               >
                 View Projects
-              </motion.a>
+              </motion.a> */}
             </div>
           </motion.div>
 

@@ -58,14 +58,14 @@ export function About() {
             className="prose prose-invert max-w-none"
           >
             <p className="text-lg text-light-darker leading-relaxed mb-8">
-              I am currently working as a Jr. Cloud & DevOps Engineer at eCosmos Solutions Private Limited. 
+              I am currently working as a Jr. Cloud & DevOps Engineer at eCosmos Solutions Private Limited., Bengaluru. 
               As an AWS Certified Cloud Practitioner, I specialize in cloud architecture, infrastructure as code, 
               and cost optimization. I'm also focused on advancing my coding skills, particularly in Python, 
               to stay current with new technologies.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <motion.a
+              {/* <motion.a
                 href="./NikhilRaghupathy_Resume.pdf"
                 download
                 whileHover={{ scale: 1.05 }}
@@ -82,6 +82,15 @@ export function About() {
                 className="inline-flex items-center gap-2 border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium hover:bg-primary/10 transition-colors"
               >
                 Explore More
+              </motion.a> */}
+              <motion.a
+                href="./NikhilRaghupathy_Resume.pdf"
+                target="_blank"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 border-2 border-primary text-primary px-6 py-3 rounded-lg font-medium hover:bg-primary/10 transition-colors"
+              >
+                Download Resume
               </motion.a>
             </div>
           </motion.div>

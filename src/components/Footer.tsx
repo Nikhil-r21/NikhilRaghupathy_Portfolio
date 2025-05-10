@@ -12,6 +12,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export function Footer() {
+
+  const MediumIcon = () => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1043.63 592.71"
+      className="h-5 w-5"
+      fill="currentColor"
+    >
+      <g>
+        <path d="M588.67 296.28c0 163.7-131.27 296.3-293.67 296.3S1.33 460 1.33 296.28 132.6 0 295 0s293.67 132.57 293.67 296.28" />
+        <path d="M747.33 296.28c0 152.2-65.25 275.57-145.75 275.57s-145.75-123.37-145.75-275.57S521.08 20.72 601.58 20.72s145.75 123.36 145.75 275.56" />
+        <path d="M1043.63 296.28c0 139.2-29.1 252.05-65 252.05s-65-112.85-65-252.05 29.1-252.05 65-252.05 65 112.86 65 252.05" />
+      </g>
+    </svg>
+  );
+  
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -31,9 +47,9 @@ export function Footer() {
       label: "Email"
     },
     {
-      icon: <Newspaper size={20} />,
-      href: "https://cloudtrailblazer.blogspot.com/",
-      label: "Blog"
+      icon: <MediumIcon />,
+      href: "https://medium.com/@rnikhilvignesh21",
+      label: "Medium"
     },
     {
       icon: <Instagram size={20} />,
@@ -45,7 +61,7 @@ export function Footer() {
   const quickLinks = [
     { href: "#hero", label: "Home" },
     { href: "#about", label: "About" },
-    { href: "https://cloudtrailblazer.blogspot.com/", label: "Blog" }
+    { href: "https://medium.com/@rnikhilvignesh21", label: "Blog" }
   ];
 
   return (
@@ -88,7 +104,7 @@ export function Footer() {
             </p>
             <p className="flex items-center gap-2">
               <MapPin size={16} className="text-primary" />
-              Chennai, Tamil Nadu, India
+              Bengaluru, Karnataka, India
             </p>
             </div>
           </div>

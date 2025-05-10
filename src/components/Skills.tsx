@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Cloud, Github as Git, PenTool as Pipeline, Box, Server, Code, Network, LineChart, Wrench, Shield } from 'lucide-react';
+import { Cloud, Github as Git, PenTool as Pipeline, Box, Server, Code, Network, LineChart, Wrench, Shield, CheckCircle } from 'lucide-react';
 
 export function Skills() {
   const [ref, inView] = useInView({
@@ -12,7 +12,7 @@ export function Skills() {
     {
       icon: <Cloud />,
       title: "Cloud Technologies",
-      skills: ["AWS", "OpenStack"]
+      skills: ["AWS", "OpenStack", "Azure"]
     },
     {
       icon: <Git />,
@@ -109,8 +109,9 @@ export function Skills() {
                 {category.skills.map((skill, idx) => (
                   <div
                     key={idx}
-                    className="bg-dark-lighter px-3 py-2 rounded-md text-light-darker"
+                    className="flex items-center px-3 py-2 text-light-darker"
                   >
+                    <CheckCircle className="mr-2 h-4 w-4 text-green-500" />
                     {skill}
                   </div>
                 ))}

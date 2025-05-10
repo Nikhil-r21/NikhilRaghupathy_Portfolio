@@ -73,6 +73,19 @@ export function Projects() {
         "Built custom parsers to handle various webpage structures"
       ],
       image: "https://blog.apify.com/content/images/2023/09/what-is-web-scraping-websites-web-scraper-structured-data-1.png"
+    },
+    {
+      title: "DockerMate",
+      description: "A sleek, interactive, beginner-friendly CLI tool to manage all things Docker — now packaged for easy installation on Debian-based systems",
+      technologies: ["Docker", "Shell Scripting", "Ubuntu"],
+      details: [
+        "DockerMate v1.0 is a Bash-based interactive tool that simplifies Docker management with a color-coded, menu-driven terminal UI.",
+        "It supports container, image, network, and volume operations, including batch actions and health checks.",
+        "Set up S3 buckets for static content deliveryBuilt-in debugging tools and error handling provide safe, user-friendly system monitoring and troubleshooting.",
+        "Easily installable via a custom APT repository, it's ideal for those who prefer managing Docker without complex CLI commands.",
+        "Checkout: https://gist.github.com/Nikhil-r21/a6115e6beb6b74f0bcf48c51968eb5c0"
+      ],
+      image: "https://media.licdn.com/dms/image/v2/D5622AQGZETcEA19AUA/feedshare-shrink_800/B56ZY.GmBAGUAg-/0/1744798642319?e=1748476800&v=beta&t=DBZr_bgDiepisVQZwubuDpUIUp2iK3k8CaFKM5QD0a8"
     }
   ];
 
