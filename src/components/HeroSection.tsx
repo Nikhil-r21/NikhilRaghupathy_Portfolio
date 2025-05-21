@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
               View Projects
             </a>
             <a 
-              href="./Nikhil_Raghupathy_DevOps_Engineer.pdf" 
+              href="./Nikhil_Raghupathy_Jr_Cloud_DevOps_Engineer.pdf" 
               className="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-6 rounded-lg border border-blue-600 transition-colors flex items-center justify-center"
             >
               <FileDown size={18} className="mr-2" />
