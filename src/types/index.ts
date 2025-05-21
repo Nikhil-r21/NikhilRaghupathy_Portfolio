@@ -1,4 +1,3 @@
-// index.ts
 export interface INavLink {
   id: string;
   title: string;
