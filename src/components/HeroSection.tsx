@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ReactTyped } from 'react-typed';
-import { FileDown, ExternalLink } from 'lucide-react';
+import { FileDown, ExternalLink, BarChartHorizontalBig } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   return (
@@ -55,7 +55,7 @@ const HeroSection: React.FC = () => {
               View Projects
             </a>
             <a 
-              href="./Nikhil_Raghupathy_Jr_Cloud_DevOps_Engineer.pdf" 
+              href="./Nikhil_Raghupathy_Jr_Cloud_DevOps_Engineer.pdf" target='_blank' rel="noopener noreferrer"
               className="bg-white hover:bg-gray-100 text-blue-600 font-semibold py-3 px-6 rounded-lg border border-blue-600 transition-colors flex items-center justify-center"
             >
               <FileDown size={18} className="mr-2" />
