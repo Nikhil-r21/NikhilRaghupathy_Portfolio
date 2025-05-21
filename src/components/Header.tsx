@@ -1,89 +1,130 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useNavStore } from '../store/useNavStore';
+import { navLinks } from '../data/navData';
 
-export function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const Header: React.FC = () => {
+  const { activeSection, isMenuOpen, toggleMenu, closeMenu, setActiveSection } = useNavStore();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      const scrollTop = window.scrollY;
+      if (scrollTop > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { href: '#hero', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#education', label: 'Education' },
-    { href: '#contact', label: 'Contact' }
-  ];
+  const handleNavClick = (id: string) => {
+    setActiveSection(id);
+    closeMenu();
+    
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
-    <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-dark/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+    <motion.header 
+      className={`fixed w-full z-30 transition-all duration-300 ${
+        scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
       }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-semibold">
-            <span className="text-primary">Nikhil</span> Raghupathy
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <div className="flex items-center">
+          <a 
+            href="#home" 
+            className="text-2xl font-bold transition-colors"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('home');
+            }}
+          >
+            <span className="text-blue-600">Nikhil</span> Raghupathy
           </a>
+        </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-light hover:text-primary transition-colors"
-              >
-                {item.label}
-              </a>
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex">
+          <ul className="flex space-x-8">
+            {navLinks.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={`#${link.id}`}
+                  className={`text-sm font-medium hover:text-blue-600 transition-colors ${
+                    activeSection === link.id
+                      ? 'text-blue-600 border-b-2 border-blue-600 pb-1'
+                      : 'text-gray-800'
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.id);
+                  }}
+                >
+                  {link.title}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
+        </nav>
 
-          {/* Mobile Menu Button */}
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
           <button
-            className="md:hidden text-light hover:text-primary transition-colors"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-gray-800 hover:text-blue-600 transition-colors"
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="md:hidden absolute top-full left-0 w-full bg-dark-lighter shadow-lg"
-            >
-              <div className="py-4 px-6 space-y-4">
-                {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={item.href}
-                    className="block text-light hover:text-primary transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </header>
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+        <motion.div 
+          className="md:hidden bg-white shadow-lg"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ul className="py-4">
+            {navLinks.map((link) => (
+              <li key={link.id} className="px-4 py-2">
+                <a
+                  href={`#${link.id}`}
+                  className={`block text-sm font-medium hover:text-blue-600 transition-colors ${
+                    activeSection === link.id ? 'text-blue-600' : 'text-gray-800'
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.id);
+                  }}
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      )}
+    </motion.header>
   );
-}
+};
+
+export default Header;
