@@ -8,8 +8,8 @@ const createTransporter = () => {
   return nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER, // Your Gmail address
-      pass: process.env.EMAIL_APP_PASSWORD // Your Gmail App Password
+      user: process.env.EMAIL, // Your Gmail address
+      pass: process.env.APP_PASSWORD // Your Gmail App Password
     }
   });
 };
@@ -64,8 +64,8 @@ export default async function handler(req, res) {
 
     // Email to owner (you)
     const ownerMailOptions = {
-      from: `"Portfolio Contact Form" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER, // Your email
+      from: `"Portfolio Contact Form" <${process.env.EMAIL}>`,
+      to: process.env.EMAIL, // Your email
       subject: `New Contact Form: ${subject}`,
       html: createOwnerEmailTemplate(formData),
       replyTo: email // Allow direct reply to sender
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
 
     // Confirmation email to sender
     const senderMailOptions = {
-      from: `"Nikhil Raghupathy" <${process.env.EMAIL_USER}>`,
+      from: `"Nikhil Raghupathy" <${process.env.EMAIL}>`,
       to: email,
       subject: `Thank you for your message - ${subject}`,
       html: createSenderEmailTemplate(formData)
