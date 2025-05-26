@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { Send, AlertCircle, CheckCircle, Mail, MapPin, Phone } from 'lucide-react';
 
 type FormInputs = {
@@ -11,42 +9,100 @@ type FormInputs = {
 };
 
 const ContactSection: React.FC = () => {
-  const form = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState<FormInputs>({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [errors, setErrors] = useState<Partial<FormInputs>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState<boolean | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormInputs>();
+  // Form validation
+  const validateForm = (): boolean => {
+    const newErrors: Partial<FormInputs> = {};
 
-  const onSubmit: SubmitHandler<FormInputs> = async () => {
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      newErrors.email = 'Invalid email address';
+    }
+
+    if (!formData.subject.trim()) {
+      newErrors.subject = 'Subject is required';
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message should be at least 10 characters';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Clear error when user starts typing
+    if (errors[name as keyof FormInputs]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitSuccess(null);
     setSubmitError(null);
 
     try {
-      // Replace these with actual EmailJS credentials for production
-      // For demo purposes, we'll just simulate a successful submission
-      // await emailjs.sendForm(
-      //   'YOUR_SERVICE_ID',
-      //   'YOUR_TEMPLATE_ID',
-      //   form.current!,
-      //   'YOUR_USER_ID'
-      // );
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      setSubmitSuccess(true);
-      reset();
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitSuccess(true);
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+        setErrors({});
+      } else {
+        setSubmitSuccess(false);
+        setSubmitError(result.message || 'Failed to send message. Please try again later.');
+      }
     } catch (error) {
       setSubmitSuccess(false);
-      setSubmitError('Failed to send message. Please try again later.');
-      console.error('Error sending email:', error);
+      setSubmitError('Network error. Please check your connection and try again.');
+      console.error('Error sending message:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -55,29 +111,18 @@ const ContactSection: React.FC = () => {
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, amount: 0.2 }}
-          className="mb-12 text-center"
-        >
+        <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold text-gray-800 mb-2">Get In Touch</h2>
           <div className="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Have a question or want to work together? Feel free to contact me using the form below.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <form ref={form} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div>
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Input */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
@@ -86,15 +131,18 @@ const ContactSection: React.FC = () => {
                 <input
                   type="text"
                   id="name"
-                  {...register('name', { required: 'Name is required' })}
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
                     errors.name ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Your name"
+                  disabled={isSubmitting}
                 />
                 {errors.name && (
                   <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.name.message}
+                    <AlertCircle size={14} className="mr-1" /> {errors.name}
                   </p>
                 )}
               </div>
@@ -107,21 +155,18 @@ const ContactSection: React.FC = () => {
                 <input
                   type="email"
                   id="email"
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Invalid email address',
-                    },
-                  })}
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
                     errors.email ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="your.email@example.com"
+                  disabled={isSubmitting}
                 />
                 {errors.email && (
                   <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.email.message}
+                    <AlertCircle size={14} className="mr-1" /> {errors.email}
                   </p>
                 )}
               </div>
@@ -134,15 +179,18 @@ const ContactSection: React.FC = () => {
                 <input
                   type="text"
                   id="subject"
-                  {...register('subject', { required: 'Subject is required' })}
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleInputChange}
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
                     errors.subject ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="What is this regarding?"
+                  disabled={isSubmitting}
                 />
                 {errors.subject && (
                   <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.subject.message}
+                    <AlertCircle size={14} className="mr-1" /> {errors.subject}
                   </p>
                 )}
               </div>
@@ -154,22 +202,19 @@ const ContactSection: React.FC = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
-                  {...register('message', {
-                    required: 'Message is required',
-                    minLength: {
-                      value: 10,
-                      message: 'Message should be at least 10 characters',
-                    },
-                  })}
+                  value={formData.message}
+                  onChange={handleInputChange}
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
                     errors.message ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Write your message here..."
+                  disabled={isSubmitting}
                 ></textarea>
                 {errors.message && (
                   <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.message.message}
+                    <AlertCircle size={14} className="mr-1" /> {errors.message}
                   </p>
                 )}
               </div>
@@ -216,47 +261,34 @@ const ContactSection: React.FC = () => {
                 )}
               </button>
 
-              {/* Success/Error Messages */}
+              {/* Success Message */}
               {submitSuccess && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-start"
-                >
+                <div className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-start">
                   <CheckCircle size={20} className="mr-3 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="font-medium">Message sent successfully!</p>
                     <p className="text-sm mt-1">
-                      Thank you for reaching out. I'll get back to you as soon as possible.
+                      Thank you for reaching out. You'll receive a confirmation email shortly, and I'll get back to you as soon as possible.
                     </p>
                   </div>
-                </motion.div>
+                </div>
               )}
 
+              {/* Error Message */}
               {submitSuccess === false && submitError && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-start"
-                >
+                <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-start">
                   <AlertCircle size={20} className="mr-3 mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="font-medium">Something went wrong!</p>
                     <p className="text-sm mt-1">{submitError}</p>
                   </div>
-                </motion.div>
+                </div>
               )}
             </form>
-          </motion.div>
+          </div>
 
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="bg-gray-50 p-8 rounded-lg"
-          >
+          <div className="bg-gray-50 p-8 rounded-lg">
             <h3 className="text-xl font-bold text-gray-800 mb-6">Contact Information</h3>
 
             <div className="space-y-6">
@@ -366,7 +398,7 @@ const ContactSection: React.FC = () => {
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
