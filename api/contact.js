@@ -1,4 +1,3 @@
-//api
 import nodemailer from 'nodemailer';
 import { createOwnerEmailTemplate } from './templates/ownerTemplate.js';
 import { createSenderEmailTemplate } from './templates/senderTemplate.js';
