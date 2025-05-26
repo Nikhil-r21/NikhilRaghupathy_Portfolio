@@ -1,11 +1,17 @@
-import React, { useRef, useState } from 'react';
-import { Send, AlertCircle, CheckCircle, Mail, MapPin, Phone } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { Send, AlertCircle, CheckCircle, Mail, MapPin, Phone, X } from 'lucide-react';
 
 type FormInputs = {
   name: string;
   email: string;
   subject: string;
   message: string;
+};
+
+type NotificationState = {
+  isVisible: boolean;
+  isSuccess: boolean | null;
+  message: string | null;
 };
 
 const ContactSection: React.FC = () => {
@@ -17,8 +23,33 @@ const ContactSection: React.FC = () => {
   });
   const [errors, setErrors] = useState<Partial<FormInputs>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState<boolean | null>(null);
-  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [notification, setNotification] = useState<NotificationState>({
+    isVisible: false,
+    isSuccess: null,
+    message: null
+  });
+  
+  // Timer reference for auto-dismissal
+  const notificationTimerRef = useRef<number | null>(null);
+
+  // Clear notification timer on unmount
+  useEffect(() => {
+    return () => {
+      if (notificationTimerRef.current) {
+        window.clearTimeout(notificationTimerRef.current);
+      }
+    };
+  }, []);
+
+  // Set up auto-dismissal when notification becomes visible
+  useEffect(() => {
+    if (notification.isVisible && notificationTimerRef.current === null) {
+      notificationTimerRef.current = window.setTimeout(() => {
+        setNotification(prev => ({ ...prev, isVisible: false }));
+        notificationTimerRef.current = null;
+      }, 3000);
+    }
+  }, [notification.isVisible]);
 
   // Form validation
   const validateForm = (): boolean => {
@@ -72,8 +103,13 @@ const ContactSection: React.FC = () => {
     }
 
     setIsSubmitting(true);
-    setSubmitSuccess(null);
-    setSubmitError(null);
+    
+    // Reset any existing notification
+    setNotification({
+      isVisible: false,
+      isSuccess: null,
+      message: null
+    });
 
     try {
       const response = await fetch('/api/contact', {
@@ -87,7 +123,12 @@ const ContactSection: React.FC = () => {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        setSubmitSuccess(true);
+        setNotification({
+          isVisible: true,
+          isSuccess: true,
+          message: result.message || 'Message sent successfully! You will receive a confirmation email shortly.'
+        });
+        
         setFormData({
           name: '',
           email: '',
@@ -96,16 +137,32 @@ const ContactSection: React.FC = () => {
         });
         setErrors({});
       } else {
-        setSubmitSuccess(false);
-        setSubmitError(result.message || 'Failed to send message. Please try again later.');
+        setNotification({
+          isVisible: true,
+          isSuccess: false,
+          message: result.message || 'Failed to send message. Please try again later.'
+        });
       }
     } catch (error) {
-      setSubmitSuccess(false);
-      setSubmitError('Network error. Please check your connection and try again.');
+      setNotification({
+        isVisible: true,
+        isSuccess: false,
+        message: 'Network error. Please check your connection and try again.'
+      });
       console.error('Error sending message:', error);
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const dismissNotification = () => {
+    // Clear any existing timer
+    if (notificationTimerRef.current) {
+      window.clearTimeout(notificationTimerRef.current);
+      notificationTimerRef.current = null;
+    }
+    
+    setNotification(prev => ({ ...prev, isVisible: false }));
   };
 
   return (
@@ -261,27 +318,39 @@ const ContactSection: React.FC = () => {
                 )}
               </button>
 
-              {/* Success Message */}
-              {submitSuccess && (
-                <div className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-start">
-                  <CheckCircle size={20} className="mr-3 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium">Message sent successfully!</p>
-                    <p className="text-sm mt-1">
-                      Thank you for reaching out. You'll receive a confirmation email shortly, and I'll get back to you as soon as possible.
+              {/* Notification Messages */}
+              {notification.isVisible && notification.isSuccess !== null && (
+                <div 
+                  className={`p-4 ${
+                    notification.isSuccess 
+                      ? 'bg-green-50 border-green-200 text-green-700' 
+                      : 'bg-red-50 border-red-200 text-red-700'
+                  } border rounded-lg flex items-start transition-opacity duration-300 ease-in-out`}
+                >
+                  <div className="flex-shrink-0 mr-3 mt-0.5">
+                    {notification.isSuccess ? (
+                      <CheckCircle size={20} />
+                    ) : (
+                      <AlertCircle size={20} />
+                    )}
+                  </div>
+                  <div className="flex-grow">
+                    <p className="font-medium">
+                      {notification.isSuccess ? 'Message sent successfully!' : 'Something went wrong!'}
                     </p>
+                    <p className="text-sm mt-1">{notification.message}</p>
                   </div>
-                </div>
-              )}
-
-              {/* Error Message */}
-              {submitSuccess === false && submitError && (
-                <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-start">
-                  <AlertCircle size={20} className="mr-3 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <p className="font-medium">Something went wrong!</p>
-                    <p className="text-sm mt-1">{submitError}</p>
-                  </div>
+                  <button 
+                    onClick={dismissNotification}
+                    className={`p-1 ml-2 rounded-full ${
+                      notification.isSuccess 
+                        ? 'hover:bg-green-100' 
+                        : 'hover:bg-red-100'
+                    }`}
+                    aria-label="Close notification"
+                  >
+                    <X size={16} />
+                  </button>
                 </div>
               )}
             </form>
