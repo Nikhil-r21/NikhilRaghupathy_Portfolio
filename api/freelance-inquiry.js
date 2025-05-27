@@ -4,7 +4,7 @@ import { createFreelanceSenderEmailTemplate } from './templates/freelanceSenderT
 
 // Create nodemailer transporter
 const createTransporter = () => {
-  return nodemailer.createTransporter({
+  return nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL, // Your Gmail address
