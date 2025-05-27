@@ -1,5 +1,4 @@
 // templates/freelanceOwnerTemplate.js
-
 export const createFreelanceOwnerEmailTemplate = (data) => {
   const { 
     name, 
