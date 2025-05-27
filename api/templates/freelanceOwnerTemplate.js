@@ -12,219 +12,274 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
     submittedAt 
   } = data;
 
+  // Generate priority badge based on timeline
+  const getPriorityBadge = (timeline) => {
+    if (timeline.includes('Urgent')) {
+      return `<span style="background-color: #D13438; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">HIGH PRIORITY</span>`;
+    } else if (timeline.includes('week')) {
+      return `<span style="background-color: #FF8C00; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">MEDIUM PRIORITY</span>`;
+    }
+    return `<span style="background-color: #107C10; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500;">STANDARD</span>`;
+  };
+
   return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>New Freelance Inquiry</title>
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>New Freelance Project Inquiry</title>
       <style>
+        :root {
+          color-scheme: light;
+        }
         body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          line-height: 1.6;
-          color: #333;
-          max-width: 600px;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          line-height: 1.5;
+          color: #252525;
+          background-color: #f5f5f5;
+          margin: 0;
+          padding: 0;
+        }
+        .wrapper {
+          max-width: 640px;
           margin: 0 auto;
-          padding: 20px;
-          background-color: #f8f9fa;
+          padding: 16px;
         }
         .container {
           background-color: #ffffff;
-          border-radius: 12px;
-          padding: 30px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          border: 1px solid #e9ecef;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          overflow: hidden;
         }
         .header {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
-          padding: 25px;
-          border-radius: 8px;
+          background-color: #0078D4;
+          padding: 24px;
           text-align: center;
-          margin-bottom: 30px;
         }
-        .header h1 {
-          margin: 0;
+        .logo {
+          width: 48px;
+          height: 48px;
+          margin-bottom: 16px;
+        }
+        .header-title {
+          color: white;
           font-size: 24px;
           font-weight: 600;
+          margin: 0;
+          line-height: 1.2;
         }
-        .emoji {
-          font-size: 28px;
-          margin-bottom: 10px;
-          display: block;
-        }
-        .info-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 20px;
-          margin-bottom: 25px;
-        }
-        .info-item {
-          background-color: #f8f9fa;
-          padding: 15px;
-          border-radius: 8px;
-          border-left: 4px solid #667eea;
-        }
-        .info-label {
-          font-weight: 600;
-          color: #495057;
-          font-size: 14px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          margin-bottom: 5px;
-        }
-        .info-value {
-          color: #212529;
+        .header-subtitle {
+          color: rgba(255, 255, 255, 0.9);
           font-size: 16px;
-          font-weight: 500;
+          margin: 8px 0 0 0;
         }
-        .contact-info {
-          background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-          color: white;
-          padding: 20px;
-          border-radius: 8px;
-          margin-bottom: 25px;
+        .content {
+          padding: 24px;
         }
-        .contact-info h3 {
-          margin: 0 0 15px 0;
-          font-size: 18px;
+        .section {
+          margin-bottom: 24px;
         }
-        .contact-item {
-          margin-bottom: 8px;
-          font-size: 15px;
-        }
-        .message-section {
-          background-color: #f8f9fa;
-          padding: 20px;
-          border-radius: 8px;
-          border-left: 4px solid #dc3545;
-          margin-bottom: 25px;
-        }
-        .message-section h3 {
-          color: #dc3545;
-          margin: 0 0 15px 0;
-          font-size: 18px;
-        }
-        .message-content {
-          background-color: white;
-          padding: 15px;
-          border-radius: 6px;
-          line-height: 1.7;
-          font-size: 15px;
-          border: 1px solid #dee2e6;
-        }
-        .priority-indicator {
-          display: inline-block;
-          padding: 4px 12px;
-          border-radius: 20px;
-          font-size: 12px;
+        .section-title {
+          font-size: 16px;
           font-weight: 600;
+          color: #505A64;
+          margin: 0 0 16px 0;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #E1E1E1;
+        }
+        .card {
+          background-color: #F9F9F9;
+          border-radius: 6px;
+          padding: 16px;
+          margin-bottom: 16px;
+        }
+        .card-row {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0 -8px;
+        }
+        .card-col {
+          flex: 1 0 calc(50% - 16px);
+          margin: 0 8px 16px;
+          min-width: 200px;
+        }
+        .field {
+          margin-bottom: 16px;
+        }
+        .field:last-child {
+          margin-bottom: 0;
+        }
+        .field-label {
+          font-size: 12px;
+          font-weight: 500;
+          color: #505A64;
+          margin-bottom: 4px;
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
-        .urgent { background-color: #dc3545; color: white; }
-        .high { background-color: #fd7e14; color: white; }
-        .medium { background-color: #ffc107; color: #212529; }
-        .low { background-color: #28a745; color: white; }
-        .footer {
-          text-align: center;
-          padding: 20px;
-          color: #6c757d;
-          font-size: 14px;
-          border-top: 1px solid #e9ecef;
-          margin-top: 30px;
+        .field-value {
+          font-size: 15px;
+          color: #252525;
         }
-        .action-buttons {
+        .message-box {
+          background-color: white;
+          border: 1px solid #E1E1E1;
+          border-left: 4px solid #0078D4;
+          border-radius: 4px;
+          padding: 16px;
+          margin-top: 8px;
+        }
+        .actions {
+          padding: 16px 24px;
+          background-color: #F9F9F9;
           text-align: center;
-          margin: 25px 0;
         }
         .btn {
           display: inline-block;
-          padding: 12px 25px;
-          margin: 0 10px;
-          border-radius: 6px;
-          text-decoration: none;
-          font-weight: 600;
+          background-color: #0078D4;
+          color: white;
           font-size: 14px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
+          font-weight: 600;
+          text-decoration: none;
+          padding: 10px 24px;
+          border-radius: 4px;
+          margin: 0 8px 8px 0;
+          transition: background-color 0.2s;
         }
-        .btn-primary {
-          background-color: #007bff;
-          color: white;
+        .btn-secondary {
+          background-color: #107C10;
         }
-        .btn-success {
-          background-color: #28a745;
-          color: white;
+        .btn:hover {
+          background-color: #106EBE;
+        }
+        .btn-secondary:hover {
+          background-color: #0B6A0B;
+        }
+        .footer {
+          padding: 24px;
+          color: #505A64;
+          font-size: 13px;
+          border-top: 1px solid #E1E1E1;
+        }
+        .footer-title {
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+        .footer-steps {
+          margin: 0;
+          padding: 0 0 0 24px;
+        }
+        .footer-steps li {
+          margin-bottom: 8px;
+        }
+        .footer-steps li:last-child {
+          margin-bottom: 0;
         }
         @media (max-width: 600px) {
-          .info-grid {
-            grid-template-columns: 1fr;
+          .card-col {
+            flex: 1 0 100%;
           }
           .btn {
             display: block;
-            margin: 10px 0;
+            margin: 0 0 12px 0;
           }
         }
       </style>
     </head>
     <body>
-      <div class="container">
-        <div class="header">
-          <span class="emoji">🚀</span>
-          <h1>New Freelance Project Inquiry</h1>
-          <p style="margin: 5px 0 0 0; opacity: 0.9;">Submitted on ${submittedAt}</p>
-        </div>
-
-        <div class="contact-info">
-          <h3>👤 Client Information</h3>
-          <div class="contact-item"><strong>Name:</strong> ${name}</div>
-          <div class="contact-item"><strong>Email:</strong> <a href="mailto:${email}" style="color: white;">${email}</a></div>
-          <div class="contact-item"><strong>Phone:</strong> <a href="tel:${phone}" style="color: white;">${phone}</a></div>
-          <div class="contact-item"><strong>Company:</strong> ${companyName}</div>
-        </div>
-
-        <div class="info-grid">
-          <div class="info-item">
-            <div class="info-label">Project Type</div>
-            <div class="info-value">${projectType}</div>
+      <div class="wrapper">
+        <div class="container">
+          <div class="header">
+            <div class="logo">📨</div>
+            <h1 class="header-title">New Project Inquiry</h1>
+            <p class="header-subtitle">A potential client has submitted a project request</p>
           </div>
-          <div class="info-item">
-            <div class="info-label">Budget Range</div>
-            <div class="info-value">${budget}</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">Timeline</div>
-            <div class="info-value">
-              ${timeline}
-              ${timeline.includes('Urgent') ? '<span class="priority-indicator urgent">High Priority</span>' : 
-                timeline.includes('week') ? '<span class="priority-indicator high">Medium Priority</span>' : 
-                '<span class="priority-indicator low">Normal Priority</span>'}
+          
+          <div class="content">
+            <div class="section">
+              <h2 class="section-title">Client Information</h2>
+              <div class="card">
+                <div class="card-row">
+                  <div class="card-col">
+                    <div class="field">
+                      <div class="field-label">Name</div>
+                      <div class="field-value">${name}</div>
+                    </div>
+                    <div class="field">
+                      <div class="field-label">Email</div>
+                      <div class="field-value">
+                        <a href="mailto:${email}" style="color: #0078D4; text-decoration: none;">${email}</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-col">
+                    <div class="field">
+                      <div class="field-label">Phone</div>
+                      <div class="field-value">
+                        <a href="tel:${phone}" style="color: #0078D4; text-decoration: none;">${phone}</a>
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="field-label">Company</div>
+                      <div class="field-value">${companyName}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="section">
+              <h2 class="section-title">Project Details</h2>
+              <div class="card">
+                <div class="card-row">
+                  <div class="card-col">
+                    <div class="field">
+                      <div class="field-label">Project Type</div>
+                      <div class="field-value">${projectType}</div>
+                    </div>
+                    <div class="field">
+                      <div class="field-label">Budget Range</div>
+                      <div class="field-value">${budget}</div>
+                    </div>
+                  </div>
+                  <div class="card-col">
+                    <div class="field">
+                      <div class="field-label">Timeline</div>
+                      <div class="field-value">
+                        ${timeline} ${getPriorityBadge(timeline)}
+                      </div>
+                    </div>
+                    <div class="field">
+                      <div class="field-label">Submitted</div>
+                      <div class="field-value">${submittedAt}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="field">
+                  <div class="field-label">Project Requirements</div>
+                  <div class="message-box">${message.replace(/\n/g, '<br>')}</div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="info-item">
-            <div class="info-label">Submission Time</div>
-            <div class="info-value">${submittedAt}</div>
+          
+          <div class="actions">
+            <a href="mailto:${email}?subject=Re: Your ${projectType} Project Inquiry&body=Hi ${name},%0D%0A%0D%0AThank you for your interest in working with me on your ${projectType} project.%0D%0A%0D%0AAfter reviewing your requirements, I'd like to discuss:%0D%0A%0D%0A- Project scope and technical approach%0D%0A- Detailed timeline and milestones%0D%0A- Investment and payment terms%0D%0A%0D%0AWould you be available for a call this week to discuss further?%0D%0A%0D%0ABest regards,%0D%0ANikhil" class="btn">Reply to Client</a>
+            <a href="tel:${phone}" class="btn btn-secondary">Call Client</a>
           </div>
-        </div>
-
-        <div class="message-section">
-          <h3>📋 Project Requirements</h3>
-          <div class="message-content">${message.replace(/\n/g, '<br>')}</div>
-        </div>
-
-        <div class="action-buttons">
-          <a href="mailto:${email}?subject=Re: Your ${projectType} Project Inquiry&body=Hi ${name},%0D%0A%0D%0AThank you for your interest in working with me on your ${projectType} project.%0D%0A%0D%0AAfter reviewing your requirements, I'd like to discuss:%0D%0A%0D%0A- Project scope and technical approach%0D%0A- Detailed timeline and milestones%0D%0A- Investment and payment terms%0D%0A%0D%0AWould you be available for a call this week to discuss further?%0D%0A%0D%0ABest regards,%0D%0ANikhil" class="btn btn-primary">Reply to Client</a>
-          <a href="tel:${phone}" class="btn btn-success">Call Client</a>
-        </div>
-
-        <div class="footer">
-          <p><strong>Next Steps:</strong></p>
-          <p>1. Review the project requirements thoroughly<br>
-          2. Prepare a detailed proposal with timeline and costs<br>
-          3. Schedule a call to discuss project details<br>
-          4. Send proposal within 24 hours</p>
+          
+          <div class="footer">
+            <div class="footer-title">Recommended Next Steps:</div>
+            <ol class="footer-steps">
+              <li>Review the project requirements thoroughly</li>
+              <li>Prepare a detailed proposal with timeline and costs</li>
+              <li>Schedule a call to discuss project details</li>
+              <li>Send proposal within 24 hours</li>
+            </ol>
+          </div>
         </div>
       </div>
     </body>
