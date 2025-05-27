@@ -14,203 +14,358 @@ export const createOwnerEmailTemplate = (formData) => {
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>New Contact Form Submission</title>
       <style>
-        :root {
-          color-scheme: light;
+        * {
+          box-sizing: border-box;
         }
         body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-          line-height: 1.5;
-          color: #252525;
-          background-color: #f5f5f5;
+          font-family: 'Google Sans', 'Segoe UI', Tahoma, sans-serif;
+          line-height: 1.6;
+          color: #202124;
+          background-color: #f8f9fa;
           margin: 0;
           padding: 0;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
-        .wrapper {
-          max-width: 640px;
+        .email-wrapper {
+          max-width: 680px;
           margin: 0 auto;
-          padding: 16px;
+          padding: 20px;
+          background-color: #f8f9fa;
         }
-        .container {
+        .email-container {
           background-color: #ffffff;
           border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
           overflow: hidden;
+          box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
         }
         .header {
-          background-color: #0078D4;
-          padding: 24px;
-          text-align: center;
+          background-color: #ffffff;
+          padding: 32px 24px 24px;
+          border-bottom: 1px solid #e8eaed;
+          text-align: left;
+        }
+        .header-content {
+          display: flex;
+          align-items: center;
+          gap: 16px;
         }
         .header-icon {
-          width: 48px;
-          height: 48px;
-          background-color: rgba(255, 255, 255, 0.2);
+          width: 40px;
+          height: 40px;
+          background-color: #4285f4;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 24px;
-          margin: 0 auto 16px;
+          flex-shrink: 0;
+        }
+        .header-icon::before {
+          content: "✉";
+          color: white;
+          font-size: 18px;
+          line-height: 1;
+        }
+        .header-text {
+          flex: 1;
         }
         .header-title {
-          color: white;
-          font-size: 24px;
-          font-weight: 600;
-          margin: 0;
-          line-height: 1.2;
+          color: #202124;
+          font-size: 22px;
+          font-weight: 400;
+          margin: 0 0 4px 0;
+          line-height: 1.3;
         }
         .header-subtitle {
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 16px;
-          margin: 8px 0 0 0;
+          color: #5f6368;
+          font-size: 14px;
+          margin: 0;
+          font-weight: 400;
         }
         .content {
           padding: 24px;
         }
-        .notification-badge {
+        .alert-badge {
           display: inline-block;
-          background-color: #0078D4;
-          color: white;
+          background-color: #e8f0fe;
+          color: #1a73e8;
           font-size: 12px;
-          font-weight: 600;
+          font-weight: 500;
           padding: 4px 12px;
-          border-radius: 12px;
-          margin-bottom: 16px;
-        }
-        .section {
+          border-radius: 16px;
           margin-bottom: 24px;
+          border: 1px solid #dadce0;
         }
-        .field {
+        .contact-details {
+          background-color: #f8f9fa;
+          border-radius: 8px;
+          padding: 24px;
           margin-bottom: 24px;
-          padding-bottom: 24px;
-          border-bottom: 1px solid #E1E1E1;
+          border: 1px solid #e8eaed;
         }
-        .field:last-child {
+        .detail-row {
+          margin-bottom: 20px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid #e8eaed;
+        }
+        .detail-row:last-child {
           margin-bottom: 0;
           padding-bottom: 0;
           border-bottom: none;
         }
-        .field-label {
+        .detail-label {
           font-size: 12px;
-          font-weight: 600;
-          color: #505A64;
+          font-weight: 500;
+          color: #5f6368;
           margin-bottom: 8px;
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
-        .field-value {
+        .detail-value {
           font-size: 16px;
-          color: #252525;
-          word-break: break-word;
+          color: #202124;
+          line-height: 1.5;
+          word-wrap: break-word;
         }
-        .field-value a {
-          color: #0078D4;
+        .detail-value a {
+          color: #1a73e8;
           text-decoration: none;
         }
-        .field-value a:hover {
+        .detail-value a:hover {
           text-decoration: underline;
         }
-        .message-box {
-          background-color: #F9F9F9;
-          border-radius: 6px;
-          padding: 16px;
+        .message-content {
+          background-color: #ffffff;
+          border: 1px solid #e8eaed;
+          border-radius: 8px;
+          padding: 20px;
           margin-top: 8px;
           white-space: pre-wrap;
-          border-left: 4px solid #0078D4;
+          font-family: 'Google Sans', 'Segoe UI', Tahoma, sans-serif;
+          line-height: 1.6;
         }
-        .actions {
-          padding: 0 24px 24px;
+        .action-section {
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid #e8eaed;
         }
-        .btn {
+        .reply-button {
           display: inline-block;
-          background-color: #0078D4;
+          background-color: #1a73e8;
           color: white;
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 500;
           text-decoration: none;
-          padding: 10px 24px;
+          padding: 12px 24px;
           border-radius: 4px;
-          transition: background-color 0.2s;
+          transition: background-color 0.2s ease;
+          font-family: 'Google Sans', 'Segoe UI', Tahoma, sans-serif;
         }
-        .btn:hover {
-          background-color: #106EBE;
+        .reply-button:hover {
+          background-color: #1557b0;
         }
-        .timestamp {
-          margin-top: 24px;
-          padding-top: 16px;
-          border-top: 1px solid #E1E1E1;
-          color: #767676;
+        .timestamp-section {
+          margin-top: 32px;
+          padding-top: 24px;
+          border-top: 1px solid #e8eaed;
+          color: #5f6368;
           font-size: 14px;
         }
-        .footer {
-          background-color: #F9F9F9;
-          padding: 16px 24px;
-          text-align: center;
-          color: #505A64;
-          font-size: 13px;
-          border-top: 1px solid #E1E1E1;
+        .timestamp-label {
+          font-weight: 500;
+          margin-bottom: 4px;
         }
-        @media (max-width: 600px) {
-          .field-value {
+        .footer {
+          background-color: #f8f9fa;
+          padding: 20px 24px;
+          text-align: center;
+          color: #5f6368;
+          font-size: 12px;
+          border-top: 1px solid #e8eaed;
+          line-height: 1.5;
+        }
+        
+        /* Responsive Design */
+        @media only screen and (max-width: 600px) {
+          .email-wrapper {
+            padding: 16px;
+          }
+          .header {
+            padding: 24px 20px 20px;
+          }
+          .header-content {
+            gap: 12px;
+          }
+          .header-title {
+            font-size: 20px;
+          }
+          .header-subtitle {
+            font-size: 13px;
+          }
+          .content {
+            padding: 20px;
+          }
+          .contact-details {
+            padding: 20px;
+          }
+          .detail-value {
             font-size: 15px;
+          }
+          .reply-button {
+            padding: 10px 20px;
+            font-size: 13px;
+          }
+          .footer {
+            padding: 16px 20px;
+          }
+        }
+        
+        @media only screen and (max-width: 480px) {
+          .email-wrapper {
+            padding: 12px;
+          }
+          .header {
+            padding: 20px 16px 16px;
+          }
+          .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          }
+          .header-icon {
+            align-self: flex-start;
+          }
+          .content {
+            padding: 16px;
+          }
+          .contact-details {
+            padding: 16px;
+          }
+          .message-content {
+            padding: 16px;
+          }
+          .footer {
+            padding: 16px;
+          }
+        }
+        
+        /* High DPI Display Support */
+        @media only screen and (-webkit-min-device-pixel-ratio: 2), 
+               only screen and (min-resolution: 192dpi) {
+          .header-icon::before {
+            font-size: 17px;
+          }
+        }
+        
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+          body {
+            background-color: #1f1f1f;
+            color: #e8eaed;
+          }
+          .email-container {
+            background-color: #2d2d2d;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+          }
+          .header {
+            background-color: #2d2d2d;
+            border-bottom: 1px solid #5f6368;
+          }
+          .header-title {
+            color: #e8eaed;
+          }
+          .header-subtitle {
+            color: #9aa0a6;
+          }
+          .contact-details {
+            background-color: #1f1f1f;
+            border: 1px solid #5f6368;
+          }
+          .detail-row {
+            border-bottom: 1px solid #5f6368;
+          }
+          .detail-value {
+            color: #e8eaed;
+          }
+          .message-content {
+            background-color: #2d2d2d;
+            border: 1px solid #5f6368;
+          }
+          .action-section, .timestamp-section {
+            border-top: 1px solid #5f6368;
+          }
+          .timestamp-section {
+            color: #9aa0a6;
+          }
+          .footer {
+            background-color: #1f1f1f;
+            border-top: 1px solid #5f6368;
+            color: #9aa0a6;
           }
         }
       </style>
     </head>
     <body>
-      <div class="wrapper">
-        <div class="container">
+      <div class="email-wrapper">
+        <div class="email-container">
           <div class="header">
-            <div class="header-icon">📨</div>
-            <h1 class="header-title">New Contact Form Submission</h1>
-            <p class="header-subtitle">Someone has sent you a message</p>
+            <div class="header-content">
+              <div class="header-icon"></div>
+              <div class="header-text">
+                <h1 class="header-title">New Contact Form Submission</h1>
+                <p class="header-subtitle">You have received a new message through your portfolio</p>
+              </div>
+            </div>
           </div>
           
           <div class="content">
-            <div class="notification-badge">New Message</div>
+            <div class="alert-badge">New Message</div>
             
-            <div class="section">
-              <div class="field">
-                <div class="field-label">Full Name</div>
-                <div class="field-value">${formData.name}</div>
+            <div class="contact-details">
+              <div class="detail-row">
+                <div class="detail-label">From</div>
+                <div class="detail-value">${formData.name}</div>
               </div>
               
-              <div class="field">
-                <div class="field-label">Email Address</div>
-                <div class="field-value">
+              <div class="detail-row">
+                <div class="detail-label">Email</div>
+                <div class="detail-value">
                   <a href="mailto:${formData.email}">${formData.email}</a>
                 </div>
               </div>
               
-              <div class="field">
-                <div class="field-label">Subject</div>
-                <div class="field-value">${formData.subject}</div>
+              <div class="detail-row">
+                <div class="detail-label">Subject</div>
+                <div class="detail-value">${formData.subject}</div>
               </div>
               
-              <div class="field">
-                <div class="field-label">Message</div>
-                <div class="message-box">${formData.message}</div>
+              <div class="detail-row">
+                <div class="detail-label">Message</div>
+                <div class="message-content">${formData.message}</div>
               </div>
             </div>
             
-            <div class="actions">
-              <a href="mailto:${formData.email}?subject=Re: ${formData.subject}" class="btn">Reply to Message</a>
+            <div class="action-section">
+              <a href="mailto:${formData.email}?subject=Re: ${formData.subject}" class="reply-button">Reply to Message</a>
             </div>
             
-            <div class="timestamp">
-              Received on: ${new Date().toLocaleString('en-US', { 
+            <div class="timestamp-section">
+              <div class="timestamp-label">Received</div>
+              <div>${new Date().toLocaleString('en-US', { 
                 weekday: 'long', 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric',
                 hour: '2-digit',
-                minute: '2-digit'
-              })}
+                minute: '2-digit',
+                timeZoneName: 'short'
+              })}</div>
             </div>
           </div>
           
           <div class="footer">
-            This message was sent through your portfolio contact form.
+            This notification was generated automatically from your portfolio contact form.<br>
+            Please do not reply directly to this email.
           </div>
         </div>
       </div>
