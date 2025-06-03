@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           <div className="md:col-span-2">
             <h3 className="text-2xl font-bold text-blue-400 mb-4">NR</h3>
             <p className="text-gray-300 mb-6 max-w-md">
-              Junior Cloud & DevOps Engineer passionate about building scalable, resilient infrastructure and automating workflows for optimal efficiency.
+              DevOps Engineer passionate about building scalable, resilient infrastructure and automating workflows for optimal efficiency.
             </p>
             <div className="flex space-x-4">
             <a
@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-400">
-              <li>Chennai, TamilNadu, India</li>
+              <li>Bengaluru, Karnataka, India</li>
               <li>
                 <a href="mailto:rnikhilvignesh21@gmail.com" className="hover:text-white transition-colors">
                   rnikhilvignesh21@gmail.com

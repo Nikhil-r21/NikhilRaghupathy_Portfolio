@@ -392,7 +392,7 @@ const ContactSection: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-1">Location</h4>
-                  <p className="text-gray-600">Chennai, TamilNadu, India</p>
+                  <p className="text-gray-600">Bengaluru, Karnataka, India</p>
                 </div>
               </div>
             </div>

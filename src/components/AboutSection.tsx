@@ -51,7 +51,7 @@ const AboutSection: React.FC = () => {
         >
           <div className="space-y-4 text-gray-600">
             <p>
-              Hello! I'm Nikhil Raghupathy, a passionate Junior Cloud & DevOps Engineer with a strong foundation in AWS cloud services and containerization technologies. Having recently earned my AWS Cloud Practitioner certification, I'm dedicated to building scalable, resilient, and automated infrastructure solutions.
+              Hello! I'm Nikhil Raghupathy, a passionate DevOps Engineer with a strong foundation in AWS cloud services and containerization technologies. Having recently earned my AWS Cloud Practitioner certification, I'm dedicated to building scalable, resilient, and automated infrastructure solutions.
             </p>
             
             <p>

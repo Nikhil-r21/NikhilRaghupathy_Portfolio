@@ -3,7 +3,7 @@ import { IExperience } from '../types';
 export const experienceData: IExperience[] = [
   {
     id: '1',
-    role: 'Jr. Cloud & DevOps Engineer',
+    role: 'DevOps Engineer',
     company: 'e-Cosmos India Pvt. Ltd.',
     location: "Bengaluru, India",
     period: 'Sept 2023 – Present',

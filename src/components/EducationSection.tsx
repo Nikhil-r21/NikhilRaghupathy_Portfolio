@@ -85,7 +85,7 @@ const EducationSection: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   className="bg-white p-6 rounded-lg shadow-md flex flex-col sm:flex-row items-center"
                 >
-                  <div className="w-20 h-20 flex-shrink-0 rounded-full overflow-hidden mb-4 sm:mb-0 sm:mr-6">
+                  <div className="w-32 h-32 flex-shrink-0 rounded-full overflow-hidden mb-4 sm:mb-0 sm:mr-6">
                     <img 
                       src={cert.image} 
                       alt={cert.name} 
