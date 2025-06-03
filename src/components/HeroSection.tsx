@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ReactTyped } from 'react-typed';
-import { FileDown, ExternalLink, BarChartHorizontalBig } from 'lucide-react';
+import { FileDown, ExternalLink } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
   return (

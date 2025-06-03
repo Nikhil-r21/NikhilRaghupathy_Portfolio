@@ -27,7 +27,7 @@ export const navLinks: INavLink[] = [
   },
   {
     id: 'blog',
-    title: 'Blog',
+    title: 'Blogs',
   },
   {
     id: 'contact',
