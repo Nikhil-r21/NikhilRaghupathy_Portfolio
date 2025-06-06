@@ -282,13 +282,8 @@ const HeroSection = () => {
     };
   }, [mousePosition]);
 
-  const scrollToProjects = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log('Scrolling to projects section');
-  };
-
   // Button magnetism effect
-  const handleButtonMouseMove = (e: React.MouseEvent<HTMLElement>, callback?: () => void) => {
+  const handleButtonMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const button = e.currentTarget;
     const rect = button.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
@@ -365,8 +360,7 @@ const HeroSection = () => {
           </p>
           
           <div className={`flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center md:justify-start transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <button 
-              onClick={scrollToProjects}
+            <a href = "#projects" 
               onMouseMove={handleButtonMouseMove}
               onMouseLeave={handleButtonMouseLeave}
               className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center backdrop-blur-sm border border-blue-500/20 relative overflow-hidden group magnetic-button"
@@ -374,7 +368,7 @@ const HeroSection = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-800 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
               <ExternalLink size={18} className="mr-2 relative z-10" />
               <span className="relative z-10">View Projects</span>
-            </button>
+            </a>
             <a 
               href="./Nikhil_Raghupathy_DevOps_Engineer.pdf" 
               target='_blank' 
