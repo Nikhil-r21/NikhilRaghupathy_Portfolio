@@ -17,7 +17,7 @@ type FreelanceFormInputs = {
 
 const projectTypes = [
   'DevOps Implementation',
-  'Cloud Migration (AWS/Azure/GCP)',
+  'Cloud Migration (AWS/Azure)',
   'Infrastructure as Code (Terraform/CloudFormation)',
   'CI/CD Pipeline Setup',
   'Docker & Containerization',

@@ -3,6 +3,21 @@ import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin } from 'lucide-react';
 import { experienceData } from '../data/experienceData';
 
+const formatPeriod = (period: string) => {
+  if (period.includes('Present')) {
+    const parts = period.split(' – ');
+    return (
+      <span className="flex items-center gap-2 flex-wrap">
+        {parts[0]} – 
+        <span className="flex items-center gap-1 text-emerald-700 bg-emerald-100 px-3 py-0.5 rounded-full font-medium shadow-sm animate-pulse">
+          Present
+        </span>
+      </span>
+    );
+  }
+  return <span>{period}</span>;
+};
+
 const ExperienceSection: React.FC = () => {
   return (
     <section id="experience" className="py-20 bg-gray-50">
@@ -56,7 +71,7 @@ const ExperienceSection: React.FC = () => {
                   <div className="flex items-center mb-4 text-gray-500 gap-6">
                     <div className="flex items-center">
                       <Calendar size={16} className="mr-2" />
-                      <span>{experience.period}</span>
+                      <span>{formatPeriod(experience.period)}</span>
                     </div>
                     <div className="flex items-center">
                       <MapPin size={16} className="mr-2" />

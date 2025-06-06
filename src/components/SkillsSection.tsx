@@ -70,7 +70,7 @@ const SkillsSection: React.FC = () => {
               <div className="mt-2 space-y-1">
                 {skill.skills.map((item, index) => (
                   <div key={index} className="flex items-center text-sm text-gray-500 py-1">
-                    <CheckCircle size={14} className="mr-2 text-blue-500" />
+                    <CheckCircle size={14} className="mr-2 text-emerald-500" />
                     <span>{item}</span>
                   </div>
                 ))}
