@@ -1,86 +1,159 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Home } from 'lucide-react';
+import { Home, Shield, Info, Users, Lock, Mail, FileText } from 'lucide-react';
+import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer'; // Import the Footer component
 
-const PrivacyPolicy: React.FC = () => {
-  const navigate = useNavigate(); // Initialize the navigate function
-  
+const PrivacyPolicy = () => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate('/');
+  };
+
+  const sections = [
+    {
+      id: 1,
+      icon: Info,
+      title: "Information I Collect",
+      content:
+        "I collect information you provide directly when you use this site — typically through the contact form or project inquiries:",
+      items: [
+        "Personal identifiers (name, email address)",
+        "Project requirements and specifications",
+        "Communication preferences",
+        "Professional information relevant to your inquiry",
+      ],
+    },
+    {
+      id: 2,
+      icon: Users,
+      title: "How I Use Your Information",
+      content: "I process your information for the following purposes:",
+      items: [
+        "To respond to your inquiries and service requests",
+        "To provide and deliver the services you request",
+        "To send important service-related communications",
+        "To improve the quality and usability of this site",
+      ],
+    },
+    {
+      id: 3,
+      icon: Shield,
+      title: "Information Sharing and Disclosure",
+      content:
+        "Your personal information is never sold, rented, or shared with third parties, except when required by law or with your explicit consent.",
+      items: [],
+    },
+    {
+      id: 4,
+      icon: Lock,
+      title: "Data Security and Protection",
+      content:
+        "I use reasonable security measures to protect your information, including encryption, secure transmission, and routine security reviews. However, no online system is 100% secure.",
+      items: [],
+    },
+    {
+      id: 5,
+      icon: FileText,
+      title: "Data Retention",
+      content:
+        "I retain your personal data only as long as needed to fulfill the purposes mentioned above or to meet legal obligations.",
+      items: [],
+    },
+    {
+      id: 6,
+      icon: Mail,
+      title: "Contact Information",
+      content:
+        "If you have any questions about this Privacy Policy or how your data is handled, feel free to reach out via email at rnikhilvignesh21@gmail.com.",
+      items: [],
+    },
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <motion.div 
-        className="flex-grow bg-gray-50 py-20 px-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="container mx-auto max-w-3xl">
-          <div className="mb-6">
-            <motion.button
-              onClick={() => navigate('/')}
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Home size={20} className="mr-2" />
-              Back to Home
-            </motion.button>
-          </div>
-          
-          <h1 className="text-3xl font-bold text-gray-800 mb-8">Privacy Policy</h1>
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">1. Information We Collect</h2>
-              <p className="text-gray-600 mb-4">
-                We collect information you provide directly to us when using the contact form or freelance inquiry form, including:
-              </p>
-              <ul className="list-disc list-inside text-gray-600 ml-4">
-                <li>Name</li>
-                <li>Email address</li>
-                <li>Project details</li>
-                <li>Any other information you choose to provide</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">2. How We Use Your Information</h2>
-              <p className="text-gray-600">
-                We use the information we collect to:
-              </p>
-              <ul className="list-disc list-inside text-gray-600 ml-4">
-                <li>Respond to your inquiries</li>
-                <li>Provide the services you request</li>
-                <li>Send you technical notices and support messages</li>
-                <li>Communicate with you about products, services, and events</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">3. Information Sharing</h2>
-              <p className="text-gray-600">
-                We do not share your personal information with any third parties except as described in this privacy policy or with your explicit consent.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">4. Data Security</h2>
-              <p className="text-gray-600">
-                We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">5. Contact Us</h2>
-              <p className="text-gray-600">
-                If you have any questions about this Privacy Policy, please contact us at privacy@example.com.
-              </p>
-            </section>
-          </div>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="container mx-auto max-w-6xl px-4 py-6">
+          <button
+            onClick={handleBackClick}
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-colors duration-200"
+          >
+            <Home size={16} className="mr-2" />
+            Back to Home
+          </button>
         </div>
-      </motion.div>
-      
-      {/* Add the Footer component at the bottom */}
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto max-w-4xl px-4 py-12">
+        {/* Page Title */}
+        <div className="mb-12">
+          <div className="flex items-center mb-4">
+            <Shield className="w-8 h-8 text-blue-600 mr-3" />
+            <h1 className="text-4xl font-normal text-gray-900">Privacy Policy</h1>
+          </div>
+          <p className="text-lg text-gray-600 max-w-3xl">
+            This Privacy Policy explains how I collect, use, and safeguard your information when you use my portfolio website.
+          </p>
+          <p className="text-sm text-gray-500 mt-2">Last updated: June 2025</p>
+        </div>
+
+        {/* Table of Contents */}
+        <div className="bg-gray-50 rounded-lg p-6 mb-8">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Contents</h2>
+          <nav className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {sections.map((section) => (
+              <a
+                key={section.id}
+                href={`#section-${section.id}`}
+                className="text-blue-600 hover:text-blue-700 hover:underline text-sm py-1"
+              >
+                {section.id}. {section.title}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        {/* Content Sections */}
+        <div className="space-y-12">
+          {sections.map((section) => (
+            <section
+              key={section.id}
+              id={`#section-${section.id}`}
+              className="scroll-mt-8"
+            >
+              <div className="flex items-start mb-6">
+                <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                  <section.icon className="w-5 h-5 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-normal text-gray-900 mb-4">
+                    {section.id}. {section.title}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="ml-14">
+                <p className="text-gray-700 mb-4 leading-relaxed">
+                  {section.content}
+                </p>
+
+                {section.items.length > 0 && (
+                  <ul className="space-y-2 text-gray-700">
+                    {section.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start">
+                        <span className="text-blue-600 mr-3 mt-2">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </section>
+          ))}
+        </div>
+      </main>
+
       <Footer />
     </div>
   );

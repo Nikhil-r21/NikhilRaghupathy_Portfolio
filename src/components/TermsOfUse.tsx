@@ -1,82 +1,161 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Home } from 'lucide-react';
+import { Home, BookOpenCheck, ClipboardEdit, Ban, AlertTriangle, FileWarning, Mail } from 'lucide-react';
+import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer'; // Import the Footer component
 
-const TermsOfUse: React.FC = () => {
-  const navigate = useNavigate(); // Initialize the navigate function
-  
+const TermsOfUse = () => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate('/');
+  };
+
+  const sections = [
+    {
+      id: 1,
+      icon: BookOpenCheck,
+      title: 'Acceptance of Terms',
+      content:
+        'By accessing and using this website, you accept and agree to be bound by these Terms of Use. If you do not agree, please do not use the site.',
+      items: [],
+    },
+    {
+      id: 2,
+      icon: ClipboardEdit,
+      title: 'Use License',
+      content:
+        'You are granted a limited license to access and make personal use of this site. You may not:',
+      items: [
+        'Modify or copy the materials',
+        'Use the materials for commercial purposes',
+        'Attempt to decompile or reverse engineer any software contained on the site',
+        'Transfer the materials to another person or "mirror" them on any other server',
+        'Remove any copyright or other proprietary notations',
+      ],
+    },
+    {
+      id: 3,
+      icon: Ban,
+      title: 'Prohibited Conduct',
+      content:
+        'You agree not to use the site in any way that:',
+      items: [
+        'Violates any applicable laws or regulations',
+        'Infringes on the rights of others',
+        'Attempts to gain unauthorized access to the site or server',
+        'Interferes with or disrupts the operation of the site',
+      ],
+    },
+    {
+      id: 4,
+      icon: AlertTriangle,
+      title: 'Disclaimer',
+      content:
+        'The materials on this website are provided on an "as is" basis. No warranties, expressed or implied, are made. We disclaim all warranties, including merchantability and fitness for a particular purpose.',
+      items: [],
+    },
+    {
+      id: 5,
+      icon: FileWarning,
+      title: 'Limitation of Liability',
+      content:
+        'We are not liable for any damages arising out of the use or inability to use the materials on the site, including but not limited to loss of data or profit.',
+      items: [],
+    },
+    {
+      id: 6,
+      icon: Mail,
+      title: 'Contact Information',
+      content:
+        'If you have any questions about these Terms of Use, feel free to reach out via email at rnikhilvignesh21@gmail.com.',
+      items: [],
+    },
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen">
-      <motion.div 
-        className="flex-grow bg-gray-50 py-20 px-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="container mx-auto max-w-3xl">
-          <div className="mb-6">
-            <motion.button
-              onClick={() => navigate('/')}
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Home size={20} className="mr-2" />
-              Back to Home
-            </motion.button>
-          </div>
-          
-          <h1 className="text-3xl font-bold text-gray-800 mb-8">Terms of Use</h1>
-          <div className="bg-white rounded-lg shadow-md p-8">
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">1. Acceptance of Terms</h2>
-              <p className="text-gray-600">
-                By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">2. Use License</h2>
-              <p className="text-gray-600 mb-4">
-                Permission is granted to temporarily download one copy of the materials (information or software) on this website for personal, non-commercial transitory viewing only.
-              </p>
-              <p className="text-gray-600">
-                This is the grant of a license, not a transfer of title, and under this license you may not:
-              </p>
-              <ul className="list-disc list-inside text-gray-600 ml-4 mt-2">
-                <li>Modify or copy the materials</li>
-                <li>Use the materials for any commercial purpose</li>
-                <li>Remove any copyright or other proprietary notations from the materials</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">3. Disclaimer</h2>
-              <p className="text-gray-600">
-                The materials on this website are provided on an 'as is' basis. We make no warranties, expressed or implied, and hereby disclaim and negate all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
-              </p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">4. Limitations</h2>
-              <p className="text-gray-600">
-                In no event shall we or our suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on our website.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">5. Contact Information</h2>
-              <p className="text-gray-600">
-                If you have any questions about these Terms of Use, please contact us at terms@example.com.
-              </p>
-            </section>
-          </div>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200">
+        <div className="container mx-auto max-w-6xl px-4 py-6">
+          <button
+            onClick={handleBackClick}
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50 rounded-md transition-colors duration-200"
+          >
+            <Home size={16} className="mr-2" />
+            Back to Home
+          </button>
         </div>
-      </motion.div>
-      
-      {/* Add the Footer component at the bottom */}
+      </header>
+
+      {/* Main Content */}
+      <main className="container mx-auto max-w-4xl px-4 py-12">
+        {/* Page Title */}
+        <div className="mb-12">
+          <div className="flex items-center mb-4">
+            <BookOpenCheck className="w-8 h-8 text-blue-600 mr-3" />
+            <h1 className="text-4xl font-normal text-gray-900">Terms of Use</h1>
+          </div>
+          <p className="text-lg text-gray-600 max-w-3xl">
+            These Terms of Use govern your use of this portfolio website. By accessing or using the site, you agree to these terms.
+          </p>
+          <p className="text-sm text-gray-500 mt-2">Last updated: June 2025</p>
+        </div>
+
+        {/* Table of Contents */}
+        <div className="bg-gray-50 rounded-lg p-6 mb-8">
+          <h2 className="text-lg font-medium text-gray-900 mb-4">Contents</h2>
+          <nav className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {sections.map((section) => (
+              <a
+                key={section.id}
+                href={`#section-${section.id}`}
+                className="text-blue-600 hover:text-blue-700 hover:underline text-sm py-1"
+              >
+                {section.id}. {section.title}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        {/* Content Sections */}
+        <div className="space-y-12">
+          {sections.map((section) => (
+            <section
+              key={section.id}
+              id={`section-${section.id}`}
+              className="scroll-mt-8"
+            >
+              <div className="flex items-start mb-6">
+                <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                  <section.icon className="w-5 h-5 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-normal text-gray-900 mb-4">
+                    {section.id}. {section.title}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="ml-14">
+                <p className="text-gray-700 mb-4 leading-relaxed">
+                  {section.content}
+                </p>
+
+                {section.items.length > 0 && (
+                  <ul className="space-y-2 text-gray-700">
+                    {section.items.map((item, itemIndex) => (
+                      <li key={itemIndex} className="flex items-start">
+                        <span className="text-blue-600 mr-3 mt-2">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </section>
+          ))}
+        </div>
+      </main>
+
       <Footer />
     </div>
   );
