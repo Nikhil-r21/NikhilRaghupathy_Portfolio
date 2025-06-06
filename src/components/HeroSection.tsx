@@ -80,8 +80,8 @@ const HeroSection: React.FC = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-xl">
               {/* Profile image */}
               <img 
-                src="https://media.licdn.com/dms/image/v2/D5603AQHbq6G5DzE1iA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1724775021779?e=1749081600&v=beta&t=ODcypQMNlukVX1FJS6ZNTC8Y8aPfS7nnJTxcn7fHX5E" 
-                alt="Nikhil Raghupathy - Jr. Cloud & DevOps Engineer" 
+                src="https://media.licdn.com/dms/image/v2/D5603AQHbq6G5DzE1iA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1724775021779?e=1754524800&v=beta&t=cKP75sRP2Ly0UyW_G1kgxpJrZ_QSfIZE4VKWcnHIzw8" 
+                alt="Nikhil Raghupathy - DevOps Engineer" 
                 className="w-full h-full object-cover"
               />
             </div>
