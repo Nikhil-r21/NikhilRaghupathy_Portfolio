@@ -108,6 +108,44 @@ export const createOwnerEmailTemplate = (formData) => {
           background: #edebe9;
           margin: 24px 0;
         }
+        .reply-section {
+          background: #f3f2f1;
+          border: 1px solid #edebe9;
+          border-radius: 2px;
+          padding: 20px;
+          margin: 24px 0;
+          text-align: center;
+        }
+        .reply-title {
+          font-weight: 600;
+          color: #323130;
+          margin-bottom: 12px;
+          font-size: 14px;
+        }
+        .reply-button {
+          display: inline-block;
+          padding: 12px 24px;
+          background-color: #0078d4;
+          color: #ffffff !important;
+          text-decoration: none;
+          border-radius: 2px;
+          font-size: 14px;
+          font-weight: 600;
+          text-align: center;
+          transition: background-color 0.2s ease;
+          border: none;
+          min-width: 140px;
+        }
+        .reply-button:hover {
+          background-color: #106ebe;
+          text-decoration: none;
+        }
+        .reply-note {
+          color: #605e5c;
+          font-size: 12px;
+          margin-top: 8px;
+          font-style: italic;
+        }
         .metadata {
           background: #f8f8f8;
           border-top: 1px solid #edebe9;
@@ -154,6 +192,13 @@ export const createOwnerEmailTemplate = (formData) => {
             align-items: flex-start;
             gap: 4px;
           }
+          .reply-section {
+            padding: 16px;
+          }
+          .reply-button {
+            width: 100%;
+            box-sizing: border-box;
+          }
         }
       </style>
     </head>
@@ -188,6 +233,14 @@ export const createOwnerEmailTemplate = (formData) => {
           <div class="section">
             <div class="section-title">Message</div>
             <div class="message-container">${formData.message}</div>
+          </div>
+          
+          <div class="reply-section">
+            <div class="reply-title">Quick Action</div>
+            <a href="mailto:${formData.email}?subject=Re: ${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Hi ${formData.name},\n\nThank you for your message. `)}" class="reply-button">
+              Reply to ${formData.name}
+            </a>
+            <div class="reply-note">Opens your default email client with pre-filled recipient and subject</div>
           </div>
         </div>
         

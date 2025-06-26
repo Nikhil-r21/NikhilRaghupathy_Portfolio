@@ -12,491 +12,431 @@ export const createFreelanceSenderEmailTemplate = (data) => {
     submittedAt 
   } = data;
 
+  // Format timestamp to IST railway format (24-hour)
+  const formatToIST = (timestamp) => {
+    const date = new Date(timestamp);
+    const istOptions = {
+      timeZone: 'Asia/Kolkata',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    };
+    
+    const formatted = date.toLocaleString('en-IN', istOptions);
+    return formatted.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}:\d{2})/, '$3-$2-$1 at $4 hrs IST');
+  };
+
   return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Thank You for Your Project Inquiry</title>
+      <title>Thank You - Project Inquiry Received</title>
       <style>
-        * {
-          box-sizing: border-box;
-        }
         body {
-          font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
           line-height: 1.5;
-          color: #202124;
-          background-color: #f8f9fa;
+          color: #323130;
+          background-color: #faf9f8;
           margin: 0;
-          padding: 0;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
+          padding: 20px;
         }
-        .email-container {
-          max-width: 680px;
-          margin: 32px auto;
-          background-color: #ffffff;
-          border-radius: 8px;
-          box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
-          overflow: hidden;
-        }
-        .header {
-          background: linear-gradient(135deg, #34a853 0%, #137333 100%);
-          padding: 40px 32px;
-          text-align: center;
-        }
-        .header-content {
+        
+        .container {
           max-width: 600px;
           margin: 0 auto;
+          background-color: #ffffff;
+          border: 1px solid #e1dfdd;
+          border-radius: 4px;
         }
+        
+        .header {
+          padding: 32px;
+          border-bottom: 1px solid #e1dfdd;
+          background-color: #ffffff;
+          text-align: center;
+        }
+        
         .success-icon {
-          width: 64px;
-          height: 64px;
-          background-color: rgba(255, 255, 255, 0.2);
+          width: 48px;
+          height: 48px;
+          background-color: #107c10;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 24px;
-          font-size: 28px;
+          margin: 0 auto 16px;
           color: #ffffff;
+          font-size: 24px;
+          font-weight: bold;
         }
-        .header-title {
-          color: #ffffff;
-          font-size: 28px;
-          font-weight: 400;
+        
+        .header h1 {
           margin: 0 0 8px 0;
-          letter-spacing: -0.5px;
+          font-size: 24px;
+          font-weight: 600;
+          color: #323130;
         }
-        .header-subtitle {
-          color: rgba(255, 255, 255, 0.9);
-          font-size: 16px;
-          font-weight: 400;
+        
+        .header p {
           margin: 0;
+          font-size: 14px;
+          color: #605e5c;
         }
+        
         .content {
           padding: 32px;
         }
+        
         .greeting {
-          font-size: 20px;
-          font-weight: 400;
-          color: #202124;
+          font-size: 16px;
+          color: #323130;
           margin-bottom: 24px;
         }
+        
         .section {
           margin-bottom: 32px;
         }
+        
         .section:last-child {
           margin-bottom: 0;
         }
-        .section-header {
-          display: flex;
-          align-items: center;
-          margin-bottom: 20px;
-          padding-bottom: 12px;
-          border-bottom: 1px solid #e8eaed;
-        }
+        
         .section-title {
-          font-size: 18px;
-          font-weight: 500;
-          color: #3c4043;
-          margin: 0;
+          font-size: 16px;
+          font-weight: 600;
+          color: #323130;
+          margin: 0 0 16px 0;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #f3f2f1;
         }
+        
         .section-content {
-          font-size: 15px;
+          font-size: 14px;
+          color: #323130;
           line-height: 1.6;
-          color: #5f6368;
         }
+        
         .section-content p {
           margin: 0 0 16px 0;
         }
+        
         .section-content p:last-child {
           margin-bottom: 0;
         }
-        .section-content strong {
-          color: #202124;
-          font-weight: 500;
-        }
-        .info-grid {
+        
+        .field-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 16px;
-          margin-top: 20px;
+          grid-template-columns: 1fr 1fr;
+          gap: 16px 24px;
+          margin-top: 16px;
         }
-        .info-item {
-          background-color: #f8f9fa;
-          border: 1px solid #e8eaed;
-          border-radius: 8px;
-          padding: 16px;
+        
+        .field {
+          display: flex;
+          flex-direction: column;
         }
-        .info-label {
+        
+        .field-label {
           font-size: 12px;
-          font-weight: 500;
-          color: #5f6368;
+          font-weight: 600;
+          color: #605e5c;
+          margin-bottom: 4px;
           text-transform: uppercase;
-          letter-spacing: 0.8px;
-          margin-bottom: 6px;
+          letter-spacing: 0.5px;
         }
-        .info-value {
-          font-size: 15px;
-          color: #202124;
-          font-weight: 400;
+        
+        .field-value {
+          font-size: 14px;
+          color: #323130;
         }
-        .message-container {
-          background-color: #f8f9fa;
-          border: 1px solid #e8eaed;
-          border-radius: 8px;
-          padding: 20px;
-          margin-top: 20px;
+        
+        .full-width {
+          grid-column: 1 / -1;
         }
+        
+        .message-box {
+          background-color: #f8f7f6;
+          border: 1px solid #e1dfdd;
+          border-radius: 4px;
+          padding: 16px;
+          margin-top: 8px;
+        }
+        
         .message-text {
-          font-size: 15px;
-          line-height: 1.6;
-          color: #3c4043;
+          font-size: 14px;
+          color: #323130;
           margin: 0;
           white-space: pre-wrap;
+          line-height: 1.5;
         }
-        .timeline-section {
-          background: linear-gradient(135deg, #1a73e8 0%, #1557b0 100%);
-          color: #ffffff;
-          border-radius: 12px;
-          padding: 32px;
-          margin: 32px 0;
+        
+        .next-steps {
+          background-color: #f3f2f1;
+          border: 1px solid #e1dfdd;
+          border-radius: 4px;
+          padding: 24px;
+          margin: 24px 0;
         }
-        .timeline-title {
-          font-size: 20px;
-          font-weight: 500;
-          margin: 0 0 24px 0;
-          text-align: center;
+        
+        .next-steps-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: #323130;
+          margin: 0 0 16px 0;
         }
-        .timeline-steps {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-          gap: 20px;
+        
+        .steps-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          counter-reset: step-counter;
         }
-        .timeline-step {
-          background-color: rgba(255, 255, 255, 0.1);
-          border-radius: 12px;
-          padding: 20px 16px;
-          text-align: center;
+        
+        .steps-list li {
           position: relative;
+          padding: 12px 0 12px 40px;
+          counter-increment: step-counter;
+          border-bottom: 1px solid #e8e6e4;
         }
-        .step-number {
-          width: 32px;
-          height: 32px;
-          background-color: #ffffff;
-          color: #1a73e8;
+        
+        .steps-list li:last-child {
+          border-bottom: none;
+        }
+        
+        .steps-list li::before {
+          content: counter(step-counter);
+          position: absolute;
+          left: 0;
+          top: 12px;
+          width: 24px;
+          height: 24px;
+          background-color: #0078d4;
+          color: white;
           border-radius: 50%;
+          font-size: 12px;
+          font-weight: 600;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-weight: 600;
-          font-size: 14px;
-          margin: 0 auto 12px;
         }
+        
         .step-title {
-          font-weight: 500;
-          margin-bottom: 6px;
-          font-size: 16px;
+          font-weight: 600;
+          color: #323130;
+          margin-bottom: 4px;
         }
+        
         .step-desc {
           font-size: 13px;
-          opacity: 0.9;
+          color: #605e5c;
           line-height: 1.4;
         }
-        .contact-section {
-          background-color: #fff3e0;
-          border: 1px solid #ffcc02;
-          border-left: 4px solid #ff9800;
-          border-radius: 8px;
-          padding: 24px;
-          margin: 32px 0;
+        
+        .contact-info {
+          background-color: #fff4ce;
+          border: 1px solid #fde047;
+          border-left: 4px solid #eab308;
+          border-radius: 4px;
+          padding: 20px;
+          margin: 24px 0;
         }
+        
         .contact-title {
-          font-size: 18px;
-          font-weight: 500;
-          color: #e65100;
-          margin: 0 0 16px 0;
-        }
-        .contact-intro {
-          font-size: 15px;
-          color: #bf360c;
-          margin: 0 0 20px 0;
-          line-height: 1.5;
-        }
-        .contact-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 16px;
-        }
-        .contact-item {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          font-size: 15px;
-        }
-        .contact-label {
-          font-weight: 500;
-          color: #e65100;
-          min-width: 60px;
-        }
-        .contact-value a {
-          color: #1a73e8;
-          text-decoration: none;
-        }
-        .contact-value a:hover {
-          text-decoration: underline;
-        }
-        .social-section {
-          text-align: center;
-          padding: 24px 0;
-        }
-        .social-title {
-          font-size: 16px;
-          font-weight: 500;
-          color: #3c4043;
-          margin: 0 0 16px 0;
-        }
-        .social-links {
-          display: flex;
-          justify-content: center;
-          gap: 12px;
-          flex-wrap: wrap;
-        }
-        .social-link {
-          display: inline-flex;
-          align-items: center;
-          padding: 10px 20px;
-          background-color: #f8f9fa;
-          color: #5f6368;
-          text-decoration: none;
-          border-radius: 6px;
           font-size: 14px;
-          font-weight: 500;
-          border: 1px solid #e8eaed;
-          transition: all 0.2s ease;
-        }
-        .social-link:hover {
-          background-color: #1a73e8;
-          color: #ffffff;
-          border-color: #1a73e8;
-        }
-        .footer {
-          background-color: #f8f9fa;
-          padding: 32px;
-          border-top: 1px solid #e8eaed;
-        }
-        .footer-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 24px;
-          margin-bottom: 24px;
-        }
-        .footer-section {
-          text-align: center;
-        }
-        .footer-title {
-          font-size: 16px;
-          font-weight: 500;
-          color: #3c4043;
+          font-weight: 600;
+          color: #92400e;
           margin: 0 0 12px 0;
         }
-        .footer-content {
-          font-size: 14px;
-          color: #5f6368;
-          line-height: 1.5;
+        
+        .contact-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
         }
-        .disclaimer {
+        
+        .contact-item {
+          font-size: 14px;
+          color: #92400e;
+        }
+        
+        .contact-item a {
+          color: #0078d4;
+          text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+          text-decoration: underline;
+        }
+        
+        .availability {
+          background-color: #f8f7f6;
+          border: 1px solid #e1dfdd;
+          border-radius: 4px;
+          padding: 20px;
           text-align: center;
-          font-size: 12px;
-          color: #9aa0a6;
-          padding-top: 24px;
-          border-top: 1px solid #e8eaed;
+        }
+        
+        .availability-title {
+          font-size: 14px;
+          font-weight: 600;
+          color: #323130;
+          margin: 0 0 12px 0;
+        }
+        
+        .availability-content {
+          font-size: 13px;
+          color: #605e5c;
           line-height: 1.4;
         }
-        .divider {
-          height: 1px;
-          background-color: #e8eaed;
-          margin: 32px 0;
+        
+        .footer {
+          padding: 24px 32px;
+          background-color: #f8f7f6;
+          border-top: 1px solid #e1dfdd;
+          text-align: center;
         }
+        
+        .footer-text {
+          font-size: 12px;
+          color: #605e5c;
+          margin: 0;
+          line-height: 1.4;
+        }
+        
+        .timestamp {
+          color: #605e5c;
+          font-size: 12px;
+        }
+        
         @media (max-width: 640px) {
-          .email-container {
-            margin: 16px;
+          body {
+            padding: 8px;
+          }
+          
+          .container {
             border-radius: 0;
+            border-left: none;
+            border-right: none;
           }
-          .header {
-            padding: 32px 20px;
+          
+          .header, .content, .footer {
+            padding-left: 20px;
+            padding-right: 20px;
           }
-          .header-title {
-            font-size: 24px;
-          }
-          .content {
-            padding: 24px 20px;
-          }
-          .timeline-section {
-            padding: 24px 20px;
-          }
-          .timeline-steps {
+          
+          .field-grid, .contact-grid {
             grid-template-columns: 1fr;
           }
-          .contact-section {
-            padding: 20px;
-          }
-          .social-links {
-            flex-direction: column;
-            align-items: center;
-          }
-          .social-link {
-            width: 100%;
-            justify-content: center;
-          }
-          .footer {
-            padding: 24px 20px;
-          }
-          .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
+          
+          .steps-list li {
+            padding-left: 32px;
           }
         }
       </style>
     </head>
     <body>
-      <div class="email-container">
+      <div class="container">
         <div class="header">
-          <div class="header-content">
-            <div class="success-icon">✓</div>
-            <h1 class="header-title">Thank You for Your Inquiry</h1>
-            <p class="header-subtitle">Your project request has been successfully received</p>
-          </div>
+          <div class="success-icon">✓</div>
+          <h1>Thank You for Your Inquiry</h1>
+          <p>Your project request has been received and is being reviewed</p>
         </div>
         
         <div class="content">
           <div class="greeting">
-            Hello ${name},
+            Dear ${name},
           </div>
           
           <div class="section">
-            <div class="section-header">
-              <h2 class="section-title">Confirmation</h2>
-            </div>
+            <h2 class="section-title">Confirmation</h2>
             <div class="section-content">
-              <p>Thank you for considering me for your <strong>${projectType}</strong> project. I'm excited about the opportunity to work with ${companyName && companyName !== 'Not specified' ? companyName : 'you'} and help bring your vision to life.</p>
-              <p>Your inquiry was submitted on <strong>${submittedAt}</strong> and I have received all the details you provided.</p>
+              <p>Thank you for considering me for your <strong>${projectType}</strong> project. I appreciate you taking the time to provide detailed information about your requirements.</p>
+              <p>Your inquiry was received on <strong class="timestamp">${formatToIST(submittedAt)}</strong> and I will review all the details you have provided.</p>
             </div>
           </div>
           
           <div class="section">
-            <div class="section-header">
-              <h2 class="section-title">Project Summary</h2>
-            </div>
-            <div class="info-grid">
-              <div class="info-item">
-                <div class="info-label">Project Type</div>
-                <div class="info-value">${projectType}</div>
+            <h2 class="section-title">Project Summary</h2>
+            <div class="field-grid">
+              <div class="field">
+                <div class="field-label">Project Type</div>
+                <div class="field-value">${projectType}</div>
               </div>
-              <div class="info-item">
-                <div class="info-label">Budget Range</div>
-                <div class="info-value">${budget}</div>
+              <div class="field">
+                <div class="field-label">Timeline</div>
+                <div class="field-value">${timeline}</div>
               </div>
-              <div class="info-item">
-                <div class="info-label">Timeline</div>
-                <div class="info-value">${timeline}</div>
+              <div class="field">
+                <div class="field-label">Budget Range</div>
+                <div class="field-value">${budget}</div>
               </div>
-              <div class="info-item">
-                <div class="info-label">Company</div>
-                <div class="info-value">${companyName || 'Individual Client'}</div>
+              <div class="field">
+                <div class="field-label">Company</div>
+                <div class="field-value">${companyName || 'Individual Client'}</div>
               </div>
-            </div>
-            
-            <div class="info-item" style="margin-top: 20px;">
-              <div class="info-label">Project Requirements</div>
-              <div class="message-container">
-                <p class="message-text">${message}</p>
+              <div class="field full-width">
+                <div class="field-label">Requirements</div>
+                <div class="message-box">
+                  <p class="message-text">${message}</p>
+                </div>
               </div>
             </div>
           </div>
           
-          <div class="timeline-section">
-            <h2 class="timeline-title">What Happens Next?</h2>
-            <div class="timeline-steps">
-              <div class="timeline-step">
-                <div class="step-number">1</div>
-                <div class="step-title">Review</div>
-                <div class="step-desc">I'll analyze your requirements and assess project feasibility</div>
-              </div>
-              <div class="timeline-step">
-                <div class="step-number">2</div>
-                <div class="step-title">Proposal</div>
-                <div class="step-desc">Detailed proposal with timeline, approach, and investment</div>
-              </div>
-              <div class="timeline-step">
-                <div class="step-number">3</div>
-                <div class="step-title">Discussion</div>
-                <div class="step-desc">Discovery call to refine requirements and approach</div>
-              </div>
-              <div class="timeline-step">
-                <div class="step-number">4</div>
-                <div class="step-title">Kickoff</div>
-                <div class="step-desc">Project begins once all details are finalized</div>
-              </div>
-            </div>
+          <div class="next-steps">
+            <h3 class="next-steps-title">Next Steps</h3>
+            <ol class="steps-list">
+              <li>
+                <div class="step-title">Project Review</div>
+                <div class="step-desc">I will analyze your requirements and assess project feasibility</div>
+              </li>
+              <li>
+                <div class="step-title">Proposal Preparation</div>
+                <div class="step-desc">Detailed proposal with timeline, approach, and investment will be prepared</div>
+              </li>
+              <li>
+                <div class="step-title">Initial Discussion</div>
+                <div class="step-desc">Schedule a call to discuss your requirements in detail</div>
+              </li>
+              <li>
+                <div class="step-title">Project Kickoff</div>
+                <div class="step-desc">Begin work once all details are agreed upon</div>
+              </li>
+            </ol>
           </div>
           
-          <div class="contact-section">
-            <h3 class="contact-title">Get in Touch</h3>
-            <p class="contact-intro">If you have any questions, additional information to share, or need to discuss your project urgently, please don't hesitate to reach out:</p>
+          <div class="contact-info">
+            <h3 class="contact-title">Need to Reach Me?</h3>
+            <p style="margin: 0 0 12px 0; font-size: 13px; color: #92400e;">If you have additional information or urgent questions, please contact me directly:</p>
             <div class="contact-grid">
               <div class="contact-item">
-                <span class="contact-label">Email:</span>
-                <div class="contact-value">
-                  <a href="mailto:${process.env.EMAIL || 'your.email@example.com'}">${process.env.EMAIL || 'your.email@example.com'}</a>
-                </div>
+                <strong>Email:</strong> <a href="mailto:${process.env.EMAIL || 'your.email@example.com'}">${process.env.EMAIL || 'your.email@example.com'}</a>
               </div>
               <div class="contact-item">
-                <span class="contact-label">Phone:</span>
-                <div class="contact-value">
-                  <a href="tel:+918428754385">+91 84287 54385</a>
-                </div>
+                <strong>Phone:</strong> <a href="tel:+918428754385">+91 84287 54385</a>
               </div>
             </div>
           </div>
-
-          <div class="divider"></div>
           
-          <div class="social-section">
-            <h3 class="social-title">Connect With Me</h3>
-            <div class="social-links">
-              <a href="https://linkedin.com/in/yourprofile" class="social-link">LinkedIn Profile</a>
-              <a href="https://github.com/yourprofile" class="social-link">GitHub Portfolio</a>
-              <a href="https://yourportfolio.com" class="social-link">View Portfolio</a>
+          <div class="availability">
+            <h3 class="availability-title">Response Timeline</h3>
+            <div class="availability-content">
+              <strong>Standard Response:</strong> Within 24 hours during business days<br>
+              <strong>Business Hours:</strong> 19:00 - 23:00 hrs IST (Weekdays) | 10:00 - 19:00 hrs IST (Weekends)
             </div>
           </div>
         </div>
         
         <div class="footer">
-          <div class="footer-grid">
-            <div class="footer-section">
-              <div class="footer-title">Response Time</div>
-              <div class="footer-content">
-                I typically respond to all inquiries within 24 hours during business days. Urgent projects may receive faster response times.
-              </div>
-            </div>
-            
-            <div class="footer-section">
-              <div class="footer-title">Availability</div>
-              <div class="footer-content">
-                <strong>Weekdays:</strong> 7:00 PM - 11:00 PM IST<br>
-                <strong>Weekends:</strong> 10:00 AM - 7:00 PM IST
-              </div>
-            </div>
-          </div>
-          
-          <div class="disclaimer">
+          <p class="footer-text">
             This is an automated confirmation email. Please do not reply directly to this message.<br>
-            For any questions or additional information, please use the contact details provided above.
-          </div>
+            For questions or additional information, please use the contact details provided above.
+          </p>
         </div>
       </div>
     </body>

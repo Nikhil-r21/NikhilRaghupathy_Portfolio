@@ -117,15 +117,44 @@ export const createSenderEmailTemplate = (formData) => {
         .contact-label {
           font-weight: 600;
           color: #605e5c;
-          margin-bottom: 4px;
+          margin-bottom: 8px;
         }
-        .contact-link {
-          color: #0078d4;
+        .contact-button {
+          display: inline-block;
+          padding: 10px 16px;
+          background-color: #0078d4;
+          color: #ffffff !important;
           text-decoration: none;
+          border-radius: 2px;
           font-size: 13px;
+          font-weight: 600;
+          text-align: center;
+          transition: background-color 0.2s ease;
+          border: none;
+          width: 100%;
+          box-sizing: border-box;
         }
-        .contact-link:hover {
-          text-decoration: underline;
+        .contact-button:hover {
+          background-color: #106ebe;
+          text-decoration: none;
+        }
+        .contact-button.linkedin {
+          background-color: #0077b5;
+        }
+        .contact-button.linkedin:hover {
+          background-color: #005885;
+        }
+        .contact-button.github {
+          background-color: #24292e;
+        }
+        .contact-button.github:hover {
+          background-color: #1b1f23;
+        }
+        .contact-button.medium {
+          background-color: #00ab6c;
+        }
+        .contact-button.medium:hover {
+          background-color: #00925b;
         }
         .signature {
           margin-top: 32px;
@@ -187,7 +216,7 @@ export const createSenderEmailTemplate = (formData) => {
           </div>
           
           <div class="main-message">
-            Thank you for contacting me through my portfolio website. I have received your message and will respond within 24-48 business hours.
+            Thank you for contacting me through my portfolio website. I have received your message and will respond within 24 hours.
           </div>
           
           <div class="summary-section">
@@ -226,20 +255,20 @@ export const createSenderEmailTemplate = (formData) => {
             <div class="contact-grid">
               <div class="contact-item">
                 <div class="contact-label">LinkedIn</div>
-                <a href="https://www.linkedin.com/in/nikhilraghupathy/" class="contact-link" target="_blank">
-                  linkedin.com/in/nikhilraghupathy
+                <a href="https://www.linkedin.com/in/nikhilraghupathy/" class="contact-button linkedin" target="_blank">
+                  Visit LinkedIn Profile
                 </a>
               </div>
               <div class="contact-item">
                 <div class="contact-label">GitHub</div>
-                <a href="https://github.com/Nikhil-r21" class="contact-link" target="_blank">
-                  github.com/Nikhil-r21
+                <a href="https://github.com/Nikhil-r21" class="contact-button github" target="_blank">
+                  View GitHub Projects
                 </a>
               </div>
               <div class="contact-item">
                 <div class="contact-label">Medium</div>
-                <a href="https://medium.com/@rnikhilvignesh21" class="contact-link" target="_blank">
-                  medium.com/@rnikhilvignesh21
+                <a href="https://medium.com/@rnikhilvignesh21" class="contact-button medium" target="_blank">
+                  Read Medium Articles
                 </a>
               </div>
             </div>

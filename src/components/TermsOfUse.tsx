@@ -92,7 +92,7 @@ const TermsOfUse = () => {
         <div className="mb-12">
           <div className="flex items-center mb-4">
             <BookOpenCheck className="w-8 h-8 text-blue-600 mr-3" />
-            <h1 className="text-4xl font-normal text-gray-900">Terms of Use</h1>
+            <h1 className="text-4xl font-bold text-gray-900">Terms of Use</h1>
           </div>
           <p className="text-lg text-gray-600 max-w-3xl">
             These Terms of Use govern your use of this portfolio website. By accessing or using the site, you agree to these terms.
@@ -129,7 +129,7 @@ const TermsOfUse = () => {
                   <section.icon className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-2xl font-normal text-gray-900 mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
                     {section.id}. {section.title}
                   </h2>
                 </div>

@@ -90,7 +90,7 @@ const PrivacyPolicy = () => {
         <div className="mb-12">
           <div className="flex items-center mb-4">
             <Shield className="w-8 h-8 text-blue-600 mr-3" />
-            <h1 className="text-4xl font-normal text-gray-900">Privacy Policy</h1>
+            <h1 className="text-4xl font-bold text-gray-900">Privacy Policy</h1>
           </div>
           <p className="text-lg text-gray-600 max-w-3xl">
             This Privacy Policy explains how I collect, use, and safeguard your information when you use my portfolio website.
@@ -127,7 +127,7 @@ const PrivacyPolicy = () => {
                   <section.icon className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-2xl font-normal text-gray-900 mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-4">
                     {section.id}. {section.title}
                   </h2>
                 </div>
