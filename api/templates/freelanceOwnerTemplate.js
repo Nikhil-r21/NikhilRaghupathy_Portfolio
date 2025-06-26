@@ -32,12 +32,14 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
   // Simple priority indicator
   const getPriorityLevel = (timeline) => {
     if (timeline.toLowerCase().includes('urgent') || timeline.toLowerCase().includes('asap')) {
-      return 'High';
+      return { level: 'High', color: '#d13438' };
     } else if (timeline.toLowerCase().includes('week')) {
-      return 'Medium';
+      return { level: 'Medium', color: '#ff8c00' };
     }
-    return 'Normal';
+    return { level: 'Normal', color: '#107c10' };
   };
+
+  const priority = getPriorityLevel(timeline);
 
   return `
     <!DOCTYPE html>
@@ -45,295 +47,244 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>New Project Inquiry - ${name}</title>
-      <style>
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-          line-height: 1.5;
-          color: #323130;
-          background-color: #faf9f8;
-          margin: 0;
-          padding: 20px;
-        }
-        
-        .container {
-          max-width: 600px;
-          margin: 0 auto;
-          background-color: #ffffff;
-          border: 1px solid #e1dfdd;
-          border-radius: 4px;
-        }
-        
-        .header {
-          padding: 24px 32px;
-          border-bottom: 1px solid #e1dfdd;
-          background-color: #ffffff;
-        }
-        
-        .header h1 {
-          margin: 0 0 4px 0;
-          font-size: 20px;
-          font-weight: 600;
-          color: #323130;
-        }
-        
-        .header p {
-          margin: 0;
-          font-size: 14px;
-          color: #605e5c;
-        }
-        
-        .content {
-          padding: 32px;
-        }
-        
-        .section {
-          margin-bottom: 32px;
-        }
-        
-        .section:last-child {
-          margin-bottom: 0;
-        }
-        
-        .section-title {
-          font-size: 16px;
-          font-weight: 600;
-          color: #323130;
-          margin: 0 0 16px 0;
-          padding-bottom: 8px;
-          border-bottom: 1px solid #f3f2f1;
-        }
-        
-        .field-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px 24px;
-        }
-        
-        .field {
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .field-label {
-          font-size: 12px;
-          font-weight: 600;
-          color: #605e5c;
-          margin-bottom: 4px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-        
-        .field-value {
-          font-size: 14px;
-          color: #323130;
-        }
-        
-        .field-value a {
-          color: #0078d4;
-          text-decoration: none;
-        }
-        
-        .field-value a:hover {
-          text-decoration: underline;
-        }
-        
-        .priority {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-        }
-        
-        .priority-indicator {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-        }
-        
-        .priority-high {
-          background-color: #d13438;
-        }
-        
-        .priority-medium {
-          background-color: #ff8c00;
-        }
-        
-        .priority-normal {
-          background-color: #107c10;
-        }
-        
-        .message-box {
-          background-color: #f8f7f6;
-          border: 1px solid #e1dfdd;
-          border-radius: 4px;
-          padding: 16px;
-          margin-top: 8px;
-        }
-        
-        .message-text {
-          font-size: 14px;
-          color: #323130;
-          margin: 0;
-          white-space: pre-wrap;
-          line-height: 1.5;
-        }
-        
-        .actions {
-          padding: 24px 32px;
-          background-color: #f8f7f6;
-          border-top: 1px solid #e1dfdd;
-          display: flex;
-          gap: 12px;
-        }
-        
-        .btn {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          padding: 8px 16px;
-          border-radius: 2px;
-          font-size: 14px;
-          font-weight: 600;
-          text-decoration: none;
-          border: 1px solid;
-          min-height: 32px;
-          cursor: pointer;
-        }
-        
-        .btn-primary {
-          background-color: #0078d4;
-          border-color: #0078d4;
-          color: #ffffff;
-        }
-        
-        .btn-primary:hover {
-          background-color: #106ebe;
-          border-color: #106ebe;
-        }
-        
-        .btn-secondary {
-          background-color: #ffffff;
-          border-color: #8a8886;
-          color: #323130;
-        }
-        
-        .btn-secondary:hover {
-          background-color: #f3f2f1;
-        }
-        
-        .full-width {
-          grid-column: 1 / -1;
-        }
-        
-        .timestamp {
-          color: #605e5c;
-          font-size: 12px;
-        }
-        
-        @media (max-width: 640px) {
-          body {
-            padding: 8px;
-          }
-          
-          .container {
-            border-radius: 0;
-            border-left: none;
-            border-right: none;
-          }
-          
-          .header, .content, .actions {
-            padding-left: 20px;
-            padding-right: 20px;
-          }
-          
-          .field-grid {
-            grid-template-columns: 1fr;
-          }
-          
-          .actions {
-            flex-direction: column;
-          }
-          
-          .btn {
-            width: 100%;
-          }
-        }
-      </style>
+      <!--[if mso]>
+      <noscript>
+        <xml>
+          <o:OfficeDocumentSettings>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+          </o:OfficeDocumentSettings>
+        </xml>
+      </noscript>
+      <![endif]-->
     </head>
-    <body>
-      <div class="container">
-        <div class="header">
-          <h1>New Project Inquiry</h1>
-          <p>A potential client has submitted a project request</p>
-        </div>
-        
-        <div class="content">
-          <div class="section">
-            <h2 class="section-title">Client Details</h2>
-            <div class="field-grid">
-              <div class="field">
-                <div class="field-label">Name</div>
-                <div class="field-value">${name}</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Company</div>
-                <div class="field-value">${companyName || 'Not specified'}</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Email</div>
-                <div class="field-value">
-                  <a href="mailto:${email}">${email}</a>
-                </div>
-              </div>
-              <div class="field">
-                <div class="field-label">Phone</div>
-                <div class="field-value">
-                  <a href="tel:${phone}">${phone}</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="section">
-            <h2 class="section-title">Project Information</h2>
-            <div class="field-grid">
-              <div class="field">
-                <div class="field-label">Project Type</div>
-                <div class="field-value">${projectType}</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Budget</div>
-                <div class="field-value">${budget}</div>
-              </div>
-              <div class="field">
-                <div class="field-label">Timeline</div>
-                <div class="field-value">
-                  <div class="priority">
-                    <span class="priority-indicator priority-${getPriorityLevel(timeline).toLowerCase()}"></span>
-                    ${timeline}
+    <body style="margin:0; padding:0; background-color:#f5f5f5; font-family:Arial, sans-serif;">
+      
+      <!-- Main Container -->
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f5f5f5; padding:20px 0;">
+        <tr>
+          <td align="center">
+            
+            <!-- Email Container -->
+            <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); max-width:600px;">
+              
+              <!-- Header -->
+              <tr>
+                <td style="padding:30px 40px; border-bottom:3px solid #0078d4; background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td>
+                        <h1 style="margin:0; color:#ffffff; font-size:24px; font-weight:bold; font-family:Arial, sans-serif;">
+                          🚀 New Project Inquiry
+                        </h1>
+                        <p style="margin:8px 0 0 0; color:#e3f2fd; font-size:16px; font-family:Arial, sans-serif;">
+                          A potential client has submitted a project request
+                        </p>
+                      </td>
+                      <td width="80" align="right">
+                        <div style="width:60px; height:60px; background-color:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;">
+                          💼
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Priority Alert -->
+              <tr>
+                <td style="padding:0;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${priority.color}; color:#ffffff;">
+                    <tr>
+                      <td style="padding:12px 40px; text-align:center;">
+                        <strong style="font-family:Arial, sans-serif; font-size:14px;">
+                          ⚡ ${priority.level} Priority Project
+                        </strong>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Client Details Section -->
+              <tr>
+                <td style="padding:30px 40px 0 40px;">
+                  <h2 style="margin:0 0 20px 0; color:#333333; font-size:18px; font-weight:bold; font-family:Arial, sans-serif; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                    👤 Client Details
+                  </h2>
+                </td>
+              </tr>
+              
+              <tr>
+                <td style="padding:0 40px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td width="50%" style="padding-right:20px; vertical-align:top;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #0078d4;">
+                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Name</div>
+                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">${name}</div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #28a745;">
+                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Email</div>
+                                <div style="color:#0078d4; font-size:14px; font-family:Arial, sans-serif;">
+                                  <a href="mailto:${email}" style="color:#0078d4; text-decoration:none;">${email}</a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td width="50%" style="padding-left:20px; vertical-align:top;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #ffc107;">
+                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Company</div>
+                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">${companyName || 'Not specified'}</div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #17a2b8;">
+                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Phone</div>
+                                <div style="color:#0078d4; font-size:14px; font-family:Arial, sans-serif;">
+                                  <a href="tel:${phone}" style="color:#0078d4; text-decoration:none;">${phone}</a>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Project Information Section -->
+              <tr>
+                <td style="padding:30px 40px 0 40px;">
+                  <h2 style="margin:0 0 20px 0; color:#333333; font-size:18px; font-weight:bold; font-family:Arial, sans-serif; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                    📋 Project Information
+                  </h2>
+                </td>
+              </tr>
+              
+              <tr>
+                <td style="padding:0 40px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td width="50%" style="padding-right:20px; vertical-align:top;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#fff3cd; padding:15px; border-radius:6px; border-left:4px solid #ffc107;">
+                                <div style="color:#856404; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Project Type</div>
+                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">${projectType}</div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#d1ecf1; padding:15px; border-radius:6px; border-left:4px solid #17a2b8;">
+                                <div style="color:#0c5460; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Timeline</div>
+                                <div style="color:#333; font-size:14px; font-family:Arial, sans-serif;">
+                                  <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background-color:${priority.color}; margin-right:8px;"></span>
+                                  ${timeline}
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td width="50%" style="padding-left:20px; vertical-align:top;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#d4edda; padding:15px; border-radius:6px; border-left:4px solid #28a745;">
+                                <div style="color:#155724; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Budget</div>
+                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">💰 ${budget}</div>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td style="padding:10px 0;">
+                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #6c757d;">
+                                <div style="color:#6c757d; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Submitted</div>
+                                <div style="color:#333; font-size:12px; font-family:Arial, sans-serif;">📅 ${formatToIST(submittedAt)}</div>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Requirements Section -->
+              <tr>
+                <td style="padding:30px 40px 0 40px;">
+                  <h2 style="margin:0 0 15px 0; color:#333333; font-size:18px; font-weight:bold; font-family:Arial, sans-serif; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
+                    📝 Project Requirements
+                  </h2>
+                  <div style="background-color:#f8f9fa; border:1px solid #dee2e6; border-radius:8px; padding:20px; margin-bottom:20px;">
+                    <p style="margin:0; color:#333; font-size:14px; line-height:1.6; font-family:Arial, sans-serif; white-space:pre-wrap;">${message}</p>
                   </div>
-                </div>
-              </div>
-              <div class="field">
-                <div class="field-label">Submitted</div>
-                <div class="field-value timestamp">${formatToIST(submittedAt)}</div>
-              </div>
-              <div class="field full-width">
-                <div class="field-label">Requirements</div>
-                <div class="message-box">
-                  <p class="message-text">${message}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="actions">
-          <a href="mailto:${email}?subject=Re: ${projectType} Project Inquiry&body=Hello ${name},%0D%0A%0D%0AThank you for reaching out regarding your ${projectType} project.%0D%0A%0D%0AI have reviewed your requirements and would like to discuss the project details further.%0D%0A%0D%0APlease let me know when you would be available for a brief call to discuss your needs in more detail.%0D%0A%0D%0ABest regards" 
-             class="btn btn-primary">Reply to Client</a>
-          <a href="tel:${phone}" class="btn btn-secondary">Call Client</a>
-        </div>
-      </div>
+                </td>
+              </tr>
+              
+              <!-- Action Buttons -->
+              <tr>
+                <td style="padding:20px 40px 40px 40px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td align="center">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td style="padding-right:15px;">
+                              <a href="mailto:${email}?subject=Re: ${projectType} Project Inquiry&body=Hello ${name},%0D%0A%0D%0AThank you for reaching out regarding your ${projectType} project.%0D%0A%0D%0AI have reviewed your requirements and would like to discuss the project details further.%0D%0A%0D%0APlease let me know when you would be available for a brief call to discuss your needs in more detail.%0D%0A%0D%0ABest regards" 
+                                 style="background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%); color:#ffffff; padding:15px 30px; text-decoration:none; border-radius:25px; font-weight:bold; font-size:16px; font-family:Arial, sans-serif; display:inline-block; box-shadow:0 4px 12px rgba(0,120,212,0.3);">
+                                📧 Reply to Client
+                              </a>
+                            </td>
+                            <td>
+                              <a href="tel:${phone}" 
+                                 style="background-color:#28a745; color:#ffffff; padding:15px 30px; text-decoration:none; border-radius:25px; font-weight:bold; font-size:16px; font-family:Arial, sans-serif; display:inline-block; box-shadow:0 4px 12px rgba(40,167,69,0.3);">
+                                📞 Call Client
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding:20px 40px; background-color:#f8f9fa; border-top:1px solid #dee2e6; text-align:center;">
+                  <p style="margin:0; color:#6c757d; font-size:12px; font-family:Arial, sans-serif;">
+                    This email was generated automatically from your freelance inquiry form.
+                  </p>
+                </td>
+              </tr>
+              
+            </table>
+            
+          </td>
+        </tr>
+      </table>
+      
     </body>
     </html>
   `;

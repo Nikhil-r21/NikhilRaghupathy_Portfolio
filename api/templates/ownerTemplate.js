@@ -246,7 +246,7 @@ export const createOwnerEmailTemplate = (formData) => {
         
         <div class="metadata">
           <div class="metadata-row">
-            <div class="source">Portfolio Contact Form</div>
+            <div class="source style="margin-right: 20px;">Nikhil Raghupathy Portfolio Contact Form</div>
             <div class="timestamp">${new Date().toLocaleString('en-IN', { 
               timeZone: 'Asia/Kolkata',
               year: 'numeric', 
