@@ -1,7 +1,7 @@
 /**
  * Enhanced Email template for the portfolio owner
  * This template is used to notify the owner of a new contact form submission
- * Professional styling with IST timing and enhanced features
+ * Professional styling with IST railway timing and enhanced features
  */
 export const createOwnerEmailTemplate = (formData) => {
   return `
@@ -327,13 +327,13 @@ export const createOwnerEmailTemplate = (formData) => {
             <div class="timestamp">${new Date().toLocaleString('en-IN', { 
               timeZone: 'Asia/Kolkata',
               year: 'numeric', 
-              month: 'long', 
-              day: 'numeric', 
+              month: '2-digit', 
+              day: '2-digit', 
               hour: '2-digit', 
               minute: '2-digit',
               second: '2-digit',
-              timeZoneName: 'short'
-            })}</div>
+              hour12: false
+            })} IST</div>
           </div>
         </div>
       </div>
