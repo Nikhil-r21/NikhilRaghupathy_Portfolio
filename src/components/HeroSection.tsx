@@ -298,7 +298,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center pt-16 pb-24 bg-gray-50 relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center pt-16 pb-24 bg-gray-50 relative overflow-hidden">
       {/* Interactive Wave Mesh Background */}
       <canvas
         ref={canvasRef}
