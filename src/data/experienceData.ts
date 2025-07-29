@@ -1,12 +1,27 @@
 import { IExperience } from '../types';
 
 export const experienceData: IExperience[] = [
-  {
+    {
     id: '1',
+    role: 'DevOps Engineer',
+    company: 'CrashPlan',
+    location: "Bengaluru, India",
+    period: 'July 2025 – Present',
+    responsibilities: [
+      // "Led cloud infrastructure development using AWS services",
+      // "Built CI/CD pipelines reducing deployment time by 60%",
+      // "Dockerized applications and optimized cloud costs",
+      // "Implemented monitoring solutions using Prometheus and Grafana",
+      // "Led cloud infrastructure development using AWS services"
+    ],
+    technologies: ['Azure', 'CI/CD', 'Docker', 'Shell Scripting'],
+  },
+  {
+    id: '2',
     role: 'DevOps Engineer',
     company: 'e-Cosmos India Pvt. Ltd.',
     location: "Bengaluru, India",
-    period: 'Sept 2023 – Present',
+    period: 'Sept 2023 – July 2025',
     responsibilities: [
       "Led cloud infrastructure development using AWS services",
       "Built CI/CD pipelines reducing deployment time by 60%",
@@ -17,7 +32,7 @@ export const experienceData: IExperience[] = [
     technologies: ['AWS', 'CI/CD', 'Docker','Nginx', 'Python', 'Shell Scripting'],
   },
   {
-    id: '2',
+    id: '3',
     role: 'AWS Re/Start Intern',
     company: 'Magic Bus India Foundation',
     location: "Chennai, India",
