@@ -160,11 +160,11 @@ const Footer: React.FC = () => {
                   rnikhilvignesh21@gmail.com
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a href="tel:+8428754385" className="hover:text-white transition-colors">
                   +91 84287 54385
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>
