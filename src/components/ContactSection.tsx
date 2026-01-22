@@ -376,7 +376,7 @@ const ContactSection: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-start">
+              {/* <div className="flex items-start">
                 <div className="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
                   <Phone size={20} />
                 </div>
@@ -384,7 +384,7 @@ const ContactSection: React.FC = () => {
                   <h4 className="font-semibold text-gray-800 mb-1">Phone</h4>
                   <p className="text-gray-600">+91 84287 54385</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-start">
                 <div className="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
