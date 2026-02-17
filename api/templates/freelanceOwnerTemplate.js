@@ -152,10 +152,6 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           text-decoration: none;
           font-size: 14px;
           font-weight: 400;
-          margin-right: 12px;
-        }
-        .action-button.secondary {
-          background-color: #545b64;
         }
         .metadata {
           border-top: 1px solid #eaeded;
@@ -182,8 +178,6 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           }
           .action-button {
             display: block;
-            margin-bottom: 12px;
-            margin-right: 0;
           }
           .metadata-row {
             flex-direction: column;
@@ -259,9 +253,6 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           <div class="action-section">
             <a href="mailto:${email}?subject=Re: ${encodeURIComponent(projectType)} Project Inquiry&body=${encodeURIComponent(`Hello ${name},\n\nThank you for reaching out regarding your ${projectType} project.\n\nI have reviewed your requirements and would like to discuss the project details further.\n\nPlease let me know when you would be available for a brief call to discuss your needs in more detail.\n\nBest regards,\nNikhil Raghupathy`)}" class="action-button">
               Reply to Client
-            </a>
-            <a href="tel:${phone}" class="action-button secondary">
-              Call Client
             </a>
           </div>
         </div>
