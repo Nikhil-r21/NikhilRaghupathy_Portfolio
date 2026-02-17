@@ -41,7 +41,7 @@ const AboutSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-10 sm:mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 mb-3 sm:mb-4">
@@ -61,7 +61,7 @@ const AboutSection: React.FC = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
           >
             <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-2xl p-8 border border-primary-100">
               <p className="text-lg text-neutral-700 leading-relaxed mb-4">
@@ -92,7 +92,7 @@ const AboutSection: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
                   className="bg-white rounded-xl p-6 border border-neutral-200 hover:border-primary-300 hover:shadow-lg transition-all duration-300 card-hover"
                 >
                   <div className="text-primary-600 mb-3">{highlight.icon}</div>
@@ -108,7 +108,7 @@ const AboutSection: React.FC = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.4 }}
           >
             {/* Stats Cards - filled, unified look */}
             <div className="space-y-4">
@@ -118,7 +118,7 @@ const AboutSection: React.FC = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
                   className="bg-gradient-to-br from-primary-50 to-primary-100/80 rounded-xl p-6 border border-primary-200/60 shadow-md hover:shadow-lg hover:from-primary-100 hover:to-primary-200/60 transition-all duration-300 card-hover"
                 >
                   <div className="flex items-center justify-between mb-3">

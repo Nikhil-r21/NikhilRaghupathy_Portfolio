@@ -62,15 +62,15 @@ const HeroSection = () => {
           {/* Text Content */}
           <motion.div 
             className="text-center lg:text-left space-y-6"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.4 }}
           >
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.1, duration: 0.5 }}
+              transition={{ delay: 0, duration: 0.3 }}
               className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-primary-100 text-primary-700 rounded-full text-xs sm:text-sm font-semibold mb-4"
             >
               <Sparkles size={14} className="text-primary-600 sm:w-4 sm:h-4" />
@@ -80,9 +80,9 @@ const HeroSection = () => {
             {/* Main Heading */}
             <motion.h1 
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2, duration: 0.7 }}
+              transition={{ delay: 0.05, duration: 0.4 }}
             >
               Hi, I'm{' '}
               <span className="text-primary-600">Nikhil</span>
@@ -93,15 +93,15 @@ const HeroSection = () => {
             {/* Typed Text */}
             <motion.div 
               className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-neutral-700 mb-2 min-h-[2.5rem] sm:min-h-[3rem] flex items-center justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.3, duration: 0.7 }}
+              transition={{ delay: 0.1, duration: 0.4 }}
             >
               <span className="font-semibold">
                 {typedText}
                 <motion.span 
                   animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+                  transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
                   className="inline-block ml-2 text-primary-600 font-bold"
                 >
                   |
@@ -112,9 +112,9 @@ const HeroSection = () => {
             {/* Description */}
             <motion.p 
               className="text-base sm:text-lg md:text-xl text-neutral-600 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed px-2 sm:px-0"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4, duration: 0.7 }}
+              transition={{ delay: 0.15, duration: 0.4 }}
             >
               Building scalable cloud infrastructure and automating workflows at{' '}
               <span className="font-semibold text-neutral-900">CrashPlan</span>. 
@@ -124,9 +124,9 @@ const HeroSection = () => {
             {/* CTA Buttons */}
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.5, duration: 0.7 }}
+              transition={{ delay: 0.2, duration: 0.4 }}
             >
               <motion.a 
                 href="#projects"
@@ -153,7 +153,7 @@ const HeroSection = () => {
               className="flex flex-wrap gap-6 justify-center lg:justify-start pt-4"
               initial={{ opacity: 0 }}
               animate={isVisible ? { opacity: 1 } : {}}
-              transition={{ delay: 0.6, duration: 0.7 }}
+              transition={{ delay: 0.25, duration: 0.4 }}
             >
               <div className="text-center lg:text-left">
                 <div className="text-2xl font-bold text-neutral-900">3+</div>
@@ -173,9 +173,9 @@ const HeroSection = () => {
           {/* Profile Image */}
           <motion.div 
             className="flex justify-center lg:justify-end relative"
-            initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-            animate={isVisible ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-            transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.1, duration: 0.4 }}
           >
             <div className="relative">
               {/* Decorative circles */}

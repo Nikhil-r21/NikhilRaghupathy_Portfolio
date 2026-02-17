@@ -41,7 +41,7 @@ const ProjectsSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-10 sm:mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 mb-3 sm:mb-4">
@@ -61,7 +61,7 @@ const ProjectsSection: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
               whileHover={{ y: -8 }}
               className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer border border-neutral-200"
               onClick={() => openProjectModal(project)}
