@@ -1,9 +1,20 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { navLinks } from '../data/navData';
-import { ChevronUp } from 'lucide-react';
+import { ChevronUp, Mail, MapPin, Linkedin, Github, ExternalLink } from 'lucide-react';
 
 const Footer: React.FC = () => {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -11,194 +22,186 @@ const Footer: React.FC = () => {
     });
   };
 
+  const handleNavClick = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: 'smooth',
+      });
+    }
+  };
+
   return (
-    <footer className="bg-gray-800 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo & Description */}
-          <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold text-blue-400 mb-4">NR</h3>
-            <p className="text-gray-300 mb-6 max-w-md">
-              DevOps Engineer passionate about building scalable, resilient infrastructure and automating workflows for optimal efficiency.
+    <footer className="bg-neutral-900 text-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }} />
+      </div>
+
+      <div className="container-padding py-12 sm:py-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 sm:gap-12 mb-10 sm:mb-12">
+          {/* Brand & Description */}
+          <motion.div
+            className="md:col-span-2"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
+              <span className="bg-gradient-to-r from-primary-400 to-accent-400 bg-clip-text text-transparent">
+                Nikhil Raghupathy
+              </span>
+            </h3>
+            <p className="text-neutral-400 mb-6 max-w-md leading-relaxed">
+              DevOps Engineer with 3 years of experience building scalable cloud infrastructure 
+              and automating workflows. Currently at CrashPlan, specializing in Azure and AWS platforms.
             </p>
-            <div className="flex space-x-4">
-            <a
+            <div className="flex gap-3">
+              <motion.a
                 href="https://www.linkedin.com/in/nikhilraghupathy/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="p-3 bg-neutral-800 hover:bg-primary-600 rounded-lg transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
                 aria-label="LinkedIn"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
-              <a
+                <Linkedin size={20} />
+              </motion.a>
+              <motion.a
                 href="https://github.com/Nikhil-r21"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="p-3 bg-neutral-800 hover:bg-primary-600 rounded-lg transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
                 aria-label="GitHub"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-              </a>
-              <a
+                <Github size={20} />
+              </motion.a>
+              <motion.a
                 href="mailto:rnikhilvignesh21@gmail.com"
-                className="text-gray-400 hover:text-white transition-colors"
+                className="p-3 bg-neutral-800 hover:bg-primary-600 rounded-lg transition-all duration-300"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.95 }}
                 aria-label="Email"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-              </a>
-              <a
-                href="https://medium.com/@rnikhilvignesh21"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-                aria-label="Medium"
-              >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 1043.63 592.71"
-                    fill="currentColor"
-                  >
-                    <g>
-                      <path d="M588.67,296.14c0,163.63-131.36,296.14-293.32,296.14S2,459.77,2,296.14,133.36,0,295.32,0,588.67,132.5,588.67,296.14Z"/>
-                      <path d="M758.59,296.14c0,146.07-65.41,264.48-146.1,264.48s-146.1-118.41-146.1-264.48S531.8,31.66,612.49,31.66,758.59,150.07,758.59,296.14Z"/>
-                      <path d="M1041.63,296.14c0,140.07-29.34,253.65-65.52,253.65s-65.52-113.58-65.52-253.65,29.34-253.65,65.52-253.65,65.52,113.58,65.52,253.65Z"/>
-                    </g>
-                  </svg>
-              </a>
-              <a
-                href="https://www.instagram.com/nikhil_raghupathy/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-                aria-label="Instagram"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
+                <Mail size={20} />
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <h4 className="text-lg font-bold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.id}>
                   <a
                     href={`#${link.id}`}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(link.id);
+                    }}
+                    className="text-neutral-400 hover:text-primary-400 transition-colors duration-300 flex items-center gap-2 group"
                   >
+                    <ExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                     {link.title}
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contact</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>Bengaluru, Karnataka, India</li>
-              <li>
-                <a href="mailto:rnikhilvignesh21@gmail.com" className="hover:text-white transition-colors">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <h4 className="text-lg font-bold mb-4 text-white">Contact</h4>
+            <ul className="space-y-3 text-neutral-400">
+              <li className="flex items-start gap-3">
+                <MapPin size={18} className="text-primary-400 mt-1 flex-shrink-0" />
+                <span>Bengaluru, Karnataka, India</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail size={18} className="text-primary-400 mt-1 flex-shrink-0" />
+                <a
+                  href="mailto:rnikhilvignesh21@gmail.com"
+                  className="hover:text-primary-400 transition-colors"
+                >
                   rnikhilvignesh21@gmail.com
                 </a>
               </li>
-              {/* <li>
-                <a href="tel:+8428754385" className="hover:text-white transition-colors">
-                  +91 84287 54385
-                </a>
-              </li> */}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
-        <hr className="border-gray-700 my-8" />
+        {/* Divider */}
+        <div className="border-t border-neutral-800 my-8"></div>
 
         {/* Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Nikhil Raghupathy. All rights reserved.
+        <motion.div
+          className="flex flex-col md:flex-row justify-between items-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <p className="text-neutral-400 text-sm mb-4 md:mb-0">
+            &copy; {new Date().getFullYear()} <span className="text-primary-400 font-semibold">Nikhil Raghupathy</span>. All rights reserved.
           </p>
-          <div className="flex space-x-4 text-sm text-gray-400">
-            <a href="/privacy-policy" className="hover:text-white transition-colors">
+          <div className="flex gap-6 text-sm">
+            <a
+              href="/privacy-policy"
+              className="text-neutral-400 hover:text-primary-400 transition-colors"
+            >
               Privacy Policy
             </a>
-            <a href="/terms-of-use" className="hover:text-white transition-colors">
+            <a
+              href="/terms-of-use"
+              className="text-neutral-400 hover:text-primary-400 transition-colors"
+            >
               Terms of Use
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Scroll to Top Button */}
-      <motion.button
-        onClick={handleScrollToTop}
-        className="fixed right-6 bottom-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        aria-label="Scroll to top"
-      >
-        <ChevronUp size={24} />
-      </motion.button>
+      {/* Scroll to Top Button - appears after scrolling */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            type="button"
+            onClick={handleScrollToTop}
+            className="fixed right-5 sm:right-6 bottom-5 sm:bottom-6 z-40 flex items-center gap-2 pl-2 pr-4 sm:pl-3 sm:pr-5 py-2.5 sm:py-3 min-h-[48px] bg-white text-neutral-800 font-semibold rounded-full shadow-lg hover:shadow-xl border border-neutral-200 hover:border-primary-300 transition-all duration-300 group"
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.96 }}
+            aria-label="Scroll to top"
+          >
+            <span className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-primary-600 to-primary-700 text-white shadow-inner group-hover:from-primary-700 group-hover:to-primary-800 transition-colors">
+              <ChevronUp size={20} className="sm:w-5 sm:h-5" aria-hidden />
+            </span>
+            <span className="hidden sm:inline text-sm">Back to top</span>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </footer>
   );
 };

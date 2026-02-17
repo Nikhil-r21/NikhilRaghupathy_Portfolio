@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { experienceData } from '../data/experienceData';
 
 const formatPeriod = (period: string) => {
@@ -9,7 +9,8 @@ const formatPeriod = (period: string) => {
     return (
       <span className="flex items-center gap-2 flex-wrap">
         {parts[0]} – 
-        <span className="flex items-center gap-1 text-emerald-700 bg-emerald-100 px-3 py-0.5 rounded-full font-medium shadow-sm animate-pulse">
+        <span className="flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-semibold">
+          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
           Present
         </span>
       </span>
@@ -20,99 +21,108 @@ const formatPeriod = (period: string) => {
 
 const ExperienceSection: React.FC = () => {
   return (
-    <section id="experience" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section id="experience" className="section-padding bg-white">
+      <div className="container-padding">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, amount: 0.2 }}
-          className="mb-12 text-center"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10 sm:mb-16"
         >
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Work Experience</h2>
-          <div className="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            My professional journey in cloud computing and DevOps engineering.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 mb-3 sm:mb-4">
+            Work Experience
+          </h2>
+          <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-primary-600 to-accent-600 mx-auto mb-4 sm:mb-6" />
+          <p className="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto px-2">
+            My journey in cloud computing and DevOps
           </p>
         </motion.div>
 
-        {/* Timeline */}
+        {/* Experience Timeline */}
         <div className="relative">
-          {/* Timeline Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
+          {/* Vertical Timeline Line */}
+          <div className="hidden lg:block absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-200 via-primary-400 to-primary-200" />
 
           {/* Experience Items */}
-          {experienceData.map((experience, index) => (
-            <motion.div
-              key={experience.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              className={`mb-12 md:mb-0 flex flex-col md:flex-row ${
-                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              }`}
-            >
-              {/* Content */}
-              <div className="md:w-1/2 p-4 md:p-8">
-                <div className={`bg-white rounded-lg shadow-md p-6 mx-4 ${
-                  index % 2 === 0 ? 'md:mr-12' : 'md:ml-12'
-                }`}>
-                  <div className="flex items-center mb-4">
-                    <div className="bg-blue-100 p-2 rounded-full text-blue-600 mr-4">
-                      <Briefcase size={20} />
+          <div className="space-y-8">
+            {experienceData.map((experience, index) => (
+              <motion.div
+                key={experience.id}
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                className="relative lg:pl-20"
+              >
+                {/* Timeline Dot */}
+                <div className="hidden lg:block absolute left-6 top-6">
+                  <div className="w-4 h-4 bg-primary-600 rounded-full border-4 border-white shadow-lg" />
+                </div>
+
+                {/* Experience Card */}
+                <div className="bg-white rounded-xl p-6 md:p-8 border-2 border-neutral-200 hover:border-primary-300 shadow-md hover:shadow-xl transition-all duration-300 card-hover group">
+                  {/* Header */}
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                    <div className="mb-4 md:mb-0">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 bg-primary-100 rounded-lg text-primary-600">
+                          <Briefcase size={20} />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-neutral-900 group-hover:text-primary-600 transition-colors">
+                            {experience.role}
+                          </h3>
+                          <p className="text-primary-600 font-semibold">{experience.company}</p>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-xl text-gray-800">{experience.role}</h3>
-                      <p className="text-blue-600">{experience.company}</p>
+                    
+                    <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
+                      <div className="flex items-center gap-2">
+                        <Calendar size={16} />
+                        <span className="font-medium">{formatPeriod(experience.period)}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MapPin size={16} />
+                        <span className="font-medium">{experience.location}</span>
+                      </div>
                     </div>
                   </div>
-                  
-                  <div className="flex items-center mb-4 text-gray-500 gap-6">
-                    <div className="flex items-center">
-                      <Calendar size={16} className="mr-2" />
-                      <span>{formatPeriod(experience.period)}</span>
-                    </div>
-                    <div className="flex items-center">
-                      <MapPin size={16} className="mr-2" />
-                      <span>{experience.location}</span>
-                    </div>
-                  </div>
-                  
-                  <ul className="list-disc list-inside space-y-2 text-gray-600 mb-4">
+
+                  {/* Responsibilities */}
+                  <ul className="space-y-3 mb-6">
                     {experience.responsibilities.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <motion.li
+                        key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.05 }}
+                        className="flex items-start gap-3 text-neutral-700"
+                      >
+                        <ArrowRight size={16} className="text-primary-600 mt-1 flex-shrink-0" />
+                        <span>{item}</span>
+                      </motion.li>
                     ))}
                   </ul>
-                  
-                  <div className="flex flex-wrap gap-2 mt-4">
+
+                  {/* Technologies */}
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-neutral-200">
                     {experience.technologies.map((tech, i) => (
                       <span
                         key={i}
-                        className="px-2 py-1 bg-blue-50 text-blue-700 text-xs rounded-full"
+                        className="px-3 py-1.5 bg-primary-50 text-primary-700 rounded-lg text-sm font-semibold border border-primary-200"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
-              
-              {/* Timeline Point - Mobile */}
-              <div className="md:hidden flex items-center mb-4">
-                <div className="bg-blue-600 rounded-full w-4 h-4"></div>
-                <div className="flex-1 h-0.5 bg-blue-200 ml-2"></div>
-              </div>
-              
-              {/* Timeline Point - Desktop */}
-              <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-600 rounded-full">
-                <div className="w-3 h-3 bg-white rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-              </div>
-              
-              {/* Empty Space for Alternate Layout */}
-              <div className="hidden md:block md:w-1/2"></div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

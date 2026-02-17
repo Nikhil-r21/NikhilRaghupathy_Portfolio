@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Send, AlertCircle, CheckCircle, Mail, MapPin, Phone, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Send, AlertCircle, CheckCircle, Mail, MapPin, Linkedin, Github } from 'lucide-react';
 
 type FormInputs = {
   name: string;
@@ -29,10 +30,8 @@ const ContactSection: React.FC = () => {
     message: null
   });
   
-  // Timer reference for auto-dismissal
   const notificationTimerRef = useRef<number | null>(null);
 
-  // Clear notification timer on unmount
   useEffect(() => {
     return () => {
       if (notificationTimerRef.current) {
@@ -41,17 +40,15 @@ const ContactSection: React.FC = () => {
     };
   }, []);
 
-  // Set up auto-dismissal when notification becomes visible
   useEffect(() => {
     if (notification.isVisible && notificationTimerRef.current === null) {
       notificationTimerRef.current = window.setTimeout(() => {
         setNotification(prev => ({ ...prev, isVisible: false }));
         notificationTimerRef.current = null;
-      }, 3000);
+      }, 5000);
     }
   }, [notification.isVisible]);
 
-  // Form validation
   const validateForm = (): boolean => {
     const newErrors: Partial<FormInputs> = {};
 
@@ -86,7 +83,6 @@ const ContactSection: React.FC = () => {
       [name]: value
     }));
     
-    // Clear error when user starts typing
     if (errors[name as keyof FormInputs]) {
       setErrors(prev => ({
         ...prev,
@@ -104,7 +100,6 @@ const ContactSection: React.FC = () => {
 
     setIsSubmitting(true);
     
-    // Reset any existing notification
     setNotification({
       isVisible: false,
       isSuccess: null,
@@ -126,7 +121,7 @@ const ContactSection: React.FC = () => {
         setNotification({
           isVisible: true,
           isSuccess: true,
-          message: result.message || 'Message sent successfully! You will receive a confirmation email shortly.'
+          message: result.message || 'Message sent successfully!'
         });
         
         setFormData({
@@ -140,7 +135,7 @@ const ContactSection: React.FC = () => {
         setNotification({
           isVisible: true,
           isSuccess: false,
-          message: result.message || 'Failed to send message. Please try again later.'
+          message: result.message || 'Failed to send message. Please try again.'
         });
       }
     } catch (error) {
@@ -156,33 +151,45 @@ const ContactSection: React.FC = () => {
   };
 
   const dismissNotification = () => {
-    // Clear any existing timer
     if (notificationTimerRef.current) {
       window.clearTimeout(notificationTimerRef.current);
       notificationTimerRef.current = null;
     }
-    
     setNotification(prev => ({ ...prev, isVisible: false }));
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Get In Touch</h2>
-          <div className="w-20 h-1 bg-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Have a question or want to work together? Feel free to contact me using the form below.
+    <section id="contact" className="section-padding bg-gradient-to-b from-white to-neutral-50">
+      <div className="container-padding">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10 sm:mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 mb-3 sm:mb-4">
+            Get In Touch
+          </h2>
+          <div className="w-16 sm:w-20 h-1 bg-gradient-to-r from-primary-600 to-accent-600 mx-auto mb-4 sm:mb-6" />
+          <p className="text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto px-2">
+            Have a project in mind or want to collaborate? I&apos;d love to hear from you!
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Input */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl p-8 shadow-lg border border-neutral-200 space-y-6">
+              {/* Name */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-sm font-semibold text-neutral-900 mb-2">
                   Full Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -191,22 +198,22 @@ const ContactSection: React.FC = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                    errors.name ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 ${
+                    errors.name ? 'border-red-400 bg-red-50' : 'border-neutral-200 bg-neutral-50 focus:bg-white'
                   }`}
                   placeholder="Your name"
                   disabled={isSubmitting}
                 />
                 {errors.name && (
-                  <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.name}
+                  <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle size={14} /> {errors.name}
                   </p>
                 )}
               </div>
 
-              {/* Email Input */}
+              {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-semibold text-neutral-900 mb-2">
                   Email Address <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -215,22 +222,22 @@ const ContactSection: React.FC = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                    errors.email ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 ${
+                    errors.email ? 'border-red-400 bg-red-50' : 'border-neutral-200 bg-neutral-50 focus:bg-white'
                   }`}
                   placeholder="your.email@example.com"
                   disabled={isSubmitting}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.email}
+                  <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle size={14} /> {errors.email}
                   </p>
                 )}
               </div>
 
-              {/* Subject Input */}
+              {/* Subject */}
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="subject" className="block text-sm font-semibold text-neutral-900 mb-2">
                   Subject <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -239,22 +246,22 @@ const ContactSection: React.FC = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                    errors.subject ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 ${
+                    errors.subject ? 'border-red-400 bg-red-50' : 'border-neutral-200 bg-neutral-50 focus:bg-white'
                   }`}
                   placeholder="What is this regarding?"
                   disabled={isSubmitting}
                 />
                 {errors.subject && (
-                  <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.subject}
+                  <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle size={14} /> {errors.subject}
                   </p>
                 )}
               </div>
 
-              {/* Message Input */}
+              {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="message" className="block text-sm font-semibold text-neutral-900 mb-2">
                   Message <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -263,211 +270,142 @@ const ContactSection: React.FC = () => {
                   rows={5}
                   value={formData.message}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                    errors.message ? 'border-red-500' : 'border-gray-300'
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all duration-300 resize-none ${
+                    errors.message ? 'border-red-400 bg-red-50' : 'border-neutral-200 bg-neutral-50 focus:bg-white'
                   }`}
-                  placeholder="Write your message here..."
+                  placeholder="Tell me about your project or inquiry..."
                   disabled={isSubmitting}
                 ></textarea>
                 {errors.message && (
-                  <p className="mt-1 text-sm text-red-500 flex items-center">
-                    <AlertCircle size={14} className="mr-1" /> {errors.message}
+                  <p className="mt-1 text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle size={14} /> {errors.message}
                   </p>
                 )}
               </div>
 
               {/* Submit Button */}
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-3 px-6 rounded-lg transition-colors flex items-center justify-center font-semibold ${
+                className={`w-full py-4 px-6 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center gap-2 ${
                   isSubmitting
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                    ? 'bg-neutral-400 cursor-not-allowed'
+                    : 'bg-primary-600 hover:bg-primary-700 shadow-lg hover:shadow-xl'
                 }`}
+                whileHover={!isSubmitting ? { scale: 1.02 } : {}}
+                whileTap={!isSubmitting ? { scale: 0.98 } : {}}
               >
                 {isSubmitting ? (
                   <>
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     Sending...
                   </>
                 ) : (
                   <>
-                    <Send size={18} className="mr-2" />
+                    <Send size={20} />
                     Send Message
                   </>
                 )}
-              </button>
+              </motion.button>
 
-              {/* Notification Messages */}
+              {/* Notification */}
               {notification.isVisible && notification.isSuccess !== null && (
-                <div 
-                  className={`p-4 ${
-                    notification.isSuccess 
-                      ? 'bg-green-50 border-green-200 text-green-700' 
-                      : 'bg-red-50 border-red-200 text-red-700'
-                  } border rounded-lg flex items-start transition-opacity duration-300 ease-in-out`}
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`p-4 rounded-lg flex items-start gap-3 ${
+                    notification.isSuccess
+                      ? 'bg-green-50 border border-green-200 text-green-800'
+                      : 'bg-red-50 border border-red-200 text-red-800'
+                  }`}
                 >
-                  <div className="flex-shrink-0 mr-3 mt-0.5">
-                    {notification.isSuccess ? (
-                      <CheckCircle size={20} />
-                    ) : (
-                      <AlertCircle size={20} />
-                    )}
-                  </div>
-                  <div className="flex-grow">
-                    <p className="font-medium">
-                      {notification.isSuccess ? 'Message sent successfully!' : 'Something went wrong!'}
+                  {notification.isSuccess ? (
+                    <CheckCircle size={20} className="flex-shrink-0" />
+                  ) : (
+                    <AlertCircle size={20} className="flex-shrink-0" />
+                  )}
+                  <div className="flex-1">
+                    <p className="font-semibold mb-1">
+                      {notification.isSuccess ? 'Success!' : 'Error'}
                     </p>
-                    <p className="text-sm mt-1">{notification.message}</p>
+                    <p className="text-sm">{notification.message}</p>
                   </div>
-                  <button 
+                  <button
                     onClick={dismissNotification}
-                    className={`p-1 ml-2 rounded-full ${
-                      notification.isSuccess 
-                        ? 'hover:bg-green-100' 
-                        : 'hover:bg-red-100'
-                    }`}
-                    aria-label="Close notification"
+                    className="text-current opacity-60 hover:opacity-100"
                   >
-                    <X size={16} />
+                    ×
                   </button>
-                </div>
+                </motion.div>
               )}
             </form>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div className="bg-gray-50 p-8 rounded-lg">
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Contact Information</h3>
-
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <div className="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
-                  <Mail size={20} />
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <div className="bg-gradient-to-br from-primary-50 to-accent-50 rounded-xl p-8 border border-primary-100">
+              <h3 className="text-2xl font-bold text-neutral-900 mb-6">Contact Information</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary-600 text-white rounded-lg">
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-neutral-900 mb-1">Email</h4>
+                    <a
+                      href="mailto:rnikhilvignesh21@gmail.com"
+                      className="text-primary-600 hover:text-primary-700 font-medium"
+                    >
+                      rnikhilvignesh21@gmail.com
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-1">Email</h4>
-                  <a
-                    href="mailto:rnikhilvignesh21@gmail.com"
-                    className="text-blue-600 hover:text-blue-800 transition-colors"
-                  >
-                    rnikhilvignesh21@gmail.com
-                  </a>
+
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary-600 text-white rounded-lg">
+                    <MapPin size={20} />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-neutral-900 mb-1">Location</h4>
+                    <p className="text-neutral-700">Bengaluru, Karnataka, India</p>
+                  </div>
                 </div>
               </div>
 
-              {/* <div className="flex items-start">
-                <div className="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-1">Phone</h4>
-                  <p className="text-gray-600">+91 84287 54385</p>
-                </div>
-              </div> */}
-
-              <div className="flex items-start">
-                <div className="bg-blue-100 p-3 rounded-full text-blue-600 mr-4">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-800 mb-1">Location</h4>
-                  <p className="text-gray-600">Bengaluru, Karnataka, India</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10">
-              <h4 className="font-semibold text-gray-800 mb-4">Connect With Me</h4>
-              <p className="text-gray-600 mb-4">
-                Follow me on social media for updates on my latest projects and tech insights.
-              </p>
-              <div className="flex space-x-4">
-                <a
-                  href="https://www.linkedin.com/in/nikhilraghupathy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gray-200 hover:bg-blue-600 hover:text-white p-3 rounded-full transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+              <div className="mt-8 pt-8 border-t border-primary-200">
+                <h4 className="font-semibold text-neutral-900 mb-4">Follow Me</h4>
+                <div className="flex gap-3">
+                  <motion.a
+                    href="https://www.linkedin.com/in/nikhilraghupathy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white hover:bg-primary-600 text-neutral-700 hover:text-white rounded-lg border border-neutral-200 hover:border-primary-600 transition-all duration-300"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                    <rect x="2" y="9" width="4" height="12"></rect>
-                    <circle cx="4" cy="4" r="2"></circle>
-                  </svg>
-                </a>
-                <a
-                  href="https://github.com/Nikhil-r21"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gray-200 hover:bg-blue-600 hover:text-white p-3 rounded-full transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    <Linkedin size={20} />
+                  </motion.a>
+                  <motion.a
+                    href="https://github.com/Nikhil-r21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white hover:bg-primary-600 text-neutral-700 hover:text-white rounded-lg border border-neutral-200 hover:border-primary-600 transition-all duration-300"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                  </svg>
-                </a>
-                <a
-                  href="https://medium.com/@rnikhilvignesh21"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gray-200 hover:bg-blue-600 hover:text-white p-3 rounded-full transition-colors"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 1043.63 592.71"
-                    fill="currentColor"
-                  >
-                    <g>
-                      <path d="M588.67,296.14c0,163.63-131.36,296.14-293.32,296.14S2,459.77,2,296.14,133.36,0,295.32,0,588.67,132.5,588.67,296.14Z"/>
-                      <path d="M758.59,296.14c0,146.07-65.41,264.48-146.1,264.48s-146.1-118.41-146.1-264.48S531.8,31.66,612.49,31.66,758.59,150.07,758.59,296.14Z"/>
-                      <path d="M1041.63,296.14c0,140.07-29.34,253.65-65.52,253.65s-65.52-113.58-65.52-253.65,29.34-253.65,65.52-253.65,65.52,113.58,65.52,253.65Z"/>
-                    </g>
-                  </svg>
-                </a>
+                    <Github size={20} />
+                  </motion.a>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

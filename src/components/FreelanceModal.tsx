@@ -126,60 +126,59 @@ const FreelanceModal: React.FC = () => {
     }
   };
 
+  const inputClass = (hasError: boolean) =>
+    `w-full px-4 py-3 min-h-[48px] border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors text-base ${
+      hasError ? 'border-red-500' : 'border-neutral-300'
+    }`;
+
   return (
     <AnimatePresence>
       {isFreelanceModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/50 backdrop-blur-sm">
           <motion.div
             ref={modalRef}
-            className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ duration: 0.3 }}
+            className="bg-white w-full sm:max-w-2xl sm:rounded-2xl shadow-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto"
+            initial={{ opacity: 0, y: 40, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 40, scale: 0.98 }}
+            transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           >
-            <div className="relative p-6">
+            <div className="relative p-5 sm:p-6 pb-8">
               <button
+                type="button"
                 onClick={closeFreelanceModal}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
+                className="absolute top-4 right-4 min-w-[44px] min-h-[44px] flex items-center justify-center text-neutral-500 hover:text-neutral-800 hover:bg-neutral-100 rounded-lg transition-colors"
                 aria-label="Close modal"
               >
                 <X size={24} />
               </button>
-              
-              <h2 className="text-2xl font-bold text-gray-800 mb-1">Let's Work Together</h2>
-              <div className="w-16 h-1 bg-blue-600 mb-4"></div>
-              <p className="text-gray-600 mb-6">
-                Tell me about your project requirements and I'll get back to you within 24 hours with a detailed proposal.
+
+              <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-1 pr-10">Let&apos;s Work Together</h2>
+              <div className="w-14 h-1 bg-primary-600 rounded mb-4" />
+              <p className="text-neutral-600 text-sm sm:text-base mb-6">
+                Share your project details and I&apos;ll get back within 24 hours with a proposal.
               </p>
-              
+
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Name Input */}
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
                       id="name"
                       {...register('name', { required: 'Name is required' })}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                        errors.name ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      className={inputClass(!!errors.name)}
                       placeholder="Your full name"
                     />
                     {errors.name && (
-                      <p className="mt-1 text-sm text-red-500">
-                        {errors.name.message}
-                      </p>
+                      <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>
                     )}
                   </div>
-
-                  {/* Email Input */}
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address <span className="text-red-500">*</span>
+                    <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Email <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -191,186 +190,145 @@ const FreelanceModal: React.FC = () => {
                           message: 'Invalid email address',
                         },
                       })}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      className={inputClass(!!errors.email)}
                       placeholder="your.email@example.com"
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-500">
-                        {errors.email.message}
-                      </p>
+                      <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
                     )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Phone Input */}
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number <span className="text-red-500">*</span>
+                    <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Phone <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="tel"
                       id="phone"
                       {...register('phone', {
-                        required: 'Phone number is required',
+                        required: 'Phone is required',
                         pattern: {
                           value: /^(\+91|91)?[6-9]\d{9}$/,
-                          message: 'Please enter a valid Indian phone number',
+                          message: 'Valid Indian phone number required',
                         },
                       })}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                        errors.phone ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      className={inputClass(!!errors.phone)}
                       placeholder="+91 98765 43210"
                     />
                     {errors.phone && (
-                      <p className="mt-1 text-sm text-red-500">
-                        {errors.phone.message}
-                      </p>
+                      <p className="mt-1 text-sm text-red-500">{errors.phone.message}</p>
                     )}
                   </div>
-
-                  {/* Company Name (Optional) */}
                   <div>
-                    <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-1">
-                      Company Name
+                    <label htmlFor="companyName" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Company (optional)
                     </label>
                     <input
                       type="text"
                       id="companyName"
                       {...register('companyName')}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-                      placeholder="Your company name (optional)"
+                      className={inputClass(false)}
+                      placeholder="Company name"
                     />
                   </div>
                 </div>
 
-                {/* Project Type */}
                 <div>
-                  <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="projectType" className="block text-sm font-medium text-neutral-700 mb-1">
                     Project Type <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="projectType"
                     {...register('projectType', { required: 'Please select a project type' })}
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                      errors.projectType ? 'border-red-500' : 'border-gray-300'
-                    }`}
+                    className={inputClass(!!errors.projectType)}
                   >
                     <option value="">Select project type</option>
                     {projectTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
+                      <option key={type} value={type}>{type}</option>
                     ))}
                   </select>
                   {errors.projectType && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.projectType.message}
-                    </p>
+                    <p className="mt-1 text-sm text-red-500">{errors.projectType.message}</p>
                   )}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* Budget */}
                   <div>
-                    <label htmlFor="budget" className="block text-sm font-medium text-gray-700 mb-1">
-                      Budget Range <span className="text-red-500">*</span>
+                    <label htmlFor="budget" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Budget <span className="text-red-500">*</span>
                     </label>
                     <select
                       id="budget"
-                      {...register('budget', { required: 'Please select a budget range' })}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                        errors.budget ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      {...register('budget', { required: 'Please select budget' })}
+                      className={inputClass(!!errors.budget)}
                     >
-                      <option value="">Select budget range</option>
+                      <option value="">Select budget</option>
                       {budgetRanges.map((range) => (
-                        <option key={range} value={range}>
-                          {range}
-                        </option>
+                        <option key={range} value={range}>{range}</option>
                       ))}
                     </select>
                     {errors.budget && (
-                      <p className="mt-1 text-sm text-red-500">
-                        {errors.budget.message}
-                      </p>
+                      <p className="mt-1 text-sm text-red-500">{errors.budget.message}</p>
                     )}
                   </div>
-
-                  {/* Timeline */}
                   <div>
-                    <label htmlFor="timeline" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="timeline" className="block text-sm font-medium text-neutral-700 mb-1">
                       Timeline <span className="text-red-500">*</span>
                     </label>
                     <select
                       id="timeline"
-                      {...register('timeline', { required: 'Please select a timeline' })}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                        errors.timeline ? 'border-red-500' : 'border-gray-300'
-                      }`}
+                      {...register('timeline', { required: 'Please select timeline' })}
+                      className={inputClass(!!errors.timeline)}
                     >
                       <option value="">Select timeline</option>
                       {timelineOptions.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
+                        <option key={option} value={option}>{option}</option>
                       ))}
                     </select>
                     {errors.timeline && (
-                      <p className="mt-1 text-sm text-red-500">
-                        {errors.timeline.message}
-                      </p>
+                      <p className="mt-1 text-sm text-red-500">{errors.timeline.message}</p>
                     )}
                   </div>
                 </div>
 
-                {/* Message */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">
                     Project Requirements <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     id="message"
                     {...register('message', {
-                      required: 'Project requirements are required',
-                      minLength: {
-                        value: 20,
-                        message: 'Please provide more details (at least 20 characters)',
-                      },
+                      required: 'Requirements are required',
+                      minLength: { value: 20, message: 'At least 20 characters' },
                     })}
                     rows={4}
-                    className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors ${
-                      errors.message ? 'border-red-500' : 'border-gray-300'
-                    }`}
-                    placeholder="Please describe your project in detail - current infrastructure, goals, challenges, specific requirements, etc."
-                  ></textarea>
+                    className={`${inputClass(!!errors.message)} min-h-[120px] resize-y`}
+                    placeholder="Describe your project: infrastructure, goals, requirements..."
+                  />
                   {errors.message && (
-                    <p className="mt-1 text-sm text-red-500">
-                      {errors.message.message}
-                    </p>
+                    <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>
                   )}
                 </div>
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full py-3 px-6 rounded-lg transition-colors flex items-center justify-center font-semibold ${
+                  className={`w-full min-h-[48px] py-3 px-6 rounded-lg font-semibold flex items-center justify-center gap-2 transition-colors ${
                     isSubmitting
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-blue-600 hover:bg-blue-700 text-white'
+                      ? 'bg-neutral-400 cursor-not-allowed text-white'
+                      : 'bg-primary-600 hover:bg-primary-700 text-white'
                   }`}
                 >
                   {isSubmitting ? (
                     <>
                       <svg
-                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        className="animate-spin h-5 w-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
+                        aria-hidden
                       >
                         <circle
                           className="opacity-25"
@@ -379,44 +337,38 @@ const FreelanceModal: React.FC = () => {
                           r="10"
                           stroke="currentColor"
                           strokeWidth="4"
-                        ></circle>
+                        />
                         <path
                           className="opacity-75"
                           fill="currentColor"
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
+                        />
                       </svg>
-                      Sending Inquiry...
+                      Sending...
                     </>
                   ) : (
                     'Send Project Inquiry'
                   )}
                 </button>
 
-                {/* Success message */}
                 {submitSuccess && (
-                  <div className="p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg">
-                    <p className="font-medium">🎉 Inquiry sent successfully!</p>
-                    <p className="text-sm mt-1">
-                      Thank you for reaching out! I'll review your requirements and get back to you within 24 hours with a detailed proposal.
-                    </p>
+                  <div className="p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg">
+                    <p className="font-semibold">Inquiry sent successfully!</p>
+                    <p className="text-sm mt-1">I&apos;ll get back within 24 hours.</p>
                   </div>
                 )}
 
-                {/* Error message */}
                 {submitSuccess === false && submitError && (
                   <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg">
-                    <p className="font-medium">Something went wrong!</p>
+                    <p className="font-semibold">Something went wrong</p>
                     <p className="text-sm mt-1">{submitError}</p>
                   </div>
                 )}
               </form>
-              
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <p className="text-xs text-gray-500 text-center">
-                  Your information is secure and will only be used to respond to your inquiry.
-                </p>
-              </div>
+
+              <p className="mt-4 pt-4 border-t border-neutral-200 text-xs text-neutral-500 text-center">
+                Your details are used only to respond to your inquiry.
+              </p>
             </div>
           </motion.div>
         </div>

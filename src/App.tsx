@@ -15,7 +15,6 @@ import NotFound from './components/NotFound';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfUse from './components/TermsOfUse';
 import { useNavStore } from './store/useNavStore';
-import FloatingHireMeButton from './components/FloatingHireMeButton';
 import FreelanceModal from './components/FreelanceModal';
 
 const MainContent = () => {
@@ -56,7 +55,6 @@ const MainContent = () => {
       <BlogSection />
       <ContactSection />
       <Footer />
-      <FloatingHireMeButton />
       <FreelanceModal />
     </>
   );
@@ -65,7 +63,7 @@ const MainContent = () => {
 function App() {
   return (
     <Router>
-      <div className="relative">
+      <div className="relative overflow-x-hidden">
         <PageLoader />
         <Routes>
           <Route path="/" element={<MainContent />} />

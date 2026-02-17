@@ -8,23 +8,24 @@ const FloatingHireMeButton: React.FC = () => {
 
   return (
     <motion.button
-      className="fixed z-50 shadow-lg rounded-full overflow-hidden floating-hire-me-button"
+      type="button"
+      className="fixed z-40 shadow-xl rounded-full overflow-hidden floating-hire-me-button min-h-[48px] min-w-[48px] sm:min-h-[52px] sm:min-w-auto"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{ 
+      transition={{
         duration: 0.5,
         type: 'spring',
         stiffness: 200,
-        damping: 10
+        damping: 10,
       }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
       onClick={openFreelanceModal}
-      aria-label="Hire Me"
+      aria-label="Hire Me - Get in touch"
     >
-      <div className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-5 flex items-center transition-colors duration-300">
-        <span className="mr-2">Hire Me</span>
-        <Rocket size={18} />
+      <div className="bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 sm:px-5 flex items-center justify-center gap-2 transition-colors duration-300 text-sm sm:text-base">
+        <span>Hire Me</span>
+        <Rocket size={18} aria-hidden />
       </div>
     </motion.button>
   );
