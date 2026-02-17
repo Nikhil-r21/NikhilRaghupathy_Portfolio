@@ -182,12 +182,13 @@ const HeroSection = () => {
               <div className="absolute -top-4 -right-4 w-32 h-32 bg-primary-200/30 rounded-full blur-2xl animate-pulse-slow" />
               <div className="absolute -bottom-4 -left-4 w-40 h-40 bg-accent-200/30 rounded-full blur-2xl animate-pulse-slow" style={{ animationDelay: '0.5s' }} />
               
-              {/* Profile image container - tries /profile.jpg first, then LinkedIn, then avatar */}
+              {/* Profile image container - uses photo.jpg from public folder */}
               <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-2xl overflow-hidden border-4 border-white shadow-2xl bg-gradient-to-br from-primary-100 to-accent-100">
                 <img 
-                  src="/profile.jpg"
+                  src="/photo.jpg"
                   alt="Nikhil Raghupathy - DevOps Engineer" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
+                  style={{ objectPosition: 'center top' }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     if (!target.dataset.fallback) {

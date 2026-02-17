@@ -1,200 +1,207 @@
 /**
- * Email template for the form sender
- * This template is used to send a confirmation email to the person who submitted the contact form
- * Redesigned with Google/Microsoft professional styling and IST railway timing
+ * Professional email template for contact form sender confirmation
+ * Enhanced with modern design matching portfolio branding
  */
 export const createSenderEmailTemplate = (formData) => {
+  const timestamp = new Date().toLocaleString('en-IN', { 
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: true
+  });
+
   return `
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>Message Received - Thank You</title>
+      <!--[if mso]>
+      <noscript>
+        <xml>
+          <o:OfficeDocumentSettings>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+          </o:OfficeDocumentSettings>
+        </xml>
+      </noscript>
+      <![endif]-->
       <style>
         body { 
-          font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
-          line-height: 1.5;
-          color: #323130;
-          background-color: #faf9f8;
           margin: 0;
-          padding: 24px;
-          font-size: 14px;
+          padding: 0;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          line-height: 1.6;
+          color: #1f2937;
+          background-color: #f3f4f6;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
         }
-        .container {
-          max-width: 680px;
+        .email-wrapper {
+          max-width: 600px;
           margin: 0 auto;
-          background: #ffffff;
-          border: 1px solid #edebe9;
-          border-radius: 2px;
-          box-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,0.132), 0 0.3px 0.9px 0 rgba(0,0,0,0.108);
+          background-color: #ffffff;
         }
         .header {
-          background: #ffffff;
-          border-bottom: 1px solid #edebe9;
-          padding: 32px;
+          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          padding: 40px 30px;
           text-align: center;
         }
-        .header h1 {
-          margin: 0;
-          font-size: 20px;
+        .header-logo {
+          font-size: 32px;
+          font-weight: 700;
+          color: #ffffff;
+          letter-spacing: 2px;
+          margin-bottom: 8px;
+        }
+        .header-title {
+          font-size: 24px;
           font-weight: 600;
-          color: #323130;
+          color: #ffffff;
+          margin: 0;
         }
         .header-subtitle {
-          color: #605e5c;
           font-size: 14px;
-          margin-top: 4px;
-          font-weight: 400;
+          color: rgba(255, 255, 255, 0.9);
+          margin-top: 8px;
         }
         .content {
-          padding: 32px;
+          padding: 40px 30px;
         }
         .greeting {
-          font-size: 16px;
-          margin-bottom: 24px;
-          color: #323130;
+          font-size: 18px;
+          font-weight: 600;
+          color: #1f2937;
+          margin-bottom: 20px;
         }
-        .main-message {
-          font-size: 14px;
-          margin-bottom: 24px;
-          color: #323130;
-          line-height: 1.6;
+        .message {
+          font-size: 15px;
+          color: #4b5563;
+          line-height: 1.7;
+          margin-bottom: 30px;
         }
-        .summary-section {
-          background: #f8f8f8;
-          border: 1px solid #edebe9;
-          border-radius: 2px;
-          padding: 20px;
-          margin: 24px 0;
+        .summary-box {
+          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+          border: 1px solid #e0e7ff;
+          border-radius: 12px;
+          padding: 24px;
+          margin: 30px 0;
         }
         .summary-title {
-          font-weight: 600;
-          color: #323130;
+          font-size: 14px;
+          font-weight: 700;
+          color: #0284c7;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 16px;
+        }
+        .summary-item {
+          display: flex;
           margin-bottom: 12px;
           font-size: 14px;
         }
-        .summary-row {
-          display: flex;
-          margin-bottom: 8px;
-          font-size: 13px;
-        }
-        .summary-row:last-child {
+        .summary-item:last-child {
           margin-bottom: 0;
         }
         .summary-label {
           font-weight: 600;
-          color: #605e5c;
-          min-width: 80px;
+          color: #6b7280;
+          min-width: 100px;
           margin-right: 12px;
         }
         .summary-value {
-          color: #323130;
+          color: #1f2937;
           flex: 1;
         }
         .divider {
           height: 1px;
-          background: #edebe9;
-          margin: 24px 0;
+          background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+          margin: 30px 0;
         }
-        .contact-section {
-          margin: 24px 0;
-        }
-        .contact-title {
-          font-weight: 600;
-          color: #323130;
-          margin-bottom: 16px;
-          font-size: 14px;
-        }
-        .contact-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 16px;
-        }
-        .contact-item {
-          font-size: 13px;
-        }
-        .contact-label {
-          font-weight: 600;
-          color: #605e5c;
-          margin-bottom: 8px;
-        }
-        .contact-button {
-          display: inline-block;
-          padding: 10px 16px;
-          background-color: #0078d4;
-          color: #ffffff !important;
-          text-decoration: none;
-          border-radius: 2px;
-          font-size: 13px;
-          font-weight: 600;
+        .cta-section {
+          background-color: #f9fafb;
+          border-radius: 12px;
+          padding: 24px;
+          margin: 30px 0;
           text-align: center;
-          transition: background-color 0.2s ease;
-          border: none;
-          width: 100%;
-          box-sizing: border-box;
         }
-        .contact-button:hover {
-          background-color: #106ebe;
+        .cta-title {
+          font-size: 16px;
+          font-weight: 600;
+          color: #1f2937;
+          margin-bottom: 16px;
+        }
+        .cta-buttons {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .cta-button {
+          display: inline-block;
+          padding: 12px 24px;
+          border-radius: 8px;
           text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          transition: all 0.2s;
+          color: #ffffff !important;
         }
-        .contact-button.linkedin {
+        .cta-button.linkedin {
           background-color: #0077b5;
         }
-        .contact-button.linkedin:hover {
-          background-color: #005885;
-        }
-        .contact-button.github {
+        .cta-button.github {
           background-color: #24292e;
         }
-        .contact-button.github:hover {
-          background-color: #1b1f23;
-        }
-        .contact-button.medium {
-          background-color: #00ab6c;
-        }
-        .contact-button.medium:hover {
-          background-color: #00925b;
+        .cta-button.portfolio {
+          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
         }
         .signature {
-          margin-top: 32px;
-          padding-top: 16px;
-          border-top: 1px solid #edebe9;
+          margin-top: 30px;
+          padding-top: 20px;
+          border-top: 1px solid #e5e7eb;
         }
         .signature-name {
+          font-size: 16px;
           font-weight: 600;
-          color: #323130;
+          color: #1f2937;
           margin-top: 8px;
         }
+        .signature-title {
+          font-size: 14px;
+          color: #6b7280;
+          margin-top: 4px;
+        }
         .footer {
-          background: #f8f8f8;
-          border-top: 1px solid #edebe9;
-          padding: 16px 32px;
-          color: #605e5c;
-          font-size: 12px;
+          background-color: #f9fafb;
+          border-top: 1px solid #e5e7eb;
+          padding: 24px 30px;
           text-align: center;
+          font-size: 12px;
+          color: #6b7280;
         }
         .footer-notice {
-          margin-bottom: 4px;
-          font-weight: 400;
+          margin-bottom: 8px;
         }
-        .footer-instruction {
-          font-weight: 400;
-        }
-        @media (max-width: 640px) {
-          body {
-            padding: 16px;
+        @media only screen and (max-width: 600px) {
+          .content {
+            padding: 30px 20px;
           }
-          .header, .content {
-            padding: 24px;
+          .header {
+            padding: 30px 20px;
           }
-          .footer {
-            padding: 16px 24px;
+          .cta-buttons {
+            flex-direction: column;
           }
-          .contact-grid {
-            grid-template-columns: 1fr;
+          .cta-button {
+            width: 100%;
+            text-align: center;
           }
-          .summary-row {
+          .summary-item {
             flex-direction: column;
           }
           .summary-label {
@@ -204,85 +211,64 @@ export const createSenderEmailTemplate = (formData) => {
       </style>
     </head>
     <body>
-      <div class="container">
+      <div class="email-wrapper">
+        <!-- Header -->
         <div class="header">
-          <h1>Message Received</h1>
-          <div class="header-subtitle">Your inquiry has been successfully submitted</div>
+          <div class="header-logo">NR</div>
+          <h1 class="header-title">Message Received</h1>
+          <p class="header-subtitle">Your inquiry has been successfully submitted</p>
         </div>
         
+        <!-- Content -->
         <div class="content">
-          <div class="greeting">
-            Hello ${formData.name},
+          <div class="greeting">Hello ${formData.name},</div>
+          
+          <div class="message">
+            Thank you for reaching out through my portfolio website. I have received your message and will review it carefully. I typically respond within <strong>24 hours</strong> during business days.
           </div>
           
-          <div class="main-message">
-            Thank you for contacting me through my portfolio website. I have received your message and will respond within 24 hours.
-          </div>
-          
-          <div class="summary-section">
+          <div class="summary-box">
             <div class="summary-title">Submission Details</div>
-            <div class="summary-row">
+            <div class="summary-item">
               <div class="summary-label">Subject:</div>
               <div class="summary-value">${formData.subject}</div>
             </div>
-            <div class="summary-row">
+            <div class="summary-item">
               <div class="summary-label">Submitted:</div>
-              <div class="summary-value">${new Date().toLocaleString('en-IN', { 
-                timeZone: 'Asia/Kolkata',
-                year: 'numeric', 
-                month: '2-digit', 
-                day: '2-digit', 
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: false
-              })} IST</div>
+              <div class="summary-value">${timestamp} IST</div>
             </div>
-            <div class="summary-row">
+            <div class="summary-item">
               <div class="summary-label">Reference:</div>
               <div class="summary-value">CF-${Date.now().toString().slice(-6)}</div>
             </div>
           </div>
           
-          <div class="main-message">
-            While you wait for my response, feel free to connect with me through my professional networks or explore my latest projects and articles.
+          <div class="message">
+            While you wait for my response, feel free to explore my work or connect with me through my professional networks.
           </div>
           
           <div class="divider"></div>
           
-          <div class="contact-section">
-            <div class="contact-title">Professional Networks</div>
-            <div class="contact-grid">
-              <div class="contact-item">
-                <div class="contact-label">LinkedIn</div>
-                <a href="https://www.linkedin.com/in/nikhilraghupathy/" class="contact-button linkedin" target="_blank">
-                  Visit LinkedIn Profile
-                </a>
-              </div>
-              <div class="contact-item">
-                <div class="contact-label">GitHub</div>
-                <a href="https://github.com/Nikhil-r21" class="contact-button github" target="_blank">
-                  View GitHub Projects
-                </a>
-              </div>
-              <div class="contact-item">
-                <div class="contact-label">Medium</div>
-                <a href="https://medium.com/@rnikhilvignesh21" class="contact-button medium" target="_blank">
-                  Read Medium Articles
-                </a>
-              </div>
+          <div class="cta-section">
+            <div class="cta-title">Connect With Me</div>
+            <div class="cta-buttons">
+              <a href="https://www.linkedin.com/in/nikhilraghupathy/" class="cta-button linkedin" target="_blank">LinkedIn</a>
+              <a href="https://github.com/Nikhil-r21" class="cta-button github" target="_blank">GitHub</a>
+              <a href="https://nikhilraghupathy.vercel.app" class="cta-button portfolio" target="_blank">Portfolio</a>
             </div>
           </div>
           
           <div class="signature">
             <div>Best regards,</div>
             <div class="signature-name">Nikhil Raghupathy</div>
+            <div class="signature-title">DevOps Engineer | Azure & AWS Cloud Specialist</div>
           </div>
         </div>
         
+        <!-- Footer -->
         <div class="footer">
-          <div class="footer-notice">This is an automated confirmation message.</div>
-          <div class="footer-instruction">Please do not reply to this email address.</div>
+          <div class="footer-notice">This is an automated confirmation email.</div>
+          <div>Please do not reply directly to this message. For inquiries, use the contact form on my portfolio.</div>
         </div>
       </div>
     </body>

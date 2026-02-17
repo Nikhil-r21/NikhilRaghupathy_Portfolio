@@ -1,229 +1,229 @@
 /**
- * Email template for the portfolio owner
- * This template is used to notify the owner of a new contact form submission
- * Redesigned with Google/Microsoft professional styling and IST railway timing
+ * Professional email template for portfolio owner notification
+ * Enhanced with modern design matching portfolio branding
  */
 export const createOwnerEmailTemplate = (formData) => {
+  const timestamp = new Date().toLocaleString('en-IN', { 
+    timeZone: 'Asia/Kolkata',
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric', 
+    hour: '2-digit', 
+    minute: '2-digit',
+    hour12: true
+  });
+
   return `
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>New Contact Form Submission</title>
+      <!--[if mso]>
+      <noscript>
+        <xml>
+          <o:OfficeDocumentSettings>
+            <o:PixelsPerInch>96</o:PixelsPerInch>
+          </o:OfficeDocumentSettings>
+        </xml>
+      </noscript>
+      <![endif]-->
       <style>
         body { 
-          font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
-          line-height: 1.5;
-          color: #323130;
-          background-color: #faf9f8;
           margin: 0;
-          padding: 24px;
-          font-size: 14px;
+          padding: 0;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          line-height: 1.6;
+          color: #1f2937;
+          background-color: #f3f4f6;
+          -webkit-font-smoothing: antialiased;
         }
-        .container {
-          max-width: 680px;
+        .email-wrapper {
+          max-width: 600px;
           margin: 0 auto;
-          background: #ffffff;
-          border: 1px solid #edebe9;
-          border-radius: 2px;
-          box-shadow: 0 1.6px 3.6px 0 rgba(0,0,0,0.132), 0 0.3px 0.9px 0 rgba(0,0,0,0.108);
+          background-color: #ffffff;
         }
         .header {
-          background: #ffffff;
-          border-bottom: 1px solid #edebe9;
-          padding: 32px;
+          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          padding: 30px;
         }
-        .header h1 {
+        .header-content {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .header-left h1 {
           margin: 0;
-          font-size: 20px;
-          font-weight: 600;
-          color: #323130;
+          font-size: 22px;
+          font-weight: 700;
+          color: #ffffff;
         }
         .header-subtitle {
-          color: #605e5c;
-          font-size: 14px;
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.9);
           margin-top: 4px;
-          font-weight: 400;
+        }
+        .header-badge {
+          background-color: rgba(255, 255, 255, 0.2);
+          padding: 8px 16px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #ffffff;
         }
         .content {
-          padding: 32px;
+          padding: 30px;
         }
         .section {
-          margin-bottom: 24px;
-        }
-        .section:last-child {
-          margin-bottom: 0;
+          margin-bottom: 28px;
         }
         .section-title {
-          font-weight: 600;
-          color: #323130;
-          margin-bottom: 8px;
           font-size: 14px;
+          font-weight: 700;
+          color: #0284c7;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 16px;
+          padding-bottom: 8px;
+          border-bottom: 2px solid #e0e7ff;
         }
         .field-row {
-          display: table;
-          width: 100%;
-          margin-bottom: 16px;
-          border-collapse: separate;
+          display: flex;
+          margin-bottom: 14px;
+          font-size: 14px;
         }
         .field-label {
-          display: table-cell;
-          width: 120px;
           font-weight: 600;
-          color: #605e5c;
-          font-size: 13px;
-          vertical-align: top;
-          padding-right: 16px;
-          padding-top: 2px;
+          color: #6b7280;
+          min-width: 100px;
+          margin-right: 12px;
         }
         .field-value {
-          display: table-cell;
-          color: #323130;
-          font-size: 14px;
-          vertical-align: top;
+          color: #1f2937;
+          flex: 1;
           word-break: break-word;
         }
         .field-value a {
-          color: #0078d4;
+          color: #0284c7;
           text-decoration: none;
         }
         .field-value a:hover {
           text-decoration: underline;
         }
-        .message-container {
-          background: #f8f8f8;
-          border: 1px solid #edebe9;
-          border-radius: 2px;
-          padding: 16px;
+        .message-box {
+          background-color: #f9fafb;
+          border-left: 4px solid #0284c7;
+          border-radius: 8px;
+          padding: 20px;
           margin-top: 8px;
-          font-family: 'Consolas', 'Courier New', monospace;
-          font-size: 13px;
-          line-height: 1.4;
+          font-size: 14px;
+          line-height: 1.7;
+          color: #374151;
           white-space: pre-wrap;
-          color: #323130;
         }
         .divider {
           height: 1px;
-          background: #edebe9;
-          margin: 24px 0;
+          background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+          margin: 28px 0;
         }
-        .reply-section {
-          background: #f3f2f1;
-          border: 1px solid #edebe9;
-          border-radius: 2px;
-          padding: 20px;
-          margin: 24px 0;
+        .action-section {
+          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+          border-radius: 12px;
+          padding: 24px;
           text-align: center;
         }
-        .reply-title {
+        .action-title {
+          font-size: 16px;
           font-weight: 600;
-          color: #323130;
-          margin-bottom: 12px;
-          font-size: 14px;
+          color: #1f2937;
+          margin-bottom: 16px;
         }
-        .reply-button {
+        .action-button {
           display: inline-block;
-          padding: 12px 24px;
-          background-color: #0078d4;
+          padding: 14px 28px;
+          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
           color: #ffffff !important;
           text-decoration: none;
-          border-radius: 2px;
-          font-size: 14px;
+          border-radius: 8px;
+          font-size: 15px;
           font-weight: 600;
-          text-align: center;
-          transition: background-color 0.2s ease;
-          border: none;
-          min-width: 140px;
+          box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
         }
-        .reply-button:hover {
-          background-color: #106ebe;
-          text-decoration: none;
-        }
-        .reply-note {
-          color: #605e5c;
+        .action-note {
           font-size: 12px;
-          margin-top: 8px;
+          color: #6b7280;
+          margin-top: 12px;
           font-style: italic;
         }
         .metadata {
-          background: #f8f8f8;
-          border-top: 1px solid #edebe9;
-          padding: 16px 32px;
-          color: #605e5c;
+          background-color: #f9fafb;
+          border-top: 1px solid #e5e7eb;
+          padding: 20px 30px;
           font-size: 12px;
+          color: #6b7280;
         }
         .metadata-row {
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
-        .timestamp {
-          font-weight: 400;
-        }
-        .source {
-          font-weight: 400;
-        }
-        @media (max-width: 640px) {
-          body {
-            padding: 16px;
+        @media only screen and (max-width: 600px) {
+          .content {
+            padding: 24px 20px;
           }
-          .header, .content {
-            padding: 24px;
+          .header {
+            padding: 24px 20px;
           }
-          .metadata {
-            padding: 16px 24px;
+          .header-content {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
           }
           .field-row {
-            display: block;
+            flex-direction: column;
           }
           .field-label {
-            display: block;
-            width: auto;
-            padding-right: 0;
             margin-bottom: 4px;
-          }
-          .field-value {
-            display: block;
-            margin-bottom: 16px;
           }
           .metadata-row {
             flex-direction: column;
             align-items: flex-start;
-            gap: 4px;
-          }
-          .reply-section {
-            padding: 16px;
-          }
-          .reply-button {
-            width: 100%;
-            box-sizing: border-box;
+            gap: 8px;
           }
         }
       </style>
     </head>
     <body>
-      <div class="container">
+      <div class="email-wrapper">
+        <!-- Header -->
         <div class="header">
-          <h1>Contact Form Submission</h1>
-          <div class="header-subtitle">New inquiry received from your portfolio website</div>
+          <div class="header-content">
+            <div class="header-left">
+              <h1>New Contact Form Submission</h1>
+              <div class="header-subtitle">Inquiry received from portfolio website</div>
+            </div>
+            <div class="header-badge">NEW</div>
+          </div>
         </div>
         
+        <!-- Content -->
         <div class="content">
           <div class="section">
             <div class="section-title">Contact Information</div>
             <div class="field-row">
-              <div class="field-label">Name</div>
+              <div class="field-label">Name:</div>
               <div class="field-value">${formData.name}</div>
             </div>
             <div class="field-row">
-              <div class="field-label">Email</div>
+              <div class="field-label">Email:</div>
               <div class="field-value">
                 <a href="mailto:${formData.email}">${formData.email}</a>
               </div>
             </div>
             <div class="field-row">
-              <div class="field-label">Subject</div>
+              <div class="field-label">Subject:</div>
               <div class="field-value">${formData.subject}</div>
             </div>
           </div>
@@ -232,31 +232,23 @@ export const createOwnerEmailTemplate = (formData) => {
           
           <div class="section">
             <div class="section-title">Message</div>
-            <div class="message-container">${formData.message}</div>
+            <div class="message-box">${formData.message}</div>
           </div>
           
-          <div class="reply-section">
-            <div class="reply-title">Quick Action</div>
-            <a href="mailto:${formData.email}?subject=Re: ${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Hi ${formData.name},\n\nThank you for your message. `)}" class="reply-button">
+          <div class="action-section">
+            <div class="action-title">Quick Action</div>
+            <a href="mailto:${formData.email}?subject=Re: ${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Hi ${formData.name},\n\nThank you for your message regarding "${formData.subject}".\n\nI have reviewed your inquiry and will get back to you shortly with a detailed response.\n\nBest regards,\nNikhil Raghupathy`)}" class="action-button">
               Reply to ${formData.name}
             </a>
-            <div class="reply-note">Opens your default email client with pre-filled recipient and subject</div>
+            <div class="action-note">Opens your email client with pre-filled recipient and subject</div>
           </div>
         </div>
         
+        <!-- Footer -->
         <div class="metadata">
           <div class="metadata-row">
-            <div class="source style="margin-right: 20px;">Nikhil Raghupathy Portfolio Contact Form</div>
-            <div class="timestamp">${new Date().toLocaleString('en-IN', { 
-              timeZone: 'Asia/Kolkata',
-              year: 'numeric', 
-              month: '2-digit', 
-              day: '2-digit', 
-              hour: '2-digit', 
-              minute: '2-digit',
-              second: '2-digit',
-              hour12: false
-            })} IST</div>
+            <div>Portfolio Contact Form</div>
+            <div>${timestamp} IST</div>
           </div>
         </div>
       </div>

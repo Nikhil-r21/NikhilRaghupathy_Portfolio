@@ -1,4 +1,7 @@
-// templates/freelanceOwnerTemplate.js
+/**
+ * Professional email template for freelance inquiry owner notification
+ * Enhanced with modern design matching portfolio branding
+ */
 export const createFreelanceOwnerEmailTemplate = (data) => {
   const { 
     name, 
@@ -12,31 +15,26 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
     submittedAt 
   } = data;
 
-  // Format timestamp to IST railway format (24-hour)
-  const formatToIST = (timestamp) => {
-    const date = new Date(timestamp);
-    const istOptions = {
+  const formatTimestamp = (timestamp) => {
+    return new Date(timestamp).toLocaleString('en-IN', {
       timeZone: 'Asia/Kolkata',
       year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
+      month: 'long',
+      day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false
-    };
-    
-    const formatted = date.toLocaleString('en-IN', istOptions);
-    return formatted.replace(/(\d{2})\/(\d{2})\/(\d{4}), (\d{2}:\d{2})/, '$3-$2-$1 at $4 hrs IST');
+      hour12: true
+    });
   };
 
-  // Simple priority indicator
   const getPriorityLevel = (timeline) => {
-    if (timeline.toLowerCase().includes('urgent') || timeline.toLowerCase().includes('asap')) {
-      return { level: 'High', color: '#d13438' };
-    } else if (timeline.toLowerCase().includes('week')) {
-      return { level: 'Medium', color: '#ff8c00' };
+    const timelineLower = timeline.toLowerCase();
+    if (timelineLower.includes('urgent') || timelineLower.includes('asap') || timelineLower.includes('1 week')) {
+      return { level: 'High Priority', color: '#dc2626', bgColor: '#fee2e2' };
+    } else if (timelineLower.includes('week') || timelineLower.includes('2 weeks')) {
+      return { level: 'Medium Priority', color: '#f59e0b', bgColor: '#fef3c7' };
     }
-    return { level: 'Normal', color: '#107c10' };
+    return { level: 'Normal Priority', color: '#10b981', bgColor: '#d1fae5' };
   };
 
   const priority = getPriorityLevel(timeline);
@@ -58,233 +56,290 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
         </xml>
       </noscript>
       <![endif]-->
+      <style>
+        body { 
+          margin: 0;
+          padding: 0;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+          line-height: 1.6;
+          color: #1f2937;
+          background-color: #f3f4f6;
+          -webkit-font-smoothing: antialiased;
+        }
+        .email-wrapper {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+        }
+        .header {
+          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          padding: 30px;
+        }
+        .header-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 12px;
+        }
+        .header-title {
+          font-size: 24px;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+        .header-icon {
+          width: 48px;
+          height: 48px;
+          background-color: rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+        }
+        .header-subtitle {
+          font-size: 14px;
+          color: rgba(255, 255, 255, 0.95);
+        }
+        .priority-banner {
+          background-color: ${priority.bgColor};
+          padding: 12px 30px;
+          text-align: center;
+        }
+        .priority-text {
+          font-size: 14px;
+          font-weight: 700;
+          color: ${priority.color};
+        }
+        .content {
+          padding: 30px;
+        }
+        .section {
+          margin-bottom: 28px;
+        }
+        .section-title {
+          font-size: 16px;
+          font-weight: 700;
+          color: #0284c7;
+          margin-bottom: 16px;
+          padding-bottom: 8px;
+          border-bottom: 2px solid #e0e7ff;
+        }
+        .info-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+        .info-card {
+          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+          border: 1px solid #e0e7ff;
+          border-radius: 8px;
+          padding: 16px;
+        }
+        .info-label {
+          font-size: 11px;
+          font-weight: 700;
+          color: #6b7280;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 6px;
+        }
+        .info-value {
+          font-size: 15px;
+          font-weight: 600;
+          color: #1f2937;
+        }
+        .info-value a {
+          color: #0284c7;
+          text-decoration: none;
+        }
+        .info-value a:hover {
+          text-decoration: underline;
+        }
+        .requirements-box {
+          background-color: #f9fafb;
+          border-left: 4px solid #7c3aed;
+          border-radius: 8px;
+          padding: 20px;
+          margin-top: 12px;
+        }
+        .requirements-text {
+          font-size: 14px;
+          color: #374151;
+          line-height: 1.7;
+          white-space: pre-wrap;
+          margin: 0;
+        }
+        .action-section {
+          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+          border-radius: 12px;
+          padding: 24px;
+          text-align: center;
+          margin: 30px 0;
+        }
+        .action-title {
+          font-size: 16px;
+          font-weight: 700;
+          color: #1f2937;
+          margin-bottom: 16px;
+        }
+        .action-buttons {
+          display: flex;
+          gap: 12px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .action-button {
+          display: inline-block;
+          padding: 12px 24px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-size: 14px;
+          font-weight: 600;
+          color: #ffffff !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .action-button.primary {
+          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+        }
+        .action-button.secondary {
+          background-color: #10b981;
+        }
+        .metadata {
+          background-color: #f9fafb;
+          border-top: 1px solid #e5e7eb;
+          padding: 20px 30px;
+          font-size: 12px;
+          color: #6b7280;
+        }
+        .metadata-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        @media only screen and (max-width: 600px) {
+          .content {
+            padding: 24px 20px;
+          }
+          .header {
+            padding: 24px 20px;
+          }
+          .priority-banner {
+            padding: 12px 20px;
+          }
+          .info-grid {
+            grid-template-columns: 1fr;
+          }
+          .action-buttons {
+            flex-direction: column;
+          }
+          .action-button {
+            width: 100%;
+            text-align: center;
+          }
+          .metadata-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+          }
+        }
+      </style>
     </head>
-    <body style="margin:0; padding:0; background-color:#f5f5f5; font-family:Arial, sans-serif;">
-      
-      <!-- Main Container -->
-      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f5f5f5; padding:20px 0;">
-        <tr>
-          <td align="center">
-            
-            <!-- Email Container -->
-            <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); max-width:600px;">
-              
-              <!-- Header -->
-              <tr>
-                <td style="padding:30px 40px; border-bottom:3px solid #0078d4; background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td>
-                        <h1 style="margin:0; color:#ffffff; font-size:24px; font-weight:bold; font-family:Arial, sans-serif;">
-                          🚀 New Project Inquiry
-                        </h1>
-                        <p style="margin:8px 0 0 0; color:#e3f2fd; font-size:16px; font-family:Arial, sans-serif;">
-                          A potential client has submitted a project request
-                        </p>
-                      </td>
-                      <td width="80" align="right">
-                        <div style="width:60px; height:60px; background-color:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px;">
-                          💼
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              
-              <!-- Priority Alert -->
-              <tr>
-                <td style="padding:0;">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${priority.color}; color:#ffffff;">
-                    <tr>
-                      <td style="padding:12px 40px; text-align:center;">
-                        <strong style="font-family:Arial, sans-serif; font-size:14px;">
-                          ⚡ ${priority.level} Priority Project
-                        </strong>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              
-              <!-- Client Details Section -->
-              <tr>
-                <td style="padding:30px 40px 0 40px;">
-                  <h2 style="margin:0 0 20px 0; color:#333333; font-size:18px; font-weight:bold; font-family:Arial, sans-serif; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                    👤 Client Details
-                  </h2>
-                </td>
-              </tr>
-              
-              <tr>
-                <td style="padding:0 40px;">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td width="50%" style="padding-right:20px; vertical-align:top;">
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #0078d4;">
-                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Name</div>
-                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">${name}</div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #28a745;">
-                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Email</div>
-                                <div style="color:#0078d4; font-size:14px; font-family:Arial, sans-serif;">
-                                  <a href="mailto:${email}" style="color:#0078d4; text-decoration:none;">${email}</a>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                      <td width="50%" style="padding-left:20px; vertical-align:top;">
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #ffc107;">
-                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Company</div>
-                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">${companyName || 'Not specified'}</div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #17a2b8;">
-                                <div style="color:#666; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Phone</div>
-                                <div style="color:#0078d4; font-size:14px; font-family:Arial, sans-serif;">
-                                  <a href="tel:${phone}" style="color:#0078d4; text-decoration:none;">${phone}</a>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              
-              <!-- Project Information Section -->
-              <tr>
-                <td style="padding:30px 40px 0 40px;">
-                  <h2 style="margin:0 0 20px 0; color:#333333; font-size:18px; font-weight:bold; font-family:Arial, sans-serif; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                    📋 Project Information
-                  </h2>
-                </td>
-              </tr>
-              
-              <tr>
-                <td style="padding:0 40px;">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td width="50%" style="padding-right:20px; vertical-align:top;">
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#fff3cd; padding:15px; border-radius:6px; border-left:4px solid #ffc107;">
-                                <div style="color:#856404; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Project Type</div>
-                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">${projectType}</div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#d1ecf1; padding:15px; border-radius:6px; border-left:4px solid #17a2b8;">
-                                <div style="color:#0c5460; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Timeline</div>
-                                <div style="color:#333; font-size:14px; font-family:Arial, sans-serif;">
-                                  <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background-color:${priority.color}; margin-right:8px;"></span>
-                                  ${timeline}
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                      <td width="50%" style="padding-left:20px; vertical-align:top;">
-                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#d4edda; padding:15px; border-radius:6px; border-left:4px solid #28a745;">
-                                <div style="color:#155724; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Budget</div>
-                                <div style="color:#333; font-size:16px; font-weight:bold; font-family:Arial, sans-serif;">💰 ${budget}</div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td style="padding:10px 0;">
-                              <div style="background-color:#f8f9fa; padding:15px; border-radius:6px; border-left:4px solid #6c757d;">
-                                <div style="color:#6c757d; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; font-family:Arial, sans-serif;">Submitted</div>
-                                <div style="color:#333; font-size:12px; font-family:Arial, sans-serif;">📅 ${formatToIST(submittedAt)}</div>
-                              </div>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              
-              <!-- Requirements Section -->
-              <tr>
-                <td style="padding:30px 40px 0 40px;">
-                  <h2 style="margin:0 0 15px 0; color:#333333; font-size:18px; font-weight:bold; font-family:Arial, sans-serif; border-bottom:2px solid #f0f0f0; padding-bottom:10px;">
-                    📝 Project Requirements
-                  </h2>
-                  <div style="background-color:#f8f9fa; border:1px solid #dee2e6; border-radius:8px; padding:20px; margin-bottom:20px;">
-                    <p style="margin:0; color:#333; font-size:14px; line-height:1.6; font-family:Arial, sans-serif; white-space:pre-wrap;">${message}</p>
-                  </div>
-                </td>
-              </tr>
-              
-              <!-- Action Buttons -->
-              <tr>
-                <td style="padding:20px 40px 40px 40px;">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td align="center">
-                        <table cellpadding="0" cellspacing="0" border="0">
-                          <tr>
-                            <td style="padding-right:15px;">
-                              <a href="mailto:${email}?subject=Re: ${projectType} Project Inquiry&body=Hello ${name},%0D%0A%0D%0AThank you for reaching out regarding your ${projectType} project.%0D%0A%0D%0AI have reviewed your requirements and would like to discuss the project details further.%0D%0A%0D%0APlease let me know when you would be available for a brief call to discuss your needs in more detail.%0D%0A%0D%0ABest regards" 
-                                 style="background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%); color:#ffffff; padding:15px 30px; text-decoration:none; border-radius:25px; font-weight:bold; font-size:16px; font-family:Arial, sans-serif; display:inline-block; box-shadow:0 4px 12px rgba(0,120,212,0.3);">
-                                📧 Reply to Client
-                              </a>
-                            </td>
-                            <td>
-                              <a href="tel:${phone}" 
-                                 style="background-color:#28a745; color:#ffffff; padding:15px 30px; text-decoration:none; border-radius:25px; font-weight:bold; font-size:16px; font-family:Arial, sans-serif; display:inline-block; box-shadow:0 4px 12px rgba(40,167,69,0.3);">
-                                📞 Call Client
-                              </a>
-                            </td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-              
-              <!-- Footer -->
-              <tr>
-                <td style="padding:20px 40px; background-color:#f8f9fa; border-top:1px solid #dee2e6; text-align:center;">
-                  <p style="margin:0; color:#6c757d; font-size:12px; font-family:Arial, sans-serif;">
-                    This email was generated automatically from your freelance inquiry form.
-                  </p>
-                </td>
-              </tr>
-              
-            </table>
-            
-          </td>
-        </tr>
-      </table>
-      
+    <body>
+      <div class="email-wrapper">
+        <!-- Header -->
+        <div class="header">
+          <div class="header-top">
+            <h1 class="header-title">🚀 New Project Inquiry</h1>
+            <div class="header-icon">💼</div>
+          </div>
+          <p class="header-subtitle">A potential client has submitted a project request</p>
+        </div>
+        
+        <!-- Priority Banner -->
+        <div class="priority-banner">
+          <div class="priority-text">⚡ ${priority.level}</div>
+        </div>
+        
+        <!-- Content -->
+        <div class="content">
+          <div class="section">
+            <div class="section-title">Client Details</div>
+            <div class="info-grid">
+              <div class="info-card">
+                <div class="info-label">Name</div>
+                <div class="info-value">${name}</div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">Email</div>
+                <div class="info-value">
+                  <a href="mailto:${email}">${email}</a>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">Phone</div>
+                <div class="info-value">
+                  <a href="tel:${phone}">${phone}</a>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">Company</div>
+                <div class="info-value">${companyName || 'Not specified'}</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="section">
+            <div class="section-title">Project Information</div>
+            <div class="info-grid">
+              <div class="info-card">
+                <div class="info-label">Project Type</div>
+                <div class="info-value">${projectType}</div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">Budget Range</div>
+                <div class="info-value">${budget}</div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">Timeline</div>
+                <div class="info-value">${timeline}</div>
+              </div>
+              <div class="info-card">
+                <div class="info-label">Submitted</div>
+                <div class="info-value">${formatTimestamp(submittedAt)} IST</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="section">
+            <div class="section-title">Project Requirements</div>
+            <div class="requirements-box">
+              <p class="requirements-text">${message}</p>
+            </div>
+          </div>
+          
+          <div class="action-section">
+            <div class="action-title">Quick Actions</div>
+            <div class="action-buttons">
+              <a href="mailto:${email}?subject=Re: ${encodeURIComponent(projectType)} Project Inquiry&body=${encodeURIComponent(`Hello ${name},\n\nThank you for reaching out regarding your ${projectType} project.\n\nI have reviewed your requirements and would like to discuss the project details further.\n\nPlease let me know when you would be available for a brief call to discuss your needs in more detail.\n\nBest regards,\nNikhil Raghupathy`)}" class="action-button primary">
+                📧 Reply to Client
+              </a>
+              <a href="tel:${phone}" class="action-button secondary">
+                📞 Call Client
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="metadata">
+          <div class="metadata-row">
+            <div>Portfolio Freelance Inquiry Form</div>
+            <div>${formatTimestamp(submittedAt)} IST</div>
+          </div>
+        </div>
+      </div>
     </body>
     </html>
   `;

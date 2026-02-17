@@ -5,10 +5,10 @@ const PageLoader: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Show loader immediately, hide after content loads (reduced from 2000ms to 800ms)
+    // Show loader immediately, hide after 2 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 800);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -83,7 +83,7 @@ const PageLoader: React.FC = () => {
                 className="h-full bg-gradient-to-r from-primary-600 to-accent-600 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: '100%' }}
-                transition={{ duration: 0.8, ease: 'easeInOut' }}
+                transition={{ duration: 2, ease: 'easeInOut' }}
               />
             </motion.div>
           </div>
