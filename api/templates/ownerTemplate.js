@@ -1,6 +1,6 @@
 /**
  * Professional email template for portfolio owner notification
- * Enhanced with modern design matching portfolio branding
+ * Clean, professional design optimized for email clients
  */
 export const createOwnerEmailTemplate = (formData) => {
   const timestamp = new Date().toLocaleString('en-IN', { 
@@ -38,7 +38,6 @@ export const createOwnerEmailTemplate = (formData) => {
           line-height: 1.6;
           color: #1f2937;
           background-color: #f3f4f6;
-          -webkit-font-smoothing: antialiased;
         }
         .email-wrapper {
           max-width: 600px;
@@ -46,32 +45,18 @@ export const createOwnerEmailTemplate = (formData) => {
           background-color: #ffffff;
         }
         .header {
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          background-color: #0284c7;
           padding: 30px;
         }
-        .header-content {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-        .header-left h1 {
-          margin: 0;
+        .header-title {
           font-size: 22px;
-          font-weight: 700;
+          font-weight: 600;
           color: #ffffff;
+          margin: 0 0 4px 0;
         }
         .header-subtitle {
           font-size: 13px;
           color: rgba(255, 255, 255, 0.9);
-          margin-top: 4px;
-        }
-        .header-badge {
-          background-color: rgba(255, 255, 255, 0.2);
-          padding: 8px 16px;
-          border-radius: 20px;
-          font-size: 12px;
-          font-weight: 600;
-          color: #ffffff;
         }
         .content {
           padding: 30px;
@@ -81,42 +66,36 @@ export const createOwnerEmailTemplate = (formData) => {
         }
         .section-title {
           font-size: 14px;
-          font-weight: 700;
+          font-weight: 600;
           color: #0284c7;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           margin-bottom: 16px;
           padding-bottom: 8px;
-          border-bottom: 2px solid #e0e7ff;
+          border-bottom: 1px solid #e5e7eb;
         }
         .field-row {
-          display: flex;
           margin-bottom: 14px;
           font-size: 14px;
         }
         .field-label {
           font-weight: 600;
           color: #6b7280;
+          display: inline-block;
           min-width: 100px;
-          margin-right: 12px;
         }
         .field-value {
           color: #1f2937;
-          flex: 1;
-          word-break: break-word;
         }
         .field-value a {
           color: #0284c7;
           text-decoration: none;
         }
-        .field-value a:hover {
-          text-decoration: underline;
-        }
         .message-box {
           background-color: #f9fafb;
-          border-left: 4px solid #0284c7;
-          border-radius: 8px;
-          padding: 20px;
+          border-left: 3px solid #0284c7;
+          border-radius: 4px;
+          padding: 16px;
           margin-top: 8px;
           font-size: 14px;
           line-height: 1.7;
@@ -125,37 +104,35 @@ export const createOwnerEmailTemplate = (formData) => {
         }
         .divider {
           height: 1px;
-          background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+          background-color: #e5e7eb;
           margin: 28px 0;
         }
         .action-section {
-          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
-          border-radius: 12px;
+          background-color: #f9fafb;
+          border-radius: 8px;
           padding: 24px;
           text-align: center;
         }
         .action-title {
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 600;
           color: #1f2937;
           margin-bottom: 16px;
         }
         .action-button {
           display: inline-block;
-          padding: 14px 28px;
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          padding: 12px 24px;
+          background-color: #0284c7;
           color: #ffffff !important;
           text-decoration: none;
-          border-radius: 8px;
-          font-size: 15px;
+          border-radius: 6px;
+          font-size: 14px;
           font-weight: 600;
-          box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
         }
         .action-note {
           font-size: 12px;
           color: #6b7280;
           margin-top: 12px;
-          font-style: italic;
         }
         .metadata {
           background-color: #f9fafb;
@@ -167,7 +144,6 @@ export const createOwnerEmailTemplate = (formData) => {
         .metadata-row {
           display: flex;
           justify-content: space-between;
-          align-items: center;
         }
         @media only screen and (max-width: 600px) {
           .content {
@@ -176,20 +152,8 @@ export const createOwnerEmailTemplate = (formData) => {
           .header {
             padding: 24px 20px;
           }
-          .header-content {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-          }
-          .field-row {
-            flex-direction: column;
-          }
-          .field-label {
-            margin-bottom: 4px;
-          }
           .metadata-row {
             flex-direction: column;
-            align-items: flex-start;
             gap: 8px;
           }
         }
@@ -199,13 +163,8 @@ export const createOwnerEmailTemplate = (formData) => {
       <div class="email-wrapper">
         <!-- Header -->
         <div class="header">
-          <div class="header-content">
-            <div class="header-left">
-              <h1>New Contact Form Submission</h1>
-              <div class="header-subtitle">Inquiry received from portfolio website</div>
-            </div>
-            <div class="header-badge">NEW</div>
-          </div>
+          <h1 class="header-title">New Contact Form Submission</h1>
+          <p class="header-subtitle">Inquiry received from portfolio website</p>
         </div>
         
         <!-- Content -->
@@ -213,18 +172,18 @@ export const createOwnerEmailTemplate = (formData) => {
           <div class="section">
             <div class="section-title">Contact Information</div>
             <div class="field-row">
-              <div class="field-label">Name:</div>
-              <div class="field-value">${formData.name}</div>
+              <span class="field-label">Name:</span>
+              <span class="field-value">${formData.name}</span>
             </div>
             <div class="field-row">
-              <div class="field-label">Email:</div>
-              <div class="field-value">
+              <span class="field-label">Email:</span>
+              <span class="field-value">
                 <a href="mailto:${formData.email}">${formData.email}</a>
-              </div>
+              </span>
             </div>
             <div class="field-row">
-              <div class="field-label">Subject:</div>
-              <div class="field-value">${formData.subject}</div>
+              <span class="field-label">Subject:</span>
+              <span class="field-value">${formData.subject}</span>
             </div>
           </div>
           

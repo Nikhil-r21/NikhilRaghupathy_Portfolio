@@ -1,6 +1,6 @@
 /**
  * Professional email template for freelance inquiry sender confirmation
- * Enhanced with modern design matching portfolio branding
+ * Clean, professional design optimized for email clients
  */
 export const createFreelanceSenderEmailTemplate = (data) => {
   const { 
@@ -52,7 +52,6 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           line-height: 1.6;
           color: #1f2937;
           background-color: #f3f4f6;
-          -webkit-font-smoothing: antialiased;
         }
         .email-wrapper {
           max-width: 600px;
@@ -60,36 +59,25 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           background-color: #ffffff;
         }
         .header {
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          background-color: #0284c7;
           padding: 40px 30px;
           text-align: center;
         }
-        .header-icon {
-          width: 64px;
-          height: 64px;
-          background-color: rgba(255, 255, 255, 0.2);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 16px;
-          font-size: 32px;
-        }
         .header-title {
-          font-size: 26px;
-          font-weight: 700;
+          font-size: 24px;
+          font-weight: 600;
           color: #ffffff;
           margin: 0 0 8px 0;
         }
         .header-subtitle {
-          font-size: 15px;
+          font-size: 14px;
           color: rgba(255, 255, 255, 0.95);
         }
         .content {
           padding: 40px 30px;
         }
         .greeting {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
           color: #1f2937;
           margin-bottom: 20px;
@@ -101,10 +89,10 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           margin-bottom: 30px;
         }
         .success-box {
-          background: linear-gradient(135deg, #d1fae5 0%, #dbeafe 100%);
-          border-left: 4px solid #10b981;
-          border-radius: 8px;
-          padding: 20px;
+          background-color: #f0fdf4;
+          border-left: 3px solid #10b981;
+          border-radius: 4px;
+          padding: 16px;
           margin-bottom: 30px;
         }
         .success-box strong {
@@ -114,49 +102,66 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           margin: 30px 0;
         }
         .summary-title {
-          font-size: 16px;
-          font-weight: 700;
+          font-size: 14px;
+          font-weight: 600;
           color: #0284c7;
-          margin-bottom: 20px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 16px;
           padding-bottom: 8px;
-          border-bottom: 2px solid #e0e7ff;
+          border-bottom: 1px solid #e5e7eb;
         }
         .summary-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-          margin-bottom: 20px;
+          display: table;
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0 8px;
         }
-        .summary-card {
-          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
-          border: 1px solid #e0e7ff;
-          border-radius: 8px;
-          padding: 16px;
+        .summary-row {
+          display: table-row;
+        }
+        .summary-cell {
+          display: table-cell;
+          padding: 12px;
+          background-color: #f9fafb;
+          border: 1px solid #e5e7eb;
+          border-radius: 4px;
+          vertical-align: top;
+        }
+        .summary-cell:first-child {
+          width: 50%;
+          padding-right: 8px;
+        }
+        .summary-cell:last-child {
+          width: 50%;
+          padding-left: 8px;
         }
         .summary-label {
           font-size: 11px;
-          font-weight: 700;
+          font-weight: 600;
           color: #6b7280;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           margin-bottom: 6px;
         }
         .summary-value {
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 600;
           color: #1f2937;
         }
         .requirements-box {
           background-color: #f9fafb;
-          border-left: 4px solid #7c3aed;
-          border-radius: 8px;
-          padding: 20px;
+          border-left: 3px solid #7c3aed;
+          border-radius: 4px;
+          padding: 16px;
           margin: 20px 0;
         }
         .requirements-title {
-          font-size: 14px;
-          font-weight: 700;
+          font-size: 13px;
+          font-weight: 600;
           color: #7c3aed;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
           margin-bottom: 12px;
         }
         .requirements-text {
@@ -164,98 +169,53 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           color: #374151;
           line-height: 1.7;
           white-space: pre-wrap;
+          margin: 0;
         }
         .next-steps {
-          background: linear-gradient(135deg, #eff6ff 0%, #f3e8ff 100%);
-          border-radius: 12px;
+          background-color: #f9fafb;
+          border-radius: 8px;
           padding: 24px;
           margin: 30px 0;
         }
         .next-steps-title {
-          font-size: 16px;
-          font-weight: 700;
+          font-size: 15px;
+          font-weight: 600;
           color: #1f2937;
           margin-bottom: 20px;
         }
         .step-item {
-          display: flex;
           margin-bottom: 16px;
-          align-items: flex-start;
+          font-size: 14px;
+          color: #4b5563;
+          line-height: 1.6;
+        }
+        .step-item:last-child {
+          margin-bottom: 0;
         }
         .step-number {
-          width: 28px;
-          height: 28px;
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
-          color: #ffffff;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 14px;
-          font-weight: 700;
-          flex-shrink: 0;
-          margin-right: 12px;
-        }
-        .step-content {
-          flex: 1;
-        }
-        .step-title {
-          font-size: 14px;
           font-weight: 600;
-          color: #1f2937;
-          margin-bottom: 4px;
-        }
-        .step-desc {
-          font-size: 13px;
-          color: #6b7280;
-          line-height: 1.5;
-        }
-        .contact-info {
-          background-color: #fff7ed;
-          border-left: 4px solid #f59e0b;
-          border-radius: 8px;
-          padding: 20px;
-          margin: 30px 0;
-        }
-        .contact-title {
-          font-size: 15px;
-          font-weight: 700;
-          color: #92400e;
-          margin-bottom: 12px;
-        }
-        .contact-details {
-          font-size: 14px;
-          color: #78350f;
-        }
-        .contact-details a {
           color: #0284c7;
-          text-decoration: none;
         }
         .divider {
           height: 1px;
-          background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+          background-color: #e5e7eb;
           margin: 30px 0;
         }
         .signature {
           margin-top: 30px;
           padding-top: 20px;
           border-top: 1px solid #e5e7eb;
+          font-size: 15px;
+          color: #1f2937;
         }
         .signature-name {
-          font-size: 16px;
           font-weight: 600;
-          color: #1f2937;
           margin-top: 8px;
-        }
-        .signature-title {
-          font-size: 14px;
-          color: #6b7280;
-          margin-top: 4px;
         }
         .footer {
           background-color: #f9fafb;
           border-top: 1px solid #e5e7eb;
-          padding: 24px 30px;
+          padding: 20px 30px;
           text-align: center;
           font-size: 12px;
           color: #6b7280;
@@ -267,8 +227,11 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           .header {
             padding: 30px 20px;
           }
-          .summary-grid {
-            grid-template-columns: 1fr;
+          .summary-cell {
+            display: block;
+            width: 100% !important;
+            padding: 12px !important;
+            margin-bottom: 8px;
           }
         }
       </style>
@@ -277,7 +240,6 @@ export const createFreelanceSenderEmailTemplate = (data) => {
       <div class="email-wrapper">
         <!-- Header -->
         <div class="header">
-          <div class="header-icon">✓</div>
           <h1 class="header-title">Thank You, ${name}!</h1>
           <p class="header-subtitle">Your project inquiry has been received and is being reviewed</p>
         </div>
@@ -296,24 +258,28 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           
           <div class="summary-section">
             <div class="summary-title">Your Project Summary</div>
-            <div class="summary-grid">
-              <div class="summary-card">
-                <div class="summary-label">Project Type</div>
-                <div class="summary-value">${projectType}</div>
-              </div>
-              <div class="summary-card">
-                <div class="summary-label">Budget Range</div>
-                <div class="summary-value">${budget}</div>
-              </div>
-              <div class="summary-card">
-                <div class="summary-label">Timeline</div>
-                <div class="summary-value">${timeline}</div>
-              </div>
-              <div class="summary-card">
-                <div class="summary-label">Company</div>
-                <div class="summary-value">${companyName || 'Individual Client'}</div>
-              </div>
-            </div>
+            <table class="summary-grid">
+              <tr class="summary-row">
+                <td class="summary-cell">
+                  <div class="summary-label">Project Type</div>
+                  <div class="summary-value">${projectType}</div>
+                </td>
+                <td class="summary-cell">
+                  <div class="summary-label">Budget Range</div>
+                  <div class="summary-value">${budget}</div>
+                </td>
+              </tr>
+              <tr class="summary-row">
+                <td class="summary-cell">
+                  <div class="summary-label">Timeline</div>
+                  <div class="summary-value">${timeline}</div>
+                </td>
+                <td class="summary-cell">
+                  <div class="summary-label">Company</div>
+                  <div class="summary-value">${companyName || 'Individual Client'}</div>
+                </td>
+              </tr>
+            </table>
           </div>
           
           <div class="requirements-box">
@@ -324,50 +290,25 @@ export const createFreelanceSenderEmailTemplate = (data) => {
           <div class="next-steps">
             <div class="next-steps-title">What Happens Next?</div>
             <div class="step-item">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <div class="step-title">Project Analysis</div>
-                <div class="step-desc">I'll carefully review your requirements and assess the project scope within 24 hours.</div>
-              </div>
+              <span class="step-number">1.</span> I'll carefully review your requirements and assess the project scope within 24 hours.
             </div>
             <div class="step-item">
-              <div class="step-number">2</div>
-              <div class="step-content">
-                <div class="step-title">Detailed Proposal</div>
-                <div class="step-desc">You'll receive a comprehensive proposal with timeline, approach, and investment details.</div>
-              </div>
+              <span class="step-number">2.</span> You'll receive a comprehensive proposal with timeline, approach, and investment details.
             </div>
             <div class="step-item">
-              <div class="step-number">3</div>
-              <div class="step-content">
-                <div class="step-title">Discovery Call</div>
-                <div class="step-desc">We'll schedule a call to discuss your vision and clarify any questions.</div>
-              </div>
-            </div>
-            <div class="step-item">
-              <div class="step-number">✓</div>
-              <div class="step-content">
-                <div class="step-title">Project Kickoff</div>
-                <div class="step-desc">Once everything is agreed upon, we'll begin bringing your project to life!</div>
-              </div>
+              <span class="step-number">3.</span> We'll schedule a call to discuss your vision and clarify any questions.
             </div>
           </div>
           
-          <div class="contact-info">
-            <div class="contact-title">Need to Reach Me?</div>
-            <div class="contact-details">
-              <strong>Email:</strong> <a href="mailto:rnikhilvignesh21@gmail.com">rnikhilvignesh21@gmail.com</a><br>
-              <strong>Phone:</strong> <a href="tel:+918428754385">+91 84287 54385</a><br>
-              <strong>Response Time:</strong> Within 24 hours during business days
-            </div>
+          <div class="message">
+            If you have additional information or urgent questions, feel free to contact me directly at <a href="mailto:rnikhilvignesh21@gmail.com" style="color: #0284c7;">rnikhilvignesh21@gmail.com</a> or <a href="tel:+918428754385" style="color: #0284c7;">+91 84287 54385</a>.
           </div>
           
           <div class="divider"></div>
           
           <div class="signature">
-            <div>Best regards,</div>
-            <div class="signature-name">Nikhil Raghupathy</div>
-            <div class="signature-title">DevOps Engineer | Azure & AWS Cloud Specialist</div>
+            Best regards,<br>
+            <span class="signature-name">Nikhil Raghupathy</span>
           </div>
         </div>
         

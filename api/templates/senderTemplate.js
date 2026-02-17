@@ -1,6 +1,6 @@
 /**
  * Professional email template for contact form sender confirmation
- * Enhanced with modern design matching portfolio branding
+ * Clean, professional design optimized for email clients
  */
 export const createSenderEmailTemplate = (formData) => {
   const timestamp = new Date().toLocaleString('en-IN', { 
@@ -38,8 +38,6 @@ export const createSenderEmailTemplate = (formData) => {
           line-height: 1.6;
           color: #1f2937;
           background-color: #f3f4f6;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
         }
         .email-wrapper {
           max-width: 600px;
@@ -47,33 +45,25 @@ export const createSenderEmailTemplate = (formData) => {
           background-color: #ffffff;
         }
         .header {
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          background-color: #0284c7;
           padding: 40px 30px;
           text-align: center;
-        }
-        .header-logo {
-          font-size: 32px;
-          font-weight: 700;
-          color: #ffffff;
-          letter-spacing: 2px;
-          margin-bottom: 8px;
         }
         .header-title {
           font-size: 24px;
           font-weight: 600;
           color: #ffffff;
-          margin: 0;
+          margin: 0 0 8px 0;
         }
         .header-subtitle {
           font-size: 14px;
           color: rgba(255, 255, 255, 0.9);
-          margin-top: 8px;
         }
         .content {
           padding: 40px 30px;
         }
         .greeting {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
           color: #1f2937;
           margin-bottom: 20px;
@@ -85,22 +75,21 @@ export const createSenderEmailTemplate = (formData) => {
           margin-bottom: 30px;
         }
         .summary-box {
-          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
-          border: 1px solid #e0e7ff;
-          border-radius: 12px;
-          padding: 24px;
+          background-color: #f9fafb;
+          border: 1px solid #e5e7eb;
+          border-radius: 8px;
+          padding: 20px;
           margin: 30px 0;
         }
         .summary-title {
-          font-size: 14px;
-          font-weight: 700;
-          color: #0284c7;
+          font-size: 13px;
+          font-weight: 600;
+          color: #6b7280;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           margin-bottom: 16px;
         }
         .summary-item {
-          display: flex;
           margin-bottom: 12px;
           font-size: 14px;
         }
@@ -110,82 +99,35 @@ export const createSenderEmailTemplate = (formData) => {
         .summary-label {
           font-weight: 600;
           color: #6b7280;
+          display: inline-block;
           min-width: 100px;
-          margin-right: 12px;
         }
         .summary-value {
           color: #1f2937;
-          flex: 1;
         }
         .divider {
           height: 1px;
-          background: linear-gradient(to right, transparent, #e5e7eb, transparent);
+          background-color: #e5e7eb;
           margin: 30px 0;
-        }
-        .cta-section {
-          background-color: #f9fafb;
-          border-radius: 12px;
-          padding: 24px;
-          margin: 30px 0;
-          text-align: center;
-        }
-        .cta-title {
-          font-size: 16px;
-          font-weight: 600;
-          color: #1f2937;
-          margin-bottom: 16px;
-        }
-        .cta-buttons {
-          display: flex;
-          gap: 12px;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-        .cta-button {
-          display: inline-block;
-          padding: 12px 24px;
-          border-radius: 8px;
-          text-decoration: none;
-          font-size: 14px;
-          font-weight: 600;
-          transition: all 0.2s;
-          color: #ffffff !important;
-        }
-        .cta-button.linkedin {
-          background-color: #0077b5;
-        }
-        .cta-button.github {
-          background-color: #24292e;
-        }
-        .cta-button.portfolio {
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
         }
         .signature {
           margin-top: 30px;
           padding-top: 20px;
           border-top: 1px solid #e5e7eb;
+          font-size: 15px;
+          color: #1f2937;
         }
         .signature-name {
-          font-size: 16px;
           font-weight: 600;
-          color: #1f2937;
           margin-top: 8px;
-        }
-        .signature-title {
-          font-size: 14px;
-          color: #6b7280;
-          margin-top: 4px;
         }
         .footer {
           background-color: #f9fafb;
           border-top: 1px solid #e5e7eb;
-          padding: 24px 30px;
+          padding: 20px 30px;
           text-align: center;
           font-size: 12px;
           color: #6b7280;
-        }
-        .footer-notice {
-          margin-bottom: 8px;
         }
         @media only screen and (max-width: 600px) {
           .content {
@@ -194,19 +136,6 @@ export const createSenderEmailTemplate = (formData) => {
           .header {
             padding: 30px 20px;
           }
-          .cta-buttons {
-            flex-direction: column;
-          }
-          .cta-button {
-            width: 100%;
-            text-align: center;
-          }
-          .summary-item {
-            flex-direction: column;
-          }
-          .summary-label {
-            margin-bottom: 4px;
-          }
         }
       </style>
     </head>
@@ -214,7 +143,6 @@ export const createSenderEmailTemplate = (formData) => {
       <div class="email-wrapper">
         <!-- Header -->
         <div class="header">
-          <div class="header-logo">NR</div>
           <h1 class="header-title">Message Received</h1>
           <p class="header-subtitle">Your inquiry has been successfully submitted</p>
         </div>
@@ -230,45 +158,35 @@ export const createSenderEmailTemplate = (formData) => {
           <div class="summary-box">
             <div class="summary-title">Submission Details</div>
             <div class="summary-item">
-              <div class="summary-label">Subject:</div>
-              <div class="summary-value">${formData.subject}</div>
+              <span class="summary-label">Subject:</span>
+              <span class="summary-value">${formData.subject}</span>
             </div>
             <div class="summary-item">
-              <div class="summary-label">Submitted:</div>
-              <div class="summary-value">${timestamp} IST</div>
+              <span class="summary-label">Submitted:</span>
+              <span class="summary-value">${timestamp} IST</span>
             </div>
             <div class="summary-item">
-              <div class="summary-label">Reference:</div>
-              <div class="summary-value">CF-${Date.now().toString().slice(-6)}</div>
+              <span class="summary-label">Reference:</span>
+              <span class="summary-value">CF-${Date.now().toString().slice(-6)}</span>
             </div>
           </div>
           
           <div class="message">
-            While you wait for my response, feel free to explore my work or connect with me through my professional networks.
+            I appreciate your interest and look forward to connecting with you soon.
           </div>
           
           <div class="divider"></div>
           
-          <div class="cta-section">
-            <div class="cta-title">Connect With Me</div>
-            <div class="cta-buttons">
-              <a href="https://www.linkedin.com/in/nikhilraghupathy/" class="cta-button linkedin" target="_blank">LinkedIn</a>
-              <a href="https://github.com/Nikhil-r21" class="cta-button github" target="_blank">GitHub</a>
-              <a href="https://nikhilraghupathy.vercel.app" class="cta-button portfolio" target="_blank">Portfolio</a>
-            </div>
-          </div>
-          
           <div class="signature">
-            <div>Best regards,</div>
-            <div class="signature-name">Nikhil Raghupathy</div>
-            <div class="signature-title">DevOps Engineer | Azure & AWS Cloud Specialist</div>
+            Best regards,<br>
+            <span class="signature-name">Nikhil Raghupathy</span>
           </div>
         </div>
         
         <!-- Footer -->
         <div class="footer">
-          <div class="footer-notice">This is an automated confirmation email.</div>
-          <div>Please do not reply directly to this message. For inquiries, use the contact form on my portfolio.</div>
+          <div>This is an automated confirmation email.</div>
+          <div style="margin-top: 8px;">Please do not reply directly to this message.</div>
         </div>
       </div>
     </body>

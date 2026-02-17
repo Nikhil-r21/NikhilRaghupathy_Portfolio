@@ -1,6 +1,6 @@
 /**
  * Professional email template for freelance inquiry owner notification
- * Enhanced with modern design matching portfolio branding
+ * Clean, professional design optimized for email clients
  */
 export const createFreelanceOwnerEmailTemplate = (data) => {
   const { 
@@ -64,7 +64,6 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           line-height: 1.6;
           color: #1f2937;
           background-color: #f3f4f6;
-          -webkit-font-smoothing: antialiased;
         }
         .email-wrapper {
           max-width: 600px;
@@ -72,34 +71,18 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           background-color: #ffffff;
         }
         .header {
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          background-color: #0284c7;
           padding: 30px;
         }
-        .header-top {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 12px;
-        }
         .header-title {
-          font-size: 24px;
-          font-weight: 700;
+          font-size: 22px;
+          font-weight: 600;
           color: #ffffff;
-          margin: 0;
-        }
-        .header-icon {
-          width: 48px;
-          height: 48px;
-          background-color: rgba(255, 255, 255, 0.2);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 24px;
+          margin: 0 0 4px 0;
         }
         .header-subtitle {
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.95);
+          font-size: 13px;
+          color: rgba(255, 255, 255, 0.9);
         }
         .priority-banner {
           background-color: ${priority.bgColor};
@@ -107,8 +90,8 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           text-align: center;
         }
         .priority-text {
-          font-size: 14px;
-          font-weight: 700;
+          font-size: 13px;
+          font-weight: 600;
           color: ${priority.color};
         }
         .content {
@@ -118,35 +101,50 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           margin-bottom: 28px;
         }
         .section-title {
-          font-size: 16px;
-          font-weight: 700;
+          font-size: 14px;
+          font-weight: 600;
           color: #0284c7;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
           margin-bottom: 16px;
           padding-bottom: 8px;
-          border-bottom: 2px solid #e0e7ff;
+          border-bottom: 1px solid #e5e7eb;
         }
         .info-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-          margin-bottom: 20px;
+          display: table;
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 0 8px;
         }
-        .info-card {
-          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
-          border: 1px solid #e0e7ff;
-          border-radius: 8px;
-          padding: 16px;
+        .info-row {
+          display: table-row;
+        }
+        .info-cell {
+          display: table-cell;
+          padding: 12px;
+          background-color: #f9fafb;
+          border: 1px solid #e5e7eb;
+          border-radius: 4px;
+          vertical-align: top;
+        }
+        .info-cell:first-child {
+          width: 50%;
+          padding-right: 8px;
+        }
+        .info-cell:last-child {
+          width: 50%;
+          padding-left: 8px;
         }
         .info-label {
           font-size: 11px;
-          font-weight: 700;
+          font-weight: 600;
           color: #6b7280;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           margin-bottom: 6px;
         }
         .info-value {
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 600;
           color: #1f2937;
         }
@@ -154,14 +152,11 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           color: #0284c7;
           text-decoration: none;
         }
-        .info-value a:hover {
-          text-decoration: underline;
-        }
         .requirements-box {
           background-color: #f9fafb;
-          border-left: 4px solid #7c3aed;
-          border-radius: 8px;
-          padding: 20px;
+          border-left: 3px solid #7c3aed;
+          border-radius: 4px;
+          padding: 16px;
           margin-top: 12px;
         }
         .requirements-text {
@@ -172,36 +167,36 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           margin: 0;
         }
         .action-section {
-          background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
-          border-radius: 12px;
+          background-color: #f9fafb;
+          border-radius: 8px;
           padding: 24px;
           text-align: center;
           margin: 30px 0;
         }
         .action-title {
-          font-size: 16px;
-          font-weight: 700;
+          font-size: 15px;
+          font-weight: 600;
           color: #1f2937;
           margin-bottom: 16px;
         }
         .action-buttons {
-          display: flex;
-          gap: 12px;
-          justify-content: center;
-          flex-wrap: wrap;
+          display: table;
+          width: 100%;
+          border-collapse: separate;
+          border-spacing: 12px 0;
         }
         .action-button {
-          display: inline-block;
-          padding: 12px 24px;
-          border-radius: 8px;
+          display: table-cell;
+          padding: 12px 20px;
+          border-radius: 6px;
           text-decoration: none;
           font-size: 14px;
           font-weight: 600;
           color: #ffffff !important;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          text-align: center;
         }
         .action-button.primary {
-          background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
+          background-color: #0284c7;
         }
         .action-button.secondary {
           background-color: #10b981;
@@ -216,7 +211,6 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
         .metadata-row {
           display: flex;
           justify-content: space-between;
-          align-items: center;
         }
         @media only screen and (max-width: 600px) {
           .content {
@@ -228,19 +222,22 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           .priority-banner {
             padding: 12px 20px;
           }
-          .info-grid {
-            grid-template-columns: 1fr;
+          .info-cell {
+            display: block;
+            width: 100% !important;
+            padding: 12px !important;
+            margin-bottom: 8px;
           }
           .action-buttons {
-            flex-direction: column;
+            display: block;
           }
           .action-button {
+            display: block;
             width: 100%;
-            text-align: center;
+            margin-bottom: 12px;
           }
           .metadata-row {
             flex-direction: column;
-            align-items: flex-start;
             gap: 8px;
           }
         }
@@ -250,10 +247,7 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
       <div class="email-wrapper">
         <!-- Header -->
         <div class="header">
-          <div class="header-top">
-            <h1 class="header-title">🚀 New Project Inquiry</h1>
-            <div class="header-icon">💼</div>
-          </div>
+          <h1 class="header-title">New Project Inquiry</h1>
           <p class="header-subtitle">A potential client has submitted a project request</p>
         </div>
         
@@ -266,50 +260,58 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
         <div class="content">
           <div class="section">
             <div class="section-title">Client Details</div>
-            <div class="info-grid">
-              <div class="info-card">
-                <div class="info-label">Name</div>
-                <div class="info-value">${name}</div>
-              </div>
-              <div class="info-card">
-                <div class="info-label">Email</div>
-                <div class="info-value">
-                  <a href="mailto:${email}">${email}</a>
-                </div>
-              </div>
-              <div class="info-card">
-                <div class="info-label">Phone</div>
-                <div class="info-value">
-                  <a href="tel:${phone}">${phone}</a>
-                </div>
-              </div>
-              <div class="info-card">
-                <div class="info-label">Company</div>
-                <div class="info-value">${companyName || 'Not specified'}</div>
-              </div>
-            </div>
+            <table class="info-grid">
+              <tr class="info-row">
+                <td class="info-cell">
+                  <div class="info-label">Name</div>
+                  <div class="info-value">${name}</div>
+                </td>
+                <td class="info-cell">
+                  <div class="info-label">Email</div>
+                  <div class="info-value">
+                    <a href="mailto:${email}">${email}</a>
+                  </div>
+                </td>
+              </tr>
+              <tr class="info-row">
+                <td class="info-cell">
+                  <div class="info-label">Phone</div>
+                  <div class="info-value">
+                    <a href="tel:${phone}">${phone}</a>
+                  </div>
+                </td>
+                <td class="info-cell">
+                  <div class="info-label">Company</div>
+                  <div class="info-value">${companyName || 'Not specified'}</div>
+                </td>
+              </tr>
+            </table>
           </div>
           
           <div class="section">
             <div class="section-title">Project Information</div>
-            <div class="info-grid">
-              <div class="info-card">
-                <div class="info-label">Project Type</div>
-                <div class="info-value">${projectType}</div>
-              </div>
-              <div class="info-card">
-                <div class="info-label">Budget Range</div>
-                <div class="info-value">${budget}</div>
-              </div>
-              <div class="info-card">
-                <div class="info-label">Timeline</div>
-                <div class="info-value">${timeline}</div>
-              </div>
-              <div class="info-card">
-                <div class="info-label">Submitted</div>
-                <div class="info-value">${formatTimestamp(submittedAt)} IST</div>
-              </div>
-            </div>
+            <table class="info-grid">
+              <tr class="info-row">
+                <td class="info-cell">
+                  <div class="info-label">Project Type</div>
+                  <div class="info-value">${projectType}</div>
+                </td>
+                <td class="info-cell">
+                  <div class="info-label">Budget Range</div>
+                  <div class="info-value">${budget}</div>
+                </td>
+              </tr>
+              <tr class="info-row">
+                <td class="info-cell">
+                  <div class="info-label">Timeline</div>
+                  <div class="info-value">${timeline}</div>
+                </td>
+                <td class="info-cell">
+                  <div class="info-label">Submitted</div>
+                  <div class="info-value">${formatTimestamp(submittedAt)} IST</div>
+                </td>
+              </tr>
+            </table>
           </div>
           
           <div class="section">
@@ -321,14 +323,20 @@ export const createFreelanceOwnerEmailTemplate = (data) => {
           
           <div class="action-section">
             <div class="action-title">Quick Actions</div>
-            <div class="action-buttons">
-              <a href="mailto:${email}?subject=Re: ${encodeURIComponent(projectType)} Project Inquiry&body=${encodeURIComponent(`Hello ${name},\n\nThank you for reaching out regarding your ${projectType} project.\n\nI have reviewed your requirements and would like to discuss the project details further.\n\nPlease let me know when you would be available for a brief call to discuss your needs in more detail.\n\nBest regards,\nNikhil Raghupathy`)}" class="action-button primary">
-                📧 Reply to Client
-              </a>
-              <a href="tel:${phone}" class="action-button secondary">
-                📞 Call Client
-              </a>
-            </div>
+            <table class="action-buttons">
+              <tr>
+                <td>
+                  <a href="mailto:${email}?subject=Re: ${encodeURIComponent(projectType)} Project Inquiry&body=${encodeURIComponent(`Hello ${name},\n\nThank you for reaching out regarding your ${projectType} project.\n\nI have reviewed your requirements and would like to discuss the project details further.\n\nPlease let me know when you would be available for a brief call to discuss your needs in more detail.\n\nBest regards,\nNikhil Raghupathy`)}" class="action-button primary">
+                    Reply to Client
+                  </a>
+                </td>
+                <td>
+                  <a href="tel:${phone}" class="action-button secondary">
+                    Call Client
+                  </a>
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
         
