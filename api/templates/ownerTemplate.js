@@ -1,6 +1,6 @@
 /**
  * Professional email template for portfolio owner notification
- * Clean, professional design optimized for email clients
+ * AWS/Azure style - clean, minimal, professional
  */
 export const createOwnerEmailTemplate = (formData) => {
   const timestamp = new Date().toLocaleString('en-IN', { 
@@ -21,23 +21,14 @@ export const createOwnerEmailTemplate = (formData) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>New Contact Form Submission</title>
-      <!--[if mso]>
-      <noscript>
-        <xml>
-          <o:OfficeDocumentSettings>
-            <o:PixelsPerInch>96</o:PixelsPerInch>
-          </o:OfficeDocumentSettings>
-        </xml>
-      </noscript>
-      <![endif]-->
       <style>
         body { 
           margin: 0;
           padding: 0;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
           line-height: 1.6;
-          color: #1f2937;
-          background-color: #f3f4f6;
+          color: #232f3e;
+          background-color: #ffffff;
         }
         .email-wrapper {
           max-width: 600px;
@@ -45,18 +36,14 @@ export const createOwnerEmailTemplate = (formData) => {
           background-color: #ffffff;
         }
         .header {
-          background-color: #0284c7;
-          padding: 30px;
+          padding: 40px 30px 30px 30px;
+          border-bottom: 1px solid #eaeded;
         }
         .header-title {
-          font-size: 22px;
-          font-weight: 600;
-          color: #ffffff;
-          margin: 0 0 4px 0;
-        }
-        .header-subtitle {
-          font-size: 13px;
-          color: rgba(255, 255, 255, 0.9);
+          font-size: 20px;
+          font-weight: 400;
+          color: #232f3e;
+          margin: 0;
         }
         .content {
           padding: 30px;
@@ -65,81 +52,65 @@ export const createOwnerEmailTemplate = (formData) => {
           margin-bottom: 28px;
         }
         .section-title {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
-          color: #0284c7;
+          color: #232f3e;
           text-transform: uppercase;
           letter-spacing: 0.5px;
           margin-bottom: 16px;
-          padding-bottom: 8px;
-          border-bottom: 1px solid #e5e7eb;
         }
         .field-row {
-          margin-bottom: 14px;
+          margin-bottom: 12px;
           font-size: 14px;
+          color: #545b64;
         }
         .field-label {
           font-weight: 600;
-          color: #6b7280;
+          color: #232f3e;
           display: inline-block;
-          min-width: 100px;
+          min-width: 90px;
         }
         .field-value {
-          color: #1f2937;
+          color: #545b64;
         }
         .field-value a {
-          color: #0284c7;
+          color: #0073bb;
           text-decoration: none;
         }
         .message-box {
-          background-color: #f9fafb;
-          border-left: 3px solid #0284c7;
-          border-radius: 4px;
-          padding: 16px;
-          margin-top: 8px;
+          padding: 16px 0;
           font-size: 14px;
           line-height: 1.7;
-          color: #374151;
+          color: #545b64;
           white-space: pre-wrap;
         }
         .divider {
           height: 1px;
-          background-color: #e5e7eb;
+          background-color: #eaeded;
           margin: 28px 0;
         }
         .action-section {
-          background-color: #f9fafb;
-          border-radius: 8px;
-          padding: 24px;
-          text-align: center;
-        }
-        .action-title {
-          font-size: 15px;
-          font-weight: 600;
-          color: #1f2937;
-          margin-bottom: 16px;
+          padding: 24px 0;
         }
         .action-button {
           display: inline-block;
-          padding: 12px 24px;
-          background-color: #0284c7;
+          padding: 10px 20px;
+          background-color: #232f3e;
           color: #ffffff !important;
           text-decoration: none;
-          border-radius: 6px;
           font-size: 14px;
-          font-weight: 600;
+          font-weight: 400;
         }
         .action-note {
           font-size: 12px;
-          color: #6b7280;
+          color: #879196;
           margin-top: 12px;
         }
         .metadata {
-          background-color: #f9fafb;
-          border-top: 1px solid #e5e7eb;
+          border-top: 1px solid #eaeded;
           padding: 20px 30px;
           font-size: 12px;
-          color: #6b7280;
+          color: #879196;
         }
         .metadata-row {
           display: flex;
@@ -150,24 +121,21 @@ export const createOwnerEmailTemplate = (formData) => {
             padding: 24px 20px;
           }
           .header {
-            padding: 24px 20px;
+            padding: 30px 20px 24px 20px;
           }
           .metadata-row {
             flex-direction: column;
-            gap: 8px;
+            gap: 4px;
           }
         }
       </style>
     </head>
     <body>
       <div class="email-wrapper">
-        <!-- Header -->
         <div class="header">
           <h1 class="header-title">New Contact Form Submission</h1>
-          <p class="header-subtitle">Inquiry received from portfolio website</p>
         </div>
         
-        <!-- Content -->
         <div class="content">
           <div class="section">
             <div class="section-title">Contact Information</div>
@@ -195,7 +163,6 @@ export const createOwnerEmailTemplate = (formData) => {
           </div>
           
           <div class="action-section">
-            <div class="action-title">Quick Action</div>
             <a href="mailto:${formData.email}?subject=Re: ${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Hi ${formData.name},\n\nThank you for your message regarding "${formData.subject}".\n\nI have reviewed your inquiry and will get back to you shortly with a detailed response.\n\nBest regards,\nNikhil Raghupathy`)}" class="action-button">
               Reply to ${formData.name}
             </a>
@@ -203,7 +170,6 @@ export const createOwnerEmailTemplate = (formData) => {
           </div>
         </div>
         
-        <!-- Footer -->
         <div class="metadata">
           <div class="metadata-row">
             <div>Portfolio Contact Form</div>
